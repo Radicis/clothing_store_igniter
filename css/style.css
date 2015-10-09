@@ -38,3 +38,22 @@ input[type=submit], form a{
     color:#fefefe;
 }
 
+.pagination{
+    clear:both;
+    display:block;
+    margin:0 auto;
+    text-align:center;
+}
+
+.pagination a, .pagination strong{
+    background:#e3e3e3;
+    color:#292929;
+    border:1px solid #ccc;
+    text-decoration:none;
+    padding: 4px 7px;
+}
+
+.pagination strong, .pagination a:hover{
+    font-weight:normal;
+    background:#cac9c9;
+}

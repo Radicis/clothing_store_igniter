@@ -13,7 +13,44 @@ class Store extends CI_Controller{
     }
 
     function index(){
-        $data['items'] = $this->item_model->get_item();
+
+        $this->load->library('pagination');
+
+        $config['base_url']=base_url().'index.php/store/index';
+
+            $config["total_rows"] = $this->item_model->record_count();
+            $config['per_page'] = 6;
+            $config['num_links'] = 20;
+            $config["uri_segment"] = 3;
+
+            $this->pagination->initialize($config);
+
+            $page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
+            $data["items"] = $this->item_model->
+            get_items($config["per_page"], $page);
+            $data["links"] = $this->pagination->create_links();
+
+            $data['main_content'] = 'store/index';
+            $this->load->view('includes/template', $data);
+    }
+
+    function category($categoryID){
+
+        $this->load->library('pagination');
+
+        $config['base_url']=base_url().'index.php/store/category/'. $categoryID;
+
+        $config["total_rows"] = $this->item_model->record_count($categoryID);
+        $config['per_page'] = 6;
+        $config['num_links'] = 20;
+        $config["uri_segment"] = 3;
+
+        $this->pagination->initialize($config);
+
+        $page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
+        $data["items"] = $this->item_model->
+        get_category_items($config["per_page"], $page, $categoryID);
+        $data["links"] = $this->pagination->create_links();
 
         $data['main_content'] = 'store/index';
         $this->load->view('includes/template', $data);

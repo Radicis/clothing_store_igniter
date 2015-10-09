@@ -8,10 +8,7 @@
         </ul>
     </div>
     <div class="col-md-9">
-        <h1>Admin Section</h1>
-
-        //Show some metrics like WP dashboard
-
+        <h1>Brands Section</h1>
     </div>
 
 </div>

@@ -1,3 +1,5 @@
+
+
 <div class="row">
     <div class="col-md-3">
         <ul>
@@ -8,10 +10,18 @@
         </ul>
     </div>
     <div class="col-md-9">
-        <h1>Admin Section</h1>
+        <div class="item-view">
+            <?php
 
-        //Show some metrics like WP dashboard
+            //Change to flat table display of data
+            //Add update/delete links maybe a copy link
 
-    </div>
+            foreach($items as $item) {
 
-</div>
+            }
+
+            echo "<div class='pagination'>" . $links . "</div>";
+
+            ?>
+
+        </div>

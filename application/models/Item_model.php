@@ -8,6 +8,16 @@ class Item_model extends CI_Model
 
     }
 
+    public function record_count($category=FALSE) {
+        if(!$category) {
+            return $this->db->count_all("store_items");
+        }
+        else{
+            $query =  $this->db->get_where('store_items', array('categoryID'=>$category));
+            return $query->num_rows();
+        }
+    }
+
     public function get_item($id = FALSE)
     {
         if (!$id)
@@ -18,6 +28,44 @@ class Item_model extends CI_Model
 
         $query = $this->db->get_where('store_items', array('id' => $id));
         return $query->row_array();
+    }
+
+    //used for pagination
+    public function get_items($limit, $start)
+    {
+        $this->db->limit($limit, $start);
+        $query = $this->db->get("store_items");
+        if ($query->num_rows() > 0) {
+            foreach ($query->result() as $row) {
+                $data[] = $row;
+            }
+            return $data;
+        }
+        return false;
+    }
+
+    //used for pagination
+    public function get_category_items($limit, $start, $category= FALSE)
+    {
+        $this->db->limit($limit, $start);
+
+        if(!$category){
+
+            $query = $this->db->get("store_items");
+        }
+
+        else{
+
+            $query = $this->db->get_where('store_items', array('categoryID' => $category));
+        }
+
+        if ($query->num_rows() > 0) {
+            foreach ($query->result() as $row) {
+                $data[] = $row;
+            }
+            return $data;
+        }
+        return false;
     }
 
 
