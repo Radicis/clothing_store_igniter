@@ -1,3 +1,5 @@
+
+
 <div class="row">
     <div class="col-md-3">
         <ul>
@@ -8,13 +10,18 @@
         </ul>
     </div>
     <div class="col-md-9">
-        <h1>Brands Section</h1>
-        <?php
-        foreach($items as $item) {
-        echo "<P>" . $item->name . "</P>";
-        }
+        <div class="item-view">
+            <?php
 
-         echo "<div class='pagination'>" . $links . "</div>"; ?>
-    </div>
+            foreach($items as $item) {
+                echo "<P>" . $item->username . "</P>";
+            }
 
-</div>
+            //Change to flat table display of data
+            //Add update/delete links maybe a copy link
+
+            echo "<div class='pagination'>" . $links . "</div>";
+
+            ?>
+
+        </div>

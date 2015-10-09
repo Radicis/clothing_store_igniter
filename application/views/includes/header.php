@@ -22,7 +22,10 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <?php echo anchor('site', 'Clothing 9000!', array('class' => 'navbar-brand')); ?>
+            <?php
+                echo anchor('site', 'Clothing 9000!', array('class' => 'navbar-brand'));
+
+            ?>
         </div>
         <div class="pull-right user-info">
             <?php
@@ -50,6 +53,11 @@
                 <li>
                     <a href="#">Contact</a>
                 </li>
+                <?php
+                    if($this->session->isAdmin==1) {
+                    echo "<li>". anchor('admin', 'Admin') . "</li>";
+                    }
+                    ?>
             </ul>
         </div>
         <!-- /.navbar-collapse -->

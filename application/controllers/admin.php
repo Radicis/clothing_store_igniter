@@ -8,6 +8,7 @@ class Admin extends CI_Controller{
         $this->load->model('item_model');
         $this->load->model('category_model');
         $this->load->model('brand_model');
+        $this->load->model('user_model');
         $this->load->helper('url_helper');
     }
 
@@ -24,7 +25,7 @@ class Admin extends CI_Controller{
 
     function is_logged_in()
     {
-        $is_logged_in = $this->session->userdata('is_logged_in');
+        $is_logged_in = $this->session->userdata('isAdmin');
 
         if(!isset($is_logged_in) || $is_logged_in != true)
         {

@@ -13,12 +13,12 @@
         <div class="item-view">
             <?php
 
+            foreach($items as $item) {
+                echo "<P>" . $item->name . "</P>";
+            }
+
             //Change to flat table display of data
             //Add update/delete links maybe a copy link
-
-            foreach($items as $item) {
-
-            }
 
             echo "<div class='pagination'>" . $links . "</div>";
 
