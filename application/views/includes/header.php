@@ -22,7 +22,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/">Clothing Store</a>
+            <?php echo anchor('site', 'Clothing 9000!', array('class' => 'navbar-brand')); ?>
         </div>
         <div class="pull-right user-info">
             <?php

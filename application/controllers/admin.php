@@ -14,7 +14,8 @@ class Admin extends CI_Controller{
         //Show overview panels
         //links to each type of model to viewedit
 
-        $this->load->view('members_area');
+        $data['main_content'] = 'admin/index';
+        $this->load->view('includes/template', $data);
     }
 
     function is_logged_in()
