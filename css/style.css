@@ -1,0 +1,40 @@
+#body{
+    background: #b6b6b6;
+    margin:0;
+    padding:0;
+
+}
+
+#login_form{
+    width:300px;
+    background:#f0f0f0;
+    border: 1px solid #ccc;
+    margin:250px auto 0;
+    padding: 1em;
+}
+
+h1, h2, h3, h4{
+    margin-top:0;
+    text-align:center;
+}
+
+input[type=text], input[type=password]{
+    display:block;
+    margin:0 0 1em 0;
+    width:280px;
+}
+
+input[type=submit], form a{
+    border:none;
+    margin-right:1em;
+    padding: 6px;
+    text-decoration: none;
+    font-size:12px;
+    background: #348075;
+    color:white;
+}
+
+.user-info{
+    color:#fefefe;
+}
+
