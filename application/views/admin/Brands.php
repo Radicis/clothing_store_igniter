@@ -8,13 +8,30 @@
         </ul>
     </div>
     <div class="col-md-9">
-        <h1>Brands Section</h1>
-        <?php
-        foreach($items as $item) {
-        echo "<P>" . $item->name . "</P>";
-        }
+        <h1>Brands</h1>
+        <table class="table table-striped item-list">
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Operations</th>
+            </tr>
 
-         echo "<div class='pagination'>" . $links . "</div>"; ?>
+            <?php
+
+            foreach($items as $item) {
+                echo "<tr><td>" . $item->id . "</td><td>" . $item->name .  "</td>";
+                echo "<td>" . anchor('category/edit', "Edit");
+                echo " | ";
+                echo anchor('category/delete', "Delete");
+                echo "</td></tr>";
+            }
+
+
+            ?>
+
+        </table>
+
+        <?php echo "<div class='pagination'>" . $links . "</div>"; ?>
     </div>
 
 </div>

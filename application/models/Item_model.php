@@ -90,6 +90,7 @@ class Item_model extends CI_Model
     }
 
 
+
     function add_rating($id, $rating, $value)
     {
         //get current rating
@@ -113,14 +114,25 @@ class Item_model extends CI_Model
 
     }
 
-    function update_item()
+    function update($id)
     {
+        $this->load->helper('url');
+
+        $data = array(
+            'item_name' => $this->input->post('item_name'),
+            'item_price' => $this->input->post('item_price'),
+            'item_description' => $this->input->post('item_description'),
+            'categoryID' => $this->input->post('categoryID'),
+            'brandID' => $this->input->post('brandID')
+        );
+
+        $this->db->where('id', $id);
+        $this->db->update('store_items', $data);
 
     }
-
-    function delete_item()
+    function delete($id)
     {
-
+        return $this->db->delete('store_items', array('id' => $id));
     }
 
 }

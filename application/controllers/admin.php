@@ -48,7 +48,7 @@ class Admin extends CI_Controller{
         }
 
         $config["total_rows"] = $model->record_count();
-        $config['per_page'] = 6;
+        $config['per_page'] = 50;
         $config['num_links'] = 20;
         $config["uri_segment"] = 3;
 

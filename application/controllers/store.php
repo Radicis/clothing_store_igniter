@@ -83,6 +83,9 @@ class Store extends CI_Controller{
 
         $this->form_validation->set_rules('item_name', 'Name', 'required');
         $this->form_validation->set_rules('item_description', 'Description', 'required');
+        $this->form_validation->set_rules('item_price', 'Price', 'required');
+        $this->form_validation->set_rules('categoryID', 'Category', 'required');
+        $this->form_validation->set_rules('brandID', 'Brand', 'required');
 
         if ($this->form_validation->run() === FALSE)
         {
@@ -94,10 +97,54 @@ class Store extends CI_Controller{
         }
         else
         {
-            $insert_id = $this->item_model->set_item();
+                $insert_id = $this->item_model->set_item();
+                $this->view($insert_id);
 
-            $this->view($insert_id);
         }
+    }
+
+    function update_item($id=null){
+
+        $this->load->helper('form');
+        $this->load->library('form_validation');
+
+        $this->form_validation->set_rules('item_name', 'Name', 'required');
+        $this->form_validation->set_rules('item_price', 'Price', 'required');
+        $this->form_validation->set_rules('categoryID', 'Category', 'required');
+        $this->form_validation->set_rules('brandID', 'Brand', 'required');
+
+        if ($this->form_validation->run() === FALSE)
+        {
+            $data['item'] = $this->item_model->get_item($id);
+
+            $data['categories'] = $this->category_model->get_item();
+            $data['brands'] = $this->brand_model->get_item();
+            $this->load->view('includes/header');
+            $this->load->view('admin/item_update', $data);
+            $this->load->view('includes/footer');
+        }
+        else
+        {
+            $data = array(
+                'item_name' => $this->input->post('item_name'),
+                'item_price' => $this->input->post('item_price'),
+                'item_description' => $this->input->post('item_description'),
+                'categoryID' => $this->input->post('categoryID'),
+                'brandID' => $this->input->post('brandID'),
+            );
+
+
+                $this->item_model->update($id, $data);
+                $this->view($id);
+
+        }
+    }
+
+    function delete_item($id = null) {
+        $status = $this->item_model->delete($id);
+        //header('Content-type: application/json');
+        //echo json_encode(array("success" => $status));
+        redirect('admin/show/items');
     }
 
     function add_rating($id = NULL)

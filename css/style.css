@@ -57,3 +57,10 @@ input[type=submit], form a{
     font-weight:normal;
     background:#cac9c9;
 }
+
+.item-list .description{
+    max-width:300px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

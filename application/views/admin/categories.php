@@ -11,17 +11,30 @@
     </div>
     <div class="col-md-9">
         <div class="item-view">
-            <?php
+            <h1>Categories</h1>
 
-            foreach($items as $item) {
-                echo "<P>" . $item->name . "</P>";
-            }
+            <table class="table table-striped item-list">
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Operations</th>
+                </tr>
 
-            //Change to flat table display of data
-            //Add update/delete links maybe a copy link
+                <?php
 
-            echo "<div class='pagination'>" . $links . "</div>";
+                foreach($items as $item) {
+                    echo "<tr><td>" . $item->id . "</td><td>" . $item->name .  "</td>";
+                    echo "<td>" . anchor('category/edit', "Edit");
+                    echo " | ";
+                    echo anchor('category/delete', "Delete");
+                    echo "</td></tr>";
+                }
 
-            ?>
+
+                ?>
+
+            </table>
+
+            <?php echo "<div class='pagination'>" . $links . "</div>"; ?>
 
         </div>
