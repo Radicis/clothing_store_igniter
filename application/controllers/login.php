@@ -7,12 +7,14 @@ class Login extends CI_Controller
     function __construct()
     {
         parent::__construct();
+        $this->load->library('user_agent');
 
     }
 
     function index()
     {
         $data['main_content'] =  'security/login_form';
+        $this->session->set_userdata('redirect_back', $this->agent->referrer() );
         $this->load->view('includes/template', $data);
     }
 
@@ -39,9 +41,19 @@ class Login extends CI_Controller
             $this->session->set_userdata($data);
             $this->session->set_flashdata('success', 'Login Successful');
 
+
+            if( $this->session->userdata('redirect_back') ) {
+                $redirect_url = $this->session->userdata('redirect_back');  // grab value and put into a temp variable so we unset the session value
+                $this->session->unset_userdata('redirect_back');
+                redirect( $redirect_url );
+            }
+
+
             if($this->user_model->isAdmin()){
                 redirect('admin');
             }
+
+
 
             redirect('site');
         }
@@ -61,6 +73,10 @@ class Login extends CI_Controller
     function logout()
     {
         $this->session->sess_destroy();
+
+        redirect($this->agent->referrer());
+
+
         redirect('site');
     }
 

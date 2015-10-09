@@ -10,6 +10,7 @@ class Store extends CI_Controller{
         $this->load->model('category_model');
         $this->load->model('brand_model');
         $this->load->helper('url_helper');
+        $this->load->library('user_agent');
     }
 
     function index(){
@@ -137,7 +138,14 @@ class Store extends CI_Controller{
 
                 $this->item_model->update($id, $data);
             $this->session->set_flashdata('success', 'Item Updated');
-                $this->view($id);
+
+            if( $this->session->userdata('redirect_back') ) {
+                $redirect_url = $this->session->userdata('redirect_back');  // grab value and put into a temp variable so we unset the session value
+                $this->session->unset_userdata('redirect_back');
+                redirect( $redirect_url );
+            }
+
+            $this->view($id);
 
         }
     }
@@ -147,7 +155,8 @@ class Store extends CI_Controller{
         //header('Content-type: application/json');
         //echo json_encode(array("success" => $status));
         $this->session->set_flashdata('success', 'Item Deleted');
-        redirect('admin/show/items');
+        redirect($this->agent->referrer());
+        //redirect('admin/show/items');
     }
 
     function add_rating($id = NULL)
@@ -157,7 +166,8 @@ class Store extends CI_Controller{
         $value = 1;
         $this->item_model->add_rating($id, $rating, $value);
         $this->session->set_flashdata('success', 'Rating Added');
-        redirect('store');
+
+        redirect($this->agent->referrer());
     }
 
     function remove_rating($id = NULL)
@@ -167,7 +177,9 @@ class Store extends CI_Controller{
         $value = -1;
         $this->item_model->add_rating($id, $rating, $value);
         $this->session->set_flashdata('success', 'Rating Added');
-        redirect('store');
+
+
+        redirect($this->agent->referrer());
     }
 
 

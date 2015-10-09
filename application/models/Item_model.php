@@ -23,7 +23,14 @@ class Item_model extends CI_Model
         if (!$id)
         {
             $query = $this->db->get('store_items');
-            return $query->result_array();
+            if ($query->num_rows() > 0) {
+                foreach ($query->result() as $row) {
+                    $data[] = $row;
+                }
+                return $data;
+            }
+            return false;
+
         }
 
         $query = $this->db->get_where('store_items', array('id' => $id));

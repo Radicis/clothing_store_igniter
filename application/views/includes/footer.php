@@ -1,6 +1,6 @@
 
 </div>
-
+</div>
         <?php if($this->session->flashdata('success')){ ?>
             <div class="alert alert-success">
                 <a href="#" class="close" data-dismiss="alert">&times;</a>

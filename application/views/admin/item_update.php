@@ -47,7 +47,8 @@ echo form_open('store/update_item/'. $item['id'], $attributes); ?>
     <textarea name="item_description" class="form-control"><?php echo $item['item_description'];  ?></textarea>
 </div>
 <div class="form-group">
-    <input type="submit" name="submit" value="Create item" />
+    <input type="submit" name="submit" value="Update item" />
+
 </div>
 
 
