@@ -25,11 +25,18 @@
             <a class="navbar-brand" href="/">Clothing Store</a>
         </div>
         <div class="pull-right user-info">
-            <?php if($this->session->is_logged_in){
+            <?php
+
+            if($this->session->is_logged_in){
                 echo "Welcome back ";
                 echo  $this->session->username;
                 echo anchor('login/logout', 'Logout');
-            } ?>
+            }
+            else{
+                echo anchor('login', 'Login');
+            }
+            ?>
+
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -38,7 +45,7 @@
                     <a href="#">About</a>
                 </li>
                 <li>
-                    <a href="#">Shop</a>
+                    <?php echo anchor('store', 'Shop'); ?>
                 </li>
                 <li>
                     <a href="#">Contact</a>
