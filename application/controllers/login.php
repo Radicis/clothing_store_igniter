@@ -30,9 +30,18 @@ class Login extends CI_Controller
                 'isAdmin' => $this->user_model->isAdmin()
             );
 
+            if($this->user_model->isAdmin()){
+                $this->session->set_flashdata('info', 'Admin Logged in');
+            }
+
 
 
             $this->session->set_userdata($data);
+            $this->session->set_flashdata('success', 'Login Successful');
+
+            if($this->user_model->isAdmin()){
+                redirect('admin');
+            }
 
             redirect('site');
         }

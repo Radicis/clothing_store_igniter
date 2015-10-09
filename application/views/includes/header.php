@@ -55,7 +55,7 @@
                 </li>
                 <?php
                     if($this->session->isAdmin==1) {
-                    echo "<li>". anchor('admin', 'Admin') . "</li>";
+                    echo "<li>". anchor('admin', 'Admin', array('class'=>'admin-link')) . "</li>";
                     }
                     ?>
             </ul>
@@ -66,4 +66,5 @@
 </nav>
 
 <div class="container">
+
 

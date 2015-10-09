@@ -20,6 +20,7 @@ class Admin extends CI_Controller{
         //links to each type of model to viewedit
 
         $data['main_content'] = 'admin/index';
+
         $this->load->view('includes/template', $data);
     }
 

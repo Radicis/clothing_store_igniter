@@ -98,6 +98,7 @@ class Store extends CI_Controller{
         else
         {
                 $insert_id = $this->item_model->set_item();
+                $this->session->set_flashdata('success', 'Item Added');
                 $this->view($insert_id);
 
         }
@@ -135,6 +136,7 @@ class Store extends CI_Controller{
 
 
                 $this->item_model->update($id, $data);
+            $this->session->set_flashdata('success', 'Item Updated');
                 $this->view($id);
 
         }
@@ -144,6 +146,7 @@ class Store extends CI_Controller{
         $status = $this->item_model->delete($id);
         //header('Content-type: application/json');
         //echo json_encode(array("success" => $status));
+        $this->session->set_flashdata('success', 'Item Deleted');
         redirect('admin/show/items');
     }
 
@@ -153,6 +156,7 @@ class Store extends CI_Controller{
         $rating = $item['rating'];
         $value = 1;
         $this->item_model->add_rating($id, $rating, $value);
+        $this->session->set_flashdata('success', 'Rating Added');
         redirect('store');
     }
 
@@ -162,6 +166,7 @@ class Store extends CI_Controller{
         $rating = $item['rating'];
         $value = -1;
         $this->item_model->add_rating($id, $rating, $value);
+        $this->session->set_flashdata('success', 'Rating Added');
         redirect('store');
     }
 

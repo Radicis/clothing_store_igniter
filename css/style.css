@@ -64,3 +64,11 @@ input[type=submit], form a{
     overflow: hidden;
     text-overflow: ellipsis;
 }
+
+.navbar-inverse .navbar-nav > li > .admin-link{
+    color:#d43f3a;
+}
+
+.toast{
+
+}
