@@ -38,6 +38,10 @@ class Category_model extends CI_Model
         return false;
     }
 
+    function get_list(){
+            //create array showing the heirarchy of categories
+    }
+
 
     function set_item()
     {

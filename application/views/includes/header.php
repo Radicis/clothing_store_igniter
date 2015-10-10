@@ -42,6 +42,7 @@
             }
             else{
                 echo anchor('login', 'Login');
+                echo " or " .  anchor('login/signup', 'Register');
             }
             ?>
 

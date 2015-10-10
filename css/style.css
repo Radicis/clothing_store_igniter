@@ -76,7 +76,7 @@ input[type=submit], form a{
 
 }
 
-.admin-sidebar ul{
+.admin-sidebar ul, .category-select{
     list-style:none;
     margin:0;
     padding:0;
@@ -105,4 +105,17 @@ input[type=submit], form a{
 
 .admin-sidebar ul > li:hover{
     background:#ccc;
+}
+
+.table{
+    margin:20px;
+    border:1px solid #ccc;
+}
+
+.rate{
+    margin-left:10px;
+}
+
+.rating-icons{
+    float:right;
 }

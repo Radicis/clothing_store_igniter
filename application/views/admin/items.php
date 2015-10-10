@@ -1,8 +1,8 @@
 <div class="col-md-9">
 <section class="content-header">
     <h1>
-        Dashboard
-        <small>Item View</small>
+        Item View
+        <small><?php echo anchor('item/create_item', 'Create New'); ?></small>
     </h1>
 </section>
 

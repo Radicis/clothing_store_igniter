@@ -5,8 +5,8 @@
         <div class="col-md-9">
             <section class="content-header">
                 <h1>
-                    Dashboard
-                    <small>Category View</small>
+                    Category View
+                    <small><?php echo anchor('category/create', 'Create New'); ?></small>
                 </h1>
             </section>
 

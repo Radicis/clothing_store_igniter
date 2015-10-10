@@ -5,8 +5,7 @@
         <div class="col-md-9">
             <section class="content-header">
                 <h1>
-                    Dashboard
-                    <small>User View</small>
+                    User View
                 </h1>
             </section>
 

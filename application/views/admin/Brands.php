@@ -2,8 +2,8 @@
 <div class="col-md-9">
     <section class="content-header">
         <h1>
-            Dashboard
-            <small>Brands View</small>
+            Brand View
+            <small><?php echo anchor('brand/create', 'Create New'); ?></small>
         </h1>
     </section>
 

@@ -31,6 +31,9 @@ class Store extends CI_Controller{
             get_items($config["per_page"], $page);
             $data["links"] = $this->pagination->create_links();
 
+            $data["categories"] = $this->category_model->get_item();
+        $data["brands"] = $this->brand_model->get_item();
+
             $data['main_content'] = 'store/index';
             $this->load->view('includes/template', $data);
     }
@@ -53,13 +56,61 @@ class Store extends CI_Controller{
         get_category_items($config["per_page"], $page, $categoryID);
         $data["links"] = $this->pagination->create_links();
 
+        $data["categories"] = $this->category_model->get_item();
+        $data["brands"] = $this->brand_model->get_item();
+
         $data['main_content'] = 'store/index';
         $this->load->view('includes/template', $data);
     }
 
+    function price($price){
 
+        $this->load->library('pagination');
 
+        $config['base_url']=base_url().'index.php/store/price/'. $price;
 
+        $config["total_rows"] = $this->item_model->record_count_price($price);
+        $config['per_page'] = 6;
+        $config['num_links'] = 20;
+        $config["uri_segment"] = 4;
 
+        $this->pagination->initialize($config);
+
+        $page = ($this->uri->segment($config["uri_segment"])) ? $this->uri->segment($config["uri_segment"]) : 0;
+        $data["items"] = $this->item_model->
+        get_by_price($config["per_page"], $page, $price);
+        $data["links"] = $this->pagination->create_links();
+
+        $data["categories"] = $this->category_model->get_item();
+        $data["brands"] = $this->brand_model->get_item();
+
+        $data['main_content'] = 'store/index';
+        $this->load->view('includes/template', $data);
+    }
+
+    function brand($brand){
+
+        $this->load->library('pagination');
+
+        $config['base_url']=base_url().'index.php/store/brand/'. $brand;
+
+        $config["total_rows"] = $this->item_model->record_count_brand($brand);
+        $config['per_page'] = 6;
+        $config['num_links'] = 20;
+        $config["uri_segment"] = 4;
+
+        $this->pagination->initialize($config);
+
+        $page = ($this->uri->segment($config["uri_segment"])) ? $this->uri->segment($config["uri_segment"]) : 0;
+        $data["items"] = $this->item_model->
+        get_by_brand($config["per_page"], $page, $brand);
+        $data["links"] = $this->pagination->create_links();
+
+        $data["categories"] = $this->category_model->get_item();
+        $data["brands"] = $this->brand_model->get_item();
+
+        $data['main_content'] = 'store/index';
+        $this->load->view('includes/template', $data);
+    }
 
 }

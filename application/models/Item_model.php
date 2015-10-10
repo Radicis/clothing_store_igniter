@@ -18,6 +18,28 @@ class Item_model extends CI_Model
         }
     }
 
+    public function record_count_price($price=FALSE) {
+        if(!$price) {
+            return $this->db->count_all("store_items");
+        }
+        else{
+
+            //may need to modify query
+            $query =  $this->db->get_where('store_items', array('item_price'>=$price));
+            return $query->num_rows();
+        }
+    }
+
+    public function record_count_brand($brand=FALSE) {
+        if(!$brand) {
+            return $this->db->count_all("store_items");
+        }
+        else{
+            $query =  $this->db->get_where('store_items', array('brandID' =>$brand));
+            return $query->num_rows();
+        }
+    }
+
     public function get_item($id = FALSE)
     {
         if (!$id)
@@ -64,6 +86,53 @@ class Item_model extends CI_Model
         else{
 
             $query = $this->db->get_where('store_items', array('categoryID' => $category));
+        }
+
+        if ($query->num_rows() > 0) {
+            foreach ($query->result() as $row) {
+                $data[] = $row;
+            }
+            return $data;
+        }
+        return false;
+    }
+
+    function get_by_price($limit, $start, $price=FALSE){
+        $this->db->limit($limit, $start);
+
+        if(!$price){
+
+            $query = $this->db->get("store_items");
+        }
+
+        else{
+            $this->db->select('*');
+            $this->db->from('store_items');
+            $this->db->where('item_price <', (float)$price);
+            $query=$this->db->get();
+        }
+
+        if ($query->num_rows() > 0) {
+            foreach ($query->result() as $row) {
+                $data[] = $row;
+            }
+            return $data;
+        }
+        return false;
+    }
+
+    public function get_by_brand($limit, $start, $brand= FALSE)
+    {
+        $this->db->limit($limit, $start);
+
+        if(!$brand){
+
+            $query = $this->db->get("store_items");
+        }
+
+        else{
+
+            $query = $this->db->get_where('store_items', array('brandID' => $brand));
         }
 
         if ($query->num_rows() > 0) {

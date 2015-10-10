@@ -41,6 +41,7 @@
             }
             else{
                 echo anchor('login', 'Login');
+                echo " or " .  anchor('login/signup', 'Register');
             }
             ?>
 
@@ -75,6 +76,11 @@
     <aside class="admin-sidebar col-md-3">
         <h3>Admin Menu</h3>
         <hr>
+        <ul>
+            <li><i class="fa fa-laptop"></i><?php echo anchor('admin', 'Dashboard'); ?></li>
+        </ul>
+
+        <hr>
            <h4 class="left">Entry Types</h4>
             <ul>
                 <li><i class="fa fa-laptop"></i><?php echo anchor('admin/show/items', 'Store Items'); ?></li>
@@ -87,10 +93,7 @@
         <hr>
         <h4 class="left">Reports/Charts</h4>
         <ul>
-            <li><i class="fa fa-laptop"></i><?php echo anchor('admin/show/items', 'Store Items'); ?></li>
-            <li><i class="fa fa-share-alt"></i><?php echo anchor('admin/show/categories', 'Item Categories'); ?></li>
-            <li ><i class="fa fa-building"></i><?php echo anchor('admin/show/brands', 'Brands'); ?></li>
-            <li><i class="fa fa-users"></i><?php echo anchor('admin/show/users', 'Users'); ?></li>
+
         </ul>
 
 

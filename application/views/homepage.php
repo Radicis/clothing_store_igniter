@@ -53,8 +53,10 @@
                     echo "<span class='glyphicon glyphicon-star' ></span >";
                 }
                 if($this->session->is_logged_in) {
-                    echo anchor('item/add_rating/' . $item->id, "+");
-                    echo anchor('item/remove_rating/' . $item->id, "-");
+                    echo "<span class='rating-icons'>";
+                    echo anchor('item/add_rating/' . $item->id, "<i class='rate fa fa-thumbs-up'></i>");
+                    echo anchor('item/remove_rating/' . $item->id, "<i class='rate fa fa-thumbs-down'></i>");
+                    echo "</span>";
                 }
                 echo "</p ></div ></div ></div>";
             }
