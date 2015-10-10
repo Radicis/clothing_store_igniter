@@ -69,6 +69,40 @@ input[type=submit], form a{
     color:#d43f3a;
 }
 
-.toast{
+.alert{
+    position:fixed;
+    bottom:20px;
+    z-index:999;
 
+}
+
+.admin-sidebar ul{
+    list-style:none;
+    margin:0;
+    padding:0;
+}
+
+.admin-sidebar ul > li > i{
+   float:left;
+    padding:10px;
+}
+
+.admin-sidebar ul > li > a{
+    font-weight:bold;
+    margin-left:20px;
+    display:block;
+    padding:10px;
+}
+
+.admin-sidebar ul > li > a:hover{
+    text-decoration:none;
+}
+
+.admin-sidebar ul > li{
+
+    border:1px solid #ccc;
+}
+
+.admin-sidebar ul > li:hover{
+    background:#ccc;
 }

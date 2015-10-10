@@ -21,7 +21,7 @@ class Admin extends CI_Controller{
 
         $data['main_content'] = 'admin/index';
 
-        $this->load->view('includes/template', $data);
+        $this->load->view('includes/admin/template', $data);
     }
 
     function is_logged_in()
@@ -61,7 +61,7 @@ class Admin extends CI_Controller{
 
 
         $data['main_content'] = 'admin/' . $type;
-        $this->load->view('includes/template', $data);
+        $this->load->view('includes/admin/template', $data);
     }
 
 

@@ -4,7 +4,7 @@
 
 $attributes = array('class' => 'form');
 
-echo form_open('store/update_item/'. $item['id'], $attributes); ?>
+echo form_open('item/update_item/'. $item['id'], $attributes); ?>
 
 <div class="form-group">
     <label for="item_name">Name</label>

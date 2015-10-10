@@ -45,7 +45,7 @@
                 echo  "<div class='caption' >";
                 echo "<h4 class='pull-right' >";
                 echo "$" . $item->item_price . "</h4>";
-                echo anchor('store/view/'.$item->id, $item->item_name);
+                echo anchor('item/view/'.$item->id, $item->item_name);
                 echo "</h4 >";
                 echo "<p>". $item->item_description . "</p></div>";
                 echo "<div class='ratings'><p>";
@@ -53,8 +53,8 @@
                     echo "<span class='glyphicon glyphicon-star' ></span >";
                 }
                 if($this->session->is_logged_in) {
-                    echo anchor('store/add_rating/' . $item->id, "+");
-                    echo anchor('store/remove_rating/' . $item->id, "-");
+                    echo anchor('item/add_rating/' . $item->id, "+");
+                    echo anchor('item/remove_rating/' . $item->id, "-");
                 }
                 echo "</p ></div ></div ></div>";
             }

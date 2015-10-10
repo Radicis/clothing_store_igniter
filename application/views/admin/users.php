@@ -1,27 +1,37 @@
 
 
-<div class="row">
-    <div class="col-md-3">
-        <ul>
-            <li><?php echo anchor('admin/show/items', 'Store Items'); ?></li>
-            <li><?php echo anchor('admin/show/categories', 'Item Categories'); ?></li>
-            <li><?php echo anchor('admin/show/brands', 'Brands'); ?></li>
-            <li><?php echo anchor('admin/show/users', 'Users'); ?></li>
-        </ul>
-    </div>
-    <div class="col-md-9">
-        <div class="item-view">
-            <?php
 
-            foreach($items as $item) {
-                echo "<P>" . $item->username . "</P>";
-            }
 
-            //Change to flat table display of data
-            //Add update/delete links maybe a copy link
+        <div class="col-md-9">
+            <section class="content-header">
+                <h1>
+                    Dashboard
+                    <small>User View</small>
+                </h1>
+            </section>
 
-            echo "<div class='pagination'>" . $links . "</div>";
+            <!-- Main content -->
+            <section class="content">
+                <div class="item-view">
+                    <table class="table table-striped item-list">
+                        <tr>
+                            <th>ID</th>
+                            <th>Username</th>
 
-            ?>
+                        </tr>
 
-        </div>
+                        <?php
+
+                        foreach($items as $item) {
+                            echo "<tr><td>" . $item->id . "</td>";
+                            echo "<td>" . $item->username . "</td></t>";
+                        }
+
+                        //Change to flat table display of data
+                        //Add update/delete links maybe a copy link
+
+                        echo "<div class='pagination'>" . $links . "</div>";
+
+                        ?>
+
+                </div>
