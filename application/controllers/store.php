@@ -15,6 +15,13 @@ class Store extends CI_Controller{
 
     function index(){
 
+        /*
+        if (!$this->input->is_ajax_request()) {
+            header('Content-Type: application/x-json; charset=utf-8');
+            echo(json_encode($this->item_model->get_item()));
+            die();
+        }*/
+
         $this->load->library('pagination');
 
         $config['base_url']=base_url().'index.php/store/index';
@@ -38,6 +45,19 @@ class Store extends CI_Controller{
             $this->load->view('includes/template', $data);
     }
 
+
+    function foo(){
+
+
+        if ($this->input->is_ajax_request()) {
+            header('Content-Type: application/x-json; charset=utf-8');
+            echo(json_encode($this->item_model->foo()));
+            die();
+        }
+
+
+    }
+
     function category($categoryID){
 
         $this->load->library('pagination');
@@ -58,6 +78,36 @@ class Store extends CI_Controller{
 
         $data["categories"] = $this->category_model->get_item();
         $data["brands"] = $this->brand_model->get_item();
+
+        $data['main_content'] = 'store/index';
+        $this->load->view('includes/template', $data);
+    }
+
+
+    //testing
+
+    function filter($categoryID=False, $brandID=False, $price=False){
+
+
+        $this->load->library('pagination');
+
+        $config['base_url']=base_url().'index.php/store/filter/'. $price;
+
+        $config["total_rows"] = $this->item_model->record_count_price($price);
+        $config['per_page'] = 6;
+        $config['num_links'] = 20;
+        $config["uri_segment"] = 4;
+
+        $this->pagination->initialize($config);
+
+        $page = ($this->uri->segment($config["uri_segment"])) ? $this->uri->segment($config["uri_segment"]) : 0;
+        $data["items"] = $this->item_model->get_filter_items($categoryID, $brandID, $price);
+        $data["links"] = $this->pagination->create_links();
+
+        $data["categories"] = $this->category_model->get_item();
+        $data["brands"] = $this->brand_model->get_item();
+
+        $this->session->set_flashdata('success', "Cat: " . $categoryID. " brand: " . $brandID . " price: " . $price);
 
         $data['main_content'] = 'store/index';
         $this->load->view('includes/template', $data);

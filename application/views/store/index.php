@@ -32,6 +32,13 @@
                     echo "<li>" . anchor('store/price/20', 'Under &euro;20') . "</li>";
                 ?>
             </ul>
+
+            <ul class="category-select">
+                <h3>Filter</h3>
+                <?php
+                echo "<li>" . anchor('store/filter/1/2', 'Test it') . "</li>";
+                ?>
+            </ul>
         </div>
     </div>
     <div class="col-md-9">

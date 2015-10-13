@@ -1,3 +1,6 @@
+<div class="contact"
+    <div class="login_left">
+        <div class="registration_form">
 <h1>Create an Account</h1>
 
 <fieldset>
@@ -30,3 +33,6 @@
         ?>
 
 </fieldset>
+    </div>
+    </div>
+</div>

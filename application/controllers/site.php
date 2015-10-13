@@ -19,7 +19,7 @@ class Site extends CI_Controller{
         $data['items'] = array($data['items'][0], $data['items'][1], $data['items'][2]);
 
         $data['main_content'] = 'homepage';
-        $this->load->view('includes/template', $data);
+        $this->load->view('includes/homepage/template', $data);
     }
 
 }

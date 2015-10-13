@@ -1,14 +1,3 @@
-<div class="col-md-9">
-<section class="content-header">
-    <h1>
-        Item View
-        <small><?php echo anchor('item/create_item', 'Create New'); ?></small>
-    </h1>
-</section>
-
-<!-- Main content -->
-<section class="content">
-        <div class="item-view">
             <table class="table table-striped item-list">
                 <tr>
                     <th>ID</th>
@@ -41,4 +30,3 @@
 
             <?php echo "<div class='pagination'>" . $links . "</div>"; ?>
 
-        </div>

@@ -24,7 +24,7 @@ class Item_model extends CI_Model
         }
         else{
 
-            //may need to modify query
+            //may need to modify query 
             $query =  $this->db->get_where('store_items', array('item_price'>=$price));
             return $query->num_rows();
         }
@@ -42,6 +42,8 @@ class Item_model extends CI_Model
 
     public function get_item($id = FALSE)
     {
+
+
         if (!$id)
         {
             $query = $this->db->get('store_items');
@@ -57,6 +59,48 @@ class Item_model extends CI_Model
 
         $query = $this->db->get_where('store_items', array('id' => $id));
         return $query->row_array();
+    }
+
+    public function foo(){
+        $this->db->select('item_price');
+        $this->db->from('store_items');
+        //$this->db->limit($limit, $start);
+        $query = $this->db->get();
+        if ($query->num_rows() > 0) {
+            foreach ($query->result() as $row) {
+                $data[] = $row;
+            }
+            return $data;
+        }
+        return false;
+    }
+
+    public function get_filter_items($categoryID='%', $brandID='%', $price=0)
+    {
+
+        $this->db->select('*');
+        $this->db->from('store_items');
+
+                if($categoryID!=False) {
+                    $this->db->where('categoryID like '.  $categoryID);
+                }
+                if($brandID!=False) {
+                    $this->db->where('brandID like '.  $brandID);
+                }
+                if($price!=False) {
+                   $this->db->where('item_price > ', (float)$price);
+                }
+
+        //$this->db->limit($limit, $start);
+        $query = $this->db->get();
+        if ($query->num_rows() > 0) {
+            foreach ($query->result() as $row) {
+                $data[] = $row;
+            }
+            return $data;
+        }
+        return false;
+
     }
 
     //used for pagination
