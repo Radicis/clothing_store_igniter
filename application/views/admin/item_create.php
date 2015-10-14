@@ -1,3 +1,5 @@
+
+
 <?php echo validation_errors(); ?>
 
 <?php
@@ -38,7 +40,9 @@ echo form_open('item/create_item', $attributes); ?>
     <label for="item_description">Description</label>
     <textarea name="item_description" class="form-control"></textarea>
 </div>
-<div class="form-group">
+
+
+<div class="form-group registration_form">
     <input type="submit" name="submit" value="Create item" />
 </div>
 

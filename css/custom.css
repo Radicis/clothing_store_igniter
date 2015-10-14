@@ -72,10 +72,11 @@
 }
 
 .admin-sidebar ul > li > a{
-    font-weight:bold;
     margin-left:20px;
     display:block;
     padding:10px;
+    color:#57C5A0;
+    font-size:1.1em;
 
 }
 

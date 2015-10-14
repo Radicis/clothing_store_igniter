@@ -3,12 +3,12 @@
 <html>
 <head>
     <meta charset="UTF-8" />
-    <title>Clothing 9000</title>
+    <title>ClothesIgniter</title>
     <link href='http://fonts.googleapis.com/css?family=Maven+Pro:400,900,700,500' rel='stylesheet' type='text/css'>
 
     <link rel="stylesheet" href="<?php echo base_url();?>css/bootstrap.css">
 
-
+    <link href="<?php echo base_url();?>images/favicon.png" rel="icon" type="image/png">
 
     <link rel="stylesheet" href="<?php echo base_url();?>css/style.css">
     <link rel="stylesheet" href="<?php echo base_url();?>css/custom.css">

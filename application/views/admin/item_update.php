@@ -46,10 +46,12 @@ echo form_open('item/update_item/'. $item['id'], $attributes); ?>
     <label for="item_description">Description</label>
     <textarea name="item_description" class="form-control"><?php echo $item['item_description'];  ?></textarea>
 </div>
+<div class="registration_form">
 <div class="form-group">
     <input type="submit" name="submit" value="Update item" />
 
 </div>
 
+</div>
 
 </form>
