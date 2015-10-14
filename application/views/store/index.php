@@ -1,6 +1,5 @@
   <div class="row">
       <div class="col-md-3 admin-sidebar">
-              <p class="lead">Filters</p>
                 <div class="list-group">
                     <ul class="category-select">
                         <h3>Categories</h3>
@@ -45,23 +44,24 @@
 
 
 
-        <!-- start grids_of_3 -->
-        <div class="grids_of_3">
-            <?php if($items!=null){
-                foreach($items as $item) { ?>
-                <div class="col-md-4 item">
-                    <a href="<?php echo base_url() . 'index.php/item/view/'.$item->id ?>">
-                        <img src="<?php echo base_url() . "images/clothes/" . $item->image_large; ?>"  alt=""/>
-                        <h3><?php echo $item->item_name ?></h3>
-                        <span class="price">&euro;<?php echo $item->item_price ?></span>
-                    </a>
-                </div>
-            <?php }} ?>
-            <div class="clear"></div>
-            </div>
+
+          <!-- start grids_of_3 -->
+          <div class="grids_of_3">
+              <?php if($items!=null){
+                  foreach($items as $item) { ?>
+                      <div class="grid1_of_3">
+                          <a href="<?php echo base_url() . 'index.php/item/view/'.$item->id ?>">
+                              <img src="<?php echo base_url() . "images/clothes/" . $item->image_large; ?>"  alt=""/>
+                              <h3><?php echo $item->item_name ?></h3>
+                              <span class="price">&euro;<?php echo $item->item_price ?></span>
+                          </a>
+                      </div>
+
+                  <?php }} ?>
+              <div class="clear"></div>
+              <?php echo "<div class='pagination'>" . $links . "</div>"; ?>
           </div>
       </div>
-
-
+  </div>
 
 
