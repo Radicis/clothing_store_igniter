@@ -75,8 +75,9 @@
     margin-left:20px;
     display:block;
     padding:10px;
-    color:#57C5A0;
+    color:#fefefe;
     font-size:1.1em;
+    transition: all 0.2s ease-out;
 
 }
 
@@ -85,12 +86,18 @@
 }
 
 .admin-sidebar ul > li{
-    background:#fefefe;
-    border:1px solid #ccc;
+    background:#57C5A0;
+    border-bottom:1px solid #fefefe;
+    transition: all 0.2s ease-out;
 }
 
 .admin-sidebar ul > li:hover{
     background:#ccc;
+
+}
+
+.admin-sidebar ul > li a:hover{
+color: #222;
 }
 
 .admin-sidebar h3, .admin-sidebar h4{
@@ -145,6 +152,18 @@
 
 .grids_of_3 > div:nth-of-type(4n) {
     margin-left:0px!important;
+
+}
+
+.grid1_of_3 a{
+    transition: all 0.4s ease-out;
+}
+
+
+.grid1_of_3 a:hover {
+    -webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
 
 }
 
