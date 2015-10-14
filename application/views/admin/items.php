@@ -1,3 +1,7 @@
+<h1>
+    Item View
+    <?php echo anchor('item/create_item', 'Create New'); ?>
+</h1>
             <table class="table table-striped item-list">
                 <tr>
                     <th>ID</th>

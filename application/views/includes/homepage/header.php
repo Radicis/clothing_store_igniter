@@ -6,9 +6,10 @@
     <title>Clothing 9000</title>
     <link href='http://fonts.googleapis.com/css?family=Maven+Pro:400,900,700,500' rel='stylesheet' type='text/css'>
 
-
+    <link rel="stylesheet" href="<?php echo base_url();?>css/bootstrap.css">
 
     <link rel="stylesheet" href="<?php echo base_url();?>css/style.css">
+    <link rel="stylesheet" href="<?php echo base_url();?>css/custom.css">
     <script src="<?php echo base_url();?>js/jquery.min.js" type="text/javascript"></script>
 
     <link type="text/css" rel="stylesheet" href="<?php echo base_url();?>css/jquery.mmenu.all.css" />

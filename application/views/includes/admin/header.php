@@ -6,10 +6,12 @@
     <title>Clothing 9000</title>
     <link href='http://fonts.googleapis.com/css?family=Maven+Pro:400,900,700,500' rel='stylesheet' type='text/css'>
 
+    <link rel="stylesheet" href="<?php echo base_url();?>css/bootstrap.css">
 
 
 
     <link rel="stylesheet" href="<?php echo base_url();?>css/style.css">
+    <link rel="stylesheet" href="<?php echo base_url();?>css/custom.css">
     <script src="<?php echo base_url();?>js/jquery.min.js" type="text/javascript"></script>
 
 
@@ -49,6 +51,8 @@
     <script src="http://code.highcharts.com/modules/exporting.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <!-- Latest compiled and minified CSS -->
+
+
 
     <script type="text/javascript" src="<?php echo base_url();?>js/main.js"></script>
 
@@ -139,10 +143,9 @@
         <div class="main">
 
             <div class="row">
-                <div class="col-md-3">
+                <div class="col-md-3 admin-sidebar">
 
                 <h3>Admin Menu</h3>
-                <hr>
                 <ul>
                     <li><i class="fa fa-laptop"></i><?php echo anchor('admin', 'Dashboard'); ?></li>
                 </ul>
@@ -156,13 +159,11 @@
                     <li ><i class="fa fa-list"></i><?php echo anchor('admin/show/orders', 'Orders'); ?></li>
                     <li><i class="fa fa-users"></i><?php echo anchor('admin/show/users', 'Users'); ?></li>
                 </ul>
-
-                <hr>
+                    <hr>
                 <h4 class="left">Reports/Charts</h4>
                 <ul>
 
                 </ul>
-
                     </div>
                 <div class="col-md-9">
 

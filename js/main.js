@@ -20,7 +20,7 @@ data = [{
             console.log(data[0].data)
 
             $(function () {
-                $('#container').highcharts({
+                $('#chart').highcharts({
                     title: {
                         text: 'Price Analysis',
                         x: -20 //center

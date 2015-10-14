@@ -1,15 +1,11 @@
 
-<div class="col-md-9">
-    <section class="content-header">
         <h1>
             Brand View
-            <small><?php echo anchor('brand/create', 'Create New'); ?></small>
+            <?php echo anchor('brand/create', 'Create New'); ?>
         </h1>
-    </section>
 
-    <!-- Main content -->
-    <section class="content">
-        <div class="item-view">
+
+
             <table class="table table-striped item-list">
                 <tr>
                     <th>ID</th>
@@ -33,4 +29,3 @@
             </table>
 
             <?php echo "<div class='pagination'>" . $links . "</div>"; ?>
-        </div>
