@@ -30,12 +30,15 @@ class Admin extends CI_Controller{
 
         if(!isset($is_logged_in) || $is_logged_in != true)
         {
-            echo "No permission to access the page";
-            die();
+            redirect('site');
         }
     }
 
     function show($type=FALSE){
+
+
+        $this->is_logged_in();
+
         $this->load->library('pagination');
         $this->load->library('table');
 

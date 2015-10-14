@@ -133,3 +133,11 @@
 .grids_of_3 img {
     max-height: 250px;
 }
+
+.registration_form input{
+    margin:10px;
+}
+
+.error{
+    color:#d43f3a;
+}

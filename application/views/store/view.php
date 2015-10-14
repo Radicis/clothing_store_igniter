@@ -58,7 +58,7 @@
                             <input type="submit" value="buy now" title="" />
                         </form>
                     </div>
-                    <p><?php echo $item['item_description']; ?></p>
+                    <p><?php echo $item['item_description_short']; ?></p>
                 </div>
 
             </div>

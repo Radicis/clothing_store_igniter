@@ -93,7 +93,7 @@
                 <li><?php echo anchor('store', 'Shop'); ?></li>
                 <li><?php echo anchor('store', 'About'); ?></li>
                 <li><?php echo anchor('store', 'Contact'); ?></li>
-                <li><a href="contact.html">Contact</a></li>
+
                 <?php
                 if($this->session->isAdmin==1) {
                     echo "<li>". anchor('admin', 'Admin', array('class'=>'admin-link')) . "</li>";
@@ -107,13 +107,16 @@
         </div>
         <nav id="menu-left">
             <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="products.html">products</a></li>
-                <li><a href="about.html">about</a></li>
-                <li><a href="index.html">pages</a></li>
-                <li><a href="blog.html">blog</a></li>
-                <li><a href="contact.html">Contact</a></li>
-                <div class="clear"></div>
+                <li><?php echo anchor('store', 'Home'); ?></li>
+                <li><?php echo anchor('store', 'Shop'); ?></li>
+                <li><?php echo anchor('store', 'About'); ?></li>
+                <li><?php echo anchor('store', 'Contact'); ?></li>
+
+                <?php
+                if($this->session->isAdmin==1) {
+                    echo "<li>". anchor('admin', 'Admin', array('class'=>'admin-link')) . "</li>";
+                }
+                ?>
             </ul>
         </nav>
         <div class="header_right">
