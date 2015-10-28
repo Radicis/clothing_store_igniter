@@ -9,7 +9,7 @@ echo form_open('category/update/'. $thisCategory['id'], $attributes); ?>
 
 <div class="form-group">
     <label for="name">Name</label>
-    <input type="input" name="name" class="form-control" required />
+    <input type="input" name="name" class="form-control" value="<?php echo $thisCategory['name'];  ?>" required />
 </div>
 
 <div class="form-group">

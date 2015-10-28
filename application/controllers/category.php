@@ -65,7 +65,7 @@ class Category extends MY_Controller
                 redirect($redirect_url);
             }
 
-            redirect('admin/show/category');
+            redirect('admin/show/categories');
 
         }
     }
