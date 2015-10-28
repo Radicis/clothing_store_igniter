@@ -1,21 +1,56 @@
+//Converts twitter datestamp into ..ago or into system time if longer than a week
+function parseTwitterDate(tdate) {
+    var system_date = new Date(Date.parse(tdate));
+    var user_date = new Date();
+    if (K.ie) {
+        system_date = Date.parse(tdate.replace(/( \+)/, ' UTC$1'))
+    }
+    var diff = Math.floor((user_date - system_date) / 1000);
+    if (diff <= 1) {return "just now";}
+    if (diff < 20) {return diff + " seconds ago";}
+    if (diff < 40) {return "half a minute ago";}
+    if (diff < 60) {return "less than a minute ago";}
+    if (diff <= 90) {return "one minute ago";}
+    if (diff <= 3540) {return Math.round(diff / 60) + " minutes ago";}
+    if (diff <= 5400) {return "1 hour ago";}
+    if (diff <= 86400) {return Math.round(diff / 3600) + " hours ago";}
+    if (diff <= 129600) {return "1 day ago";}
+    if (diff < 604800) {return Math.round(diff / 86400) + " days ago";}
+    if (diff <= 777600) {return "1 week ago";}
+    return " on " + system_date;
+}
 
-var tweets = function() {
+// from http://widgets.twimg.com/j/1/widget.js
+var K = function () {
+    var a = navigator.userAgent;
+    return {
+        ie: a.match(/MSIE\s([^;]*)/)
+    }
+}();
 
-    $.ajax({
-        url: 'http://localhost/igniter/clothing_store_igniter/twitter/tweets_json.php',
-        data: {'screen_name' : 'ASOS', 'count':4, 'callback': '127.0.0.1'},
-        type: 'GET',
-        dataType: 'html',
-        success: function (result) {
-            $('#tweets').html(result);
-        }
-    });
-};
+//Parses string for urls and renders then as links
+function urlify(text) {
+    var urlRegex = /(https?:\/\/[^\s]+)/g;
+    return text.replace(urlRegex, function(url) {
+        return '<a href="' + url + '">' + url + '</a>';
+    })
+    // or alternatively
+    // return text.replace(urlRegex, '<a href="$1">$1</a>')
+}
 
 
-$( document ).ready(function() {
-    tweets();
-});
+//gets the tweets for diaply on the homepage
+$(document).ready(function(){       
+        $.getJSON('http://localhost/clothes_igniter/twitter/tweets_json.php?count=3&screen_name=asos&callback=?',{
+          format: "json"
+        }).done(function(data){
+			$.each(data, function(index){
+				var now = new Date();
+				$('#tweets').append('<p>' + urlify(data[index].text) + '<span>' + parseTwitterDate(data[index].created_at) + '</span></p>');
+		});
+          
+        });     
+      });
 
 
 

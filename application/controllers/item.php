@@ -15,6 +15,16 @@ class Item extends MY_Controller
     function view($id = NULL)
     {
         $data['item'] = $this->item_model->get_item($id);
+		
+		//change to updated "recent" method when completed
+		
+		$recent_items = $this->item_model->get_item();
+		
+		$data['recent_items'] = array(
+			$recent_items[0],
+			$recent_items[1],
+			$recent_items[2]
+		);
 
         $categoryID = $data['item']['categoryID'];
         $brandID = $data['item']['brandID'];

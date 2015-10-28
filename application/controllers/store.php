@@ -9,6 +9,7 @@ class Store extends MY_Controller{
         $this->load->model('item_model');
         $this->load->helper('url_helper');
         $this->load->library('user_agent');
+		
     }
 
     function index(){

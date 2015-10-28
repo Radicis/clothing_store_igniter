@@ -29,22 +29,14 @@ $twitter_path = '1.1/statuses/user_timeline.json';
 $http_code = $connection->request('GET', $connection->url($twitter_path), $parameters );
 
 if ($http_code === 200) { // if everything's good
-	$response = ($connection->response['response']);
 
-    $tweets = json_decode($response, true);
 
-    $myTweets = array();
-    $echoString = "";
-
-    foreach( $tweets as $key => $tweet ) {
-        array_push($myTweets, $tweet["text"]);
-    }
-
-    foreach($myTweets as $tweet) {
-        $echoString = $echoString .  "<p>" . $tweet . "</p>";
-    }
-
-    echo $echoString;
+	$response = strip_tags($connection->response['response']);
+	if ($_GET['callback']) { 
+		echo $_GET['callback'],'(', $response,');';
+	} else {
+		echo $response;	
+	}
 
 } else {
 	echo "Error ID: ",$http_code, "<br>\n";

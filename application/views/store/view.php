@@ -75,40 +75,21 @@
     <div class="left_sidebar">
 
         <h4>recent products</h4>
+		<?php
+			  foreach($recent_items as $item){
+					?>
         <div class="left_products">
             <div class="left_img">
-                <img src="images/det_pic1.jpg" alt=""/>
+                <img src="<?php echo base_url() . "images/clothes/" . $item->image_large; ?>" alt=""/>
             </div>
-            <div class="left_text">
-                <p><a href="#">Lorem ipsum dolor sit amet, consectetuer adipiscing elit</a></p>
-                <span class="line">$72.00</span>
-                <span>$52.00</span>
-            </div>
-            <div class="clear"></div>
+					<div class="left_text">
+						<p><?php echo anchor('item/view/' . $item->id, $item->item_name) ?></p>
+						<span>&euro;<?php echo $item->item_price ?></span>
+					</div>
+					<div class="clear"></div>				
         </div>
-        <div class="left_products">
-            <div class="left_img">
-                <img src="images/det_pic2.jpg" alt=""/>
-            </div>
-            <div class="left_text">
-                <p><a href="#">Lorem ipsum dolor sit amet, consectetuer adipiscing elit</a></p>
-                <span class="line">$86.00</span>
-                <span>$83.00</span>
-            </div>
-            <div class="clear"></div>
-        </div>
-        <div class="left_products">
-            <div class="left_img">
-                <img src="images/det_pic1.jpg" alt=""/>
-            </div>
-            <div class="left_text">
-                <p><a href="#">Lorem ipsum dolor sit amet, consectetuer adipiscing elit</a></p>
-                <span class="line">$76.00</span>
-                <span>$75.00</span>
-            </div>
-            <div class="clear"></div>
-        </div>
-
+		<?php } ?>
+       
     </div>
     <div class="clear"></div>
 </div>
