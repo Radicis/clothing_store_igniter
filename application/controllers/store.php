@@ -66,11 +66,10 @@ class Store extends MY_Controller{
     //Testing Ajax
     function foo(){
 
-
         if ($this->input->is_ajax_request()) {
             header('Content-Type: application/x-json; charset=utf-8');
             echo(json_encode($this->item_model->foo()));
-            die();
+
         }
 
 

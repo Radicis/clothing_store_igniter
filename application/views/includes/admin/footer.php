@@ -14,16 +14,11 @@
                     <p>If you cant find better pants anywhere, we will match those pants and those prices. Accept no substitutes for your pants based needs</p>
                 </div>
                 <div class="span1_of_3">
-                    <h3>twitter widget</h3>
-                    <p><a href="#">@Contrarypopular</a> I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give <a href="#">@accountofsystem</a> </p>
-                    <p class="top">19 days ago</p>
-                    <p class="top"><a href="#">@Contrarypopular</a> I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give <a href="#">@accountofsystem</a> </p>
-                    <p class="top">19 days ago</p>
+                    <h3>Latest Tweets</h3>
+                    <div id="tweets"></div>
                 </div>
                 <div class="span1_of_3">
                     <h3>Facebook Widget here</h3>
-                    <a class="twitter-timeline"  href="https://twitter.com/alloydWebDev" data-widget-id="654013016816644097">Tweets by @alloydWebDev</a>
-                    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
 
                 </div>
                 <div class="clear"></div>

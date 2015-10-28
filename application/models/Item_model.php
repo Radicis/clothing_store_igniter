@@ -63,7 +63,6 @@ class Item_model extends CI_Model
     public function foo(){
         $this->db->select('item_price');
         $this->db->from('store_items');
-        //$this->db->limit($limit, $start);
         $query = $this->db->get();
         if ($query->num_rows() > 0) {
             foreach ($query->result() as $row) {

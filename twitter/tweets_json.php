@@ -1,28 +1,54 @@
 <?php
-require_once('TwitterAPIExchange.php');
-$settings = array(
-    'oauth_access_token' => "lSHOt4VJNNKCy6oTbEba6IkvX",
-    'oauth_access_token_secret' => "kZHLfYp2k8lHO8Pv5nOdse2UOPSBH5sHKIG81i29woK3kYyykB",
-    'consumer_key' => "",
-    'consumer_secret' => ""
-);
+require 'tmhOAuth.php'; // Get it from: https://github.com/themattharris/tmhOAuth
 
-$requestMethod = 'GET';
+// Use the data from http://dev.twitter.com/apps to fill out this info
+// notice the slight name difference in the last two items)
 
-$url = "https://api.twitter.com/1.1/statuses/user_timeline.json"; // I can decode output from this
-$getfield = "?screen_name=alloydwebdev&count=5"; // I can decode output from this
+$connection = new tmhOAuth(array(
+  'consumer_key' => 'lSHOt4VJNNKCy6oTbEba6IkvX',
+	'consumer_secret' => 'kZHLfYp2k8lHO8Pv5nOdse2UOPSBH5sHKIG81i29woK3kYyykB',
+	'user_token' => '', //access token
+	'user_secret' => '' //access token secret
+));
 
-$twitter = new TwitterAPIExchange($settings);
-$string = $twitter->setGetfield($getfield)
-    ->buildOauth($url, $requestMethod)
-    ->performRequest(); // from stackOverflow
-$string = json_decode($string, $assoc = TRUE); // seems i cannot use json_decode for output from tweets.json
-if ($string["errors"][0]["message"] != "")
-{
-    echo "twitter error message:" . $string[errors][0]["message"];
-    exit();
+// set up parameters to pass
+$parameters = array();
+
+if ($_GET['count']) {
+	$parameters['count'] = strip_tags($_GET['count']);
 }
-foreach ($string as $items)
-{
-    echo "tweet text =[". $items['text']."]<br />";
+
+if ($_GET['screen_name']) {
+	$parameters['screen_name'] = strip_tags($_GET['screen_name']);
 }
+
+
+$twitter_path = '1.1/statuses/user_timeline.json';
+
+
+$http_code = $connection->request('GET', $connection->url($twitter_path), $parameters );
+
+if ($http_code === 200) { // if everything's good
+	$response = ($connection->response['response']);
+
+    $tweets = json_decode($response, true);
+
+    $myTweets = array();
+    $echoString = "";
+
+    foreach( $tweets as $key => $tweet ) {
+        array_push($myTweets, $tweet["text"]);
+    }
+
+    foreach($myTweets as $tweet) {
+        $echoString = $echoString .  "<p>" . $tweet . "</p>";
+    }
+
+    echo $echoString;
+
+} else {
+	echo "Error ID: ",$http_code, "<br>\n";
+	echo "Error: ",$connection->response['error'], "<br>\n";
+}
+
+// You may have to download and copy http://curl.haxx.se/ca/cacert.pem

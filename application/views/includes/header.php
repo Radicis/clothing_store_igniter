@@ -12,10 +12,11 @@
 
     <link rel="stylesheet" href="<?php echo base_url();?>css/style.css">
     <link rel="stylesheet" href="<?php echo base_url();?>css/custom.css">
-    <script src="<?php echo base_url();?>js/jquery.min.js" type="text/javascript"></script>
+    <script src="<?php echo base_url();?>js/vendor/jquery.min.js" type="text/javascript"></script>
+    <script src="<?php echo base_url();?>js/vendor/bootstrap.min.js" type="text/javascript"></script>
 
     <link type="text/css" rel="stylesheet" href="<?php echo base_url();?>css/jquery.mmenu.all.css" />
-    <script type="text/javascript" src="<?php echo base_url();?>js/jquery.mmenu.js"></script>
+    <script type="text/javascript" src="<?php echo base_url();?>js/vendor/jquery.mmenu.js"></script>
     <script type="text/javascript">
         //	The menu on the left
         $(function() {
@@ -24,8 +25,8 @@
     </script>
     <!-- start slider -->
     <link href="<?php echo base_url();?>css/slider.css" rel="stylesheet" type="text/css" media="all" />
-    <script type="text/javascript" src="<?php echo base_url();?>js/jquery.eislideshow.js"></script>
-    <script type="text/javascript" src="<?php echo base_url();?>js/easing.js"></script>
+    <script type="text/javascript" src="<?php echo base_url();?>js/vendor/jquery.eislideshow.js"></script>
+    <script type="text/javascript" src="<?php echo base_url();?>js/vendor/easing.js"></script>
     <script type="text/javascript">
         $(function() {
             $('#ei-slider').eislideshow({
@@ -37,7 +38,7 @@
         });
     </script>
     <!-- start top_js_button -->
-    <script type="text/javascript" src="<?php echo base_url();?>js/move-top.js"></script>
+    <script type="text/javascript" src="<?php echo base_url();?>js/vendor/move-top.js"></script>
     <script type="text/javascript">
         jQuery(document).ready(function($) {
             $(".scroll").click(function(event){
@@ -46,6 +47,8 @@
             });
         });
     </script>
+
+    <script src="<?php echo base_url();?>js/main.js" type="text/javascript"></script>
 
 </head>
 <body>
