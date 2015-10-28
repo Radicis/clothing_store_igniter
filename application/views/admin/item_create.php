@@ -1,5 +1,4 @@
 
-
 <?php echo validation_errors(); ?>
 
 <?php
@@ -10,11 +9,11 @@ echo form_open('item/create_item', $attributes); ?>
 
 <div class="form-group">
     <label for="item_name">Name</label>
-    <input type="input" name="item_name" class="form-control" />
+    <input type="input" name="item_name" class="form-control"  required />
 </div>
 <div class="form-group">
     <label for="item_price">Price</label>
-    <input type="input" name="item_price" class="form-control" />
+    <input type="input" name="item_price" class="form-control"  required/>
 </div>
 <div class="form-group">
     <label for="categoryID">Category</label>

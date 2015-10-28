@@ -1,5 +1,5 @@
 <h1>
-    Brand View
+    Category View
     <?php echo anchor('category/create', 'Create New'); ?>
 </h1>
 
@@ -14,7 +14,7 @@
 
                         foreach($items as $item) {
                             echo "<tr><td>" . $item->id . "</td><td>" . $item->name .  "</td>";
-                            echo "<td>" . anchor('category/', "Edit");
+                            echo "<td>" . anchor('category/update/' . $item->id, "Edit");
                             echo " | ";
                             echo anchor('category/delete', "Delete");
                             echo "</td></tr>";

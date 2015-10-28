@@ -9,10 +9,10 @@ class Category_model extends CI_Model
     }
 
     public function record_count() {
-            return $this->db->count_all("category");
+        return $this->db->count_all("category");
     }
 
-    public function get_item($id = FALSE)
+    public function get($id = FALSE)
     {
         if (!$id)
         {
@@ -38,33 +38,22 @@ class Category_model extends CI_Model
         return false;
     }
 
-    function get_list(){
-            //create array showing the heirarchy of categories
-    }
 
-
-    function set_item()
+    function create($data)
     {
-        $this->load->helper('url');
-
-        $data = array(
-            'name' => $this->input->post('category_name'),
-            'parentID' => $this->input->post('parentID')
-        );
-
         return $this->db->insert('category', $data);
     }
 
 
-
-    function update_item()
+    function update($id, $data)
     {
-
+        $this->db->where('id', $id);
+        $this->db->update('category', $data);
     }
 
-    function delete_item()
+    function delete($id)
     {
-
+        return $this->db->delete('category', array('id' => $id));
     }
 
 }

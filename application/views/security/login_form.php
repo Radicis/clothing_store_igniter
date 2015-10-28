@@ -1,6 +1,4 @@
 
-<div class="contact"
-<div class="login_left">
     <div class="registration_form">
         <h1>Login</h1>
         <?php
@@ -14,5 +12,5 @@
 
         ?>
     </div>
-</div>
-</div>
+
+<div class="clear"></div>

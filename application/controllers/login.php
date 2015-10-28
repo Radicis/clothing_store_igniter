@@ -2,7 +2,7 @@
 
 
 
-class Login extends CI_Controller
+class Login extends MY_Controller
 {
     function __construct()
     {
@@ -15,7 +15,7 @@ class Login extends CI_Controller
     {
         $data['main_content'] =  'security/login_form';
         $this->session->set_userdata('redirect_back', $this->agent->referrer() );
-        $this->load->view('includes/template', $data);
+        $this->load->view('includes/template', $data, $this->globals);
     }
 
     function validate_credentials()
@@ -35,7 +35,6 @@ class Login extends CI_Controller
             if($this->user_model->isAdmin()){
                 $this->session->set_flashdata('info', 'Admin Logged in');
             }
-
 
 
             $this->session->set_userdata($data);
@@ -67,7 +66,7 @@ class Login extends CI_Controller
     function signup()
     {
         $data['main_content'] = 'security/signup_form';
-        $this->load->view('includes/template', $data);
+        $this->load->view('includes/template', $data, $this->globals);
     }
 
     function logout()
@@ -100,11 +99,11 @@ class Login extends CI_Controller
             if($query = $this->user_model->create_user())
             {
                 $data['main_content'] = 'security/signup_successful';
-                $this->load->view('includes/template', $data);
+                $this->load->view('includes/template', $data, $this->globals);
             }
             else
             {
-                $this->load->view('security/signup_form');
+                $this->load->view('security/signup_form', $this->globals);
             }
         }
 

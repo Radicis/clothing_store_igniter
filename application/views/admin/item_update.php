@@ -8,11 +8,11 @@ echo form_open('item/update_item/'. $item['id'], $attributes); ?>
 
 <div class="form-group">
     <label for="item_name">Name</label>
-    <input type="input" name="item_name" class="form-control" value="<?php echo $item['item_name'];  ?>" />
+    <input type="input" name="item_name" class="form-control" value="<?php echo $item['item_name'];  ?>" required />
 </div>
 <div class="form-group">
     <label for="item_price">Price</label>
-    <input type="input" name="item_price" class="form-control" value="<?php echo $item['item_price'];  ?>" />
+    <input type="input" name="item_price" class="form-control" value="<?php echo $item['item_price'];  ?>" required />
 </div>
 <div class="form-group">
     <label for="categoryID">Category</label>

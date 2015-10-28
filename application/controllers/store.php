@@ -1,26 +1,17 @@
 <?php
 
 
-class Store extends CI_Controller{
+class Store extends MY_Controller{
 
     function __construct()
     {
         parent::__construct();
         $this->load->model('item_model');
-        $this->load->model('category_model');
-        $this->load->model('brand_model');
         $this->load->helper('url_helper');
         $this->load->library('user_agent');
     }
 
     function index(){
-
-        /*
-        if (!$this->input->is_ajax_request()) {
-            header('Content-Type: application/x-json; charset=utf-8');
-            echo(json_encode($this->item_model->get_item()));
-            die();
-        }*/
 
         $this->load->library('pagination');
 
@@ -38,14 +29,41 @@ class Store extends CI_Controller{
             get_items($config["per_page"], $page);
             $data["links"] = $this->pagination->create_links();
 
-            $data["categories"] = $this->category_model->get_item();
-        $data["brands"] = $this->brand_model->get_item();
-
             $data['main_content'] = 'store/index';
-            $this->load->view('includes/template', $data);
+            $this->load->view('includes/template', $data, $this->globals);
     }
 
 
+    function view_cart()
+    {
+
+        $data['main_content'] = 'store/view_cart';
+        $this->load->view('includes/template', $data, $this->globals);
+    }
+
+    function add_to_cart($id)
+    {
+        $item = $this->item_model->get_item($id);
+
+        $data = array(
+            'id'      => $item['id'],
+            'qty'     => 1,
+            'price'   => $item['item_price'],
+            'name'    => $item['item_name'],
+        );
+
+        $this->cart->insert($data);
+        redirect('item/view/' . $id);
+    }
+
+    function empty_cart()
+    {
+        $this->cart->destroy();
+        $this->session->set_flashdata('success', 'Cart Cleared');
+        redirect('site');
+    }
+
+    //Testing Ajax
     function foo(){
 
 
@@ -76,11 +94,8 @@ class Store extends CI_Controller{
         get_category_items($config["per_page"], $page, $categoryID);
         $data["links"] = $this->pagination->create_links();
 
-        $data["categories"] = $this->category_model->get_item();
-        $data["brands"] = $this->brand_model->get_item();
-
         $data['main_content'] = 'store/index';
-        $this->load->view('includes/template', $data);
+        $this->load->view('includes/template', $data, $this->globals);
     }
 
 
@@ -104,13 +119,10 @@ class Store extends CI_Controller{
         $data["items"] = $this->item_model->get_filter_items($categoryID, $brandID, $price);
         $data["links"] = $this->pagination->create_links();
 
-        $data["categories"] = $this->category_model->get_item();
-        $data["brands"] = $this->brand_model->get_item();
-
         $this->session->set_flashdata('success', "Cat: " . $categoryID. " brand: " . $brandID . " price: " . $price);
 
         $data['main_content'] = 'store/index';
-        $this->load->view('includes/template', $data);
+        $this->load->view('includes/template', $data, $this->globals);
     }
 
     function price($price){
@@ -131,11 +143,9 @@ class Store extends CI_Controller{
         get_by_price($config["per_page"], $page, $price);
         $data["links"] = $this->pagination->create_links();
 
-        $data["categories"] = $this->category_model->get_item();
-        $data["brands"] = $this->brand_model->get_item();
 
         $data['main_content'] = 'store/index';
-        $this->load->view('includes/template', $data);
+        $this->load->view('includes/template', $data, $this->globals);
     }
 
     function brand($brand){
@@ -156,11 +166,9 @@ class Store extends CI_Controller{
         get_by_brand($config["per_page"], $page, $brand);
         $data["links"] = $this->pagination->create_links();
 
-        $data["categories"] = $this->category_model->get_item();
-        $data["brands"] = $this->brand_model->get_item();
 
         $data['main_content'] = 'store/index';
-        $this->load->view('includes/template', $data);
+        $this->load->view('includes/template', $data, $this->globals);
     }
 
 }

@@ -46,6 +46,8 @@
         });
     </script>
 
+    <script src="<?php echo base_url();?>js/main.js" type="text/javascript"></script>
+
 </head>
 <body>
 
@@ -54,7 +56,7 @@
     <div class="wrap">
         <div class="header">
             <div class="logo">
-                <a href="index.html"><img src="<?php echo base_url();?>images/logo.png" alt=""/></a>
+                <a href="<?php echo base_url();?>"><img src="<?php echo base_url();?>images/logo.png" alt=""/></a>
             </div>
             <div class="log_reg">
                 <ul>
@@ -90,10 +92,10 @@
     <div class="header_btm">
         <div class="menu">
             <ul>
-                <li><?php echo anchor('', 'Home'); ?></li>
+                <li><?php echo anchor('site', 'Home'); ?></li>
                 <li><?php echo anchor('store', 'Shop'); ?></li>
-                <li><?php echo anchor('store', 'About'); ?></li>
-                <li><?php echo anchor('store', 'Contact'); ?></li>
+                <li><?php echo anchor('site', 'About'); ?></li>
+                <li><?php echo anchor('site', 'Contact'); ?></li>
 
                 <?php
                 if($this->session->isAdmin==1) {
@@ -108,10 +110,10 @@
         </div>
         <nav id="menu-left">
             <ul>
-                <li><?php echo anchor('store', 'Home'); ?></li>
+                <li><?php echo anchor('site', 'Home'); ?></li>
                 <li><?php echo anchor('store', 'Shop'); ?></li>
-                <li><?php echo anchor('store', 'About'); ?></li>
-                <li><?php echo anchor('store', 'Contact'); ?></li>
+                <li><?php echo anchor('site', 'About'); ?></li>
+                <li><?php echo anchor('site', 'Contact'); ?></li>
 
                 <?php
                 if($this->session->isAdmin==1) {
@@ -122,8 +124,8 @@
         </nav>
         <div class="header_right">
             <ul>
-                <li><a href="#"><i  class="art"></i><span class="color1">30</span></a></li>
-                <li><a href="#"><i  class="cart"></i><span>0</span></a></li>
+                <!--<li><a href="#"><i  class="art"></i><span class="color1">30</span></a></li>-->
+                <li><a href="<?php echo base_url(); ?>index.php/store/view_cart"><i  class="cart"></i><span><?php echo $this->cart->total_items(); ?></span></a></li>
             </ul>
         </div>
         <div class="clear"></div>

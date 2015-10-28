@@ -53,10 +53,8 @@
                 <h3><?php echo $item['item_name']; ?></h3>
                 <h5>&euro;<?php echo $item['item_price']; ?></h5>
                 <div class="available">
-                    <div class="btn_form">
-                        <form>
-                            <input type="submit" value="buy now" title="" />
-                        </form>
+                    <div class="green_button">
+                            <?php echo anchor('store/add_to_cart/' . $item['id'], 'Add To Cart'); ?>
                     </div>
                     <p><?php echo $item['item_description_short']; ?></p>
                 </div>
@@ -66,7 +64,7 @@
         <div class="clear"></div>
         <!-- start left content_bottom -->
         <div class="left_content_btm">
-            <p class="para"><?php echo $item['item_description']; ?></p>
+            <h1>Description</h1><p class="para"><?php echo $item['item_description']; ?></p>
             <!-- start tabs -->
 
             <!-- end tabs -->

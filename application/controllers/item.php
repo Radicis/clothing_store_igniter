@@ -1,15 +1,13 @@
 <?php
 
 
-class Item extends CI_Controller
+class Item extends MY_Controller
 {
 
     function __construct()
     {
         parent::__construct();
         $this->load->model('item_model');
-        $this->load->model('category_model');
-        $this->load->model('brand_model');
         $this->load->helper('url_helper');
         $this->load->library('user_agent');
     }
@@ -21,17 +19,15 @@ class Item extends CI_Controller
         $categoryID = $data['item']['categoryID'];
         $brandID = $data['item']['brandID'];
 
-        $data['category'] = $this->category_model->get_item($categoryID);
-        $data['brand'] = $this->brand_model->get_item($brandID);
+        $data["categories"] = $this->category_model->get($categoryID);
+        $data["brands"] = $this->brand_model->get($brandID);
 
         if (empty($data['item']))
         {
             show_404();
         }
-
-        $this->load->view('includes/header', $data);
-        $this->load->view('store/view', $data);
-        $this->load->view('includes/footer');
+        $data['main_content'] = 'store/view';
+        $this->load->view('includes/template', $data, $this->globals);
     }
 
     function create_item()
@@ -41,17 +37,15 @@ class Item extends CI_Controller
         $this->load->library('form_validation');
 
         $this->form_validation->set_rules('item_name', 'Name', 'required');
-        $this->form_validation->set_rules('item_description', 'Description', 'required');
-        $this->form_validation->set_rules('item_price', 'Price', 'required');
+        $this->form_validation->set_rules('item_description', 'Description');
+        $this->form_validation->set_rules('item_price', 'Price', 'trim|required|numeric');
         $this->form_validation->set_rules('categoryID', 'Category', 'required');
         $this->form_validation->set_rules('brandID', 'Brand', 'required');
 
         if ($this->form_validation->run() === FALSE) {
-            $data['categories'] = $this->category_model->get_item();
-            $data['brands'] = $this->brand_model->get_item();
-            $this->load->view('includes/header');
-            $this->load->view('admin/item_create', $data);
-            $this->load->view('includes/footer');
+
+            $data['main_content'] = 'admin/item_create';
+            $this->load->view('includes/admin/template', $data, $this->globals);
         } else {
             $insert_id = $this->item_model->set_item();
             $this->session->set_flashdata('success', 'Item Added');
@@ -67,18 +61,15 @@ class Item extends CI_Controller
         $this->load->library('form_validation');
 
         $this->form_validation->set_rules('item_name', 'Name', 'required');
-        $this->form_validation->set_rules('item_price', 'Price', 'required');
+        $this->form_validation->set_rules('item_description', 'Description');
+        $this->form_validation->set_rules('item_price', 'Price', 'trim|required|numeric');
         $this->form_validation->set_rules('categoryID', 'Category', 'required');
         $this->form_validation->set_rules('brandID', 'Brand', 'required');
 
         if ($this->form_validation->run() === FALSE) {
             $data['item'] = $this->item_model->get_item($id);
-
-            $data['categories'] = $this->category_model->get_item();
-            $data['brands'] = $this->brand_model->get_item();
-            $this->load->view('includes/header');
-            $this->load->view('admin/item_update', $data);
-            $this->load->view('includes/footer');
+            $data['main_content'] = 'admin/item_update';
+            $this->load->view('includes/admin/template', $data, $this->globals);
         } else {
             $data = array(
                 'item_name' => $this->input->post('item_name'),
@@ -105,12 +96,10 @@ class Item extends CI_Controller
 
     function delete_item($id = null)
     {
-        $status = $this->item_model->delete($id);
-//header('Content-type: application/json');
-//echo json_encode(array("success" => $status));
+        $this->item_model->delete($id);
         $this->session->set_flashdata('success', 'Item Deleted');
         redirect($this->agent->referrer());
-//redirect('admin/show/items');
+
     }
 
     function add_rating($id = NULL)

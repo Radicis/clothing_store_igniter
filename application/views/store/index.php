@@ -42,9 +42,6 @@
           </div>
       <div class="col-md-9">
 
-
-
-
           <!-- start grids_of_3 -->
           <div class="grids_of_3">
               <?php if($items!=null){
@@ -54,6 +51,7 @@
                               <img src="<?php echo base_url() . "images/clothes/" . $item->image_large; ?>"  alt=""/>
                               <h3><?php echo $item->item_name ?></h3>
                               <span class="price">&euro;<?php echo $item->item_price ?></span>
+
                           </a>
                       </div>
 

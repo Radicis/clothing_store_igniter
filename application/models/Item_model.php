@@ -42,8 +42,6 @@ class Item_model extends CI_Model
 
     public function get_item($id = FALSE)
     {
-
-
         if (!$id)
         {
             $query = $this->db->get('store_items');
@@ -61,6 +59,7 @@ class Item_model extends CI_Model
         return $query->row_array();
     }
 
+    //Testing filter functions
     public function foo(){
         $this->db->select('item_price');
         $this->db->from('store_items');
@@ -75,6 +74,7 @@ class Item_model extends CI_Model
         return false;
     }
 
+    //testing multiple filters
     public function get_filter_items($categoryID='%', $brandID='%', $price=0)
     {
 
@@ -103,7 +103,7 @@ class Item_model extends CI_Model
 
     }
 
-    //used for pagination
+    //limit and start ued for pagination
     public function get_items($limit, $start)
     {
         $this->db->limit($limit, $start);
@@ -117,7 +117,6 @@ class Item_model extends CI_Model
         return false;
     }
 
-    //used for pagination
     public function get_category_items($limit, $start, $category= FALSE)
     {
         $this->db->limit($limit, $start);

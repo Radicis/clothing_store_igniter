@@ -43,7 +43,7 @@
 }
 
 .item-list .description{
-    max-width:300px;
+    max-width:150px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -155,12 +155,12 @@ color: #222;
 
 }
 
-.grid1_of_3 a{
-    transition: all 0.4s ease-out;
+.grid1_of_3{
+    transition: all 0.2s ease-out;
 }
 
 
-.grid1_of_3 a:hover {
+.grid1_of_3:hover {
     -webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
     -moz-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
     box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
@@ -174,3 +174,22 @@ color: #222;
 .error{
     color:#d43f3a;
 }
+
+.green_button a{
+    padding:10px;
+    background:#57C5A0;
+    color:#fefefe;
+    border-radius: 5px;
+    transition: all 0.4s ease-out;
+}
+.green_button a:hover{
+    filter: alpha(opacity=50);
+    opacity: 0.7;
+    text-decoration:none;
+}
+
+.green_button{
+    margin-top:10px;
+    margin-bottom:10px;
+}
+
