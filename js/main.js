@@ -44,7 +44,7 @@ $(document).ready(function(){
         }).done(function(data){
 			$.each(data, function(index){
 				var now = new Date();
-				$('#tweets').append('<p>' + urlify(data[index].text) + '<span>' + parseTwitterDate(data[index].created_at) + '</span></p>');
+				$('#tweets').append('<p>' + urlify(data[index].text) + '<span style="color:#ccc"> - ' + parseTwitterDate(data[index].created_at) + '</span></p>');
 		});
           
         });     
