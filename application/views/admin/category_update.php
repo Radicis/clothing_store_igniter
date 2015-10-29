@@ -20,9 +20,9 @@ echo form_open('category/update/'. $thisCategory['id'], $attributes); ?>
         echo "<option value='0'>None</option>";
 
         foreach($categories as $category){
-            echo "<option value='". $category['id'] ;
-            if($category['id'] === $thisCategory["categoryID"]){
-                echo "selected";
+            echo "<option value='". $category['id'] . "'' " ;
+            if($category['id'] === $thisCategory['parentID']){
+                echo " selected ";
             }
             echo "'>" . $category['name'] . "</option>";
         }

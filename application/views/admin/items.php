@@ -1,6 +1,6 @@
 <h1>
     Item View
-    <?php echo anchor('item/create_item', 'Create New'); ?>
+    <small><?php echo anchor('item/create_item', 'Create New'); ?></small>
 </h1>
             <table class="table table-striped item-list">
                 <tr>

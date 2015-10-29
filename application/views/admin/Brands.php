@@ -1,7 +1,7 @@
 
         <h1>
             Brand View
-            <?php echo anchor('brand/create', 'Create New'); ?>
+            <small><?php echo anchor('brand/create', 'Create New'); ?></small>
         </h1>
 
 

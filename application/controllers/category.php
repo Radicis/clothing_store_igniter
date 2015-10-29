@@ -70,7 +70,7 @@ class Category extends MY_Controller
         }
     }
 
-    function delete_item($id = null)
+    function delete($id = null)
     {
         $this->category_model->delete($id);
         $this->session->set_flashdata('success', 'Category Deleted');

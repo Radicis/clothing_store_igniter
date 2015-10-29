@@ -67,7 +67,7 @@ class Brand extends MY_Controller
         }
     }
 
-    function delete_item($id = null)
+    function delete($id = null)
     {
         $this->brand_model->delete($id);
         $this->session->set_flashdata('success', 'Brand Deleted');
