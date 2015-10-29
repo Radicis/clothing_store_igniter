@@ -35,6 +35,7 @@ class Store extends MY_Controller{
     }
 
 
+    //Displays cart contents
     function view_cart()
     {
 
@@ -42,6 +43,7 @@ class Store extends MY_Controller{
         $this->load->view('includes/template', $data, $this->globals);
     }
 
+    // Add specified item ID to the cart
     function add_to_cart($id)
     {
         $item = $this->item_model->get_item($id);
@@ -57,6 +59,7 @@ class Store extends MY_Controller{
         redirect('item/view/' . $id);
     }
 
+    // Removes all items in cart
     function empty_cart()
     {
         $this->cart->destroy();
@@ -76,6 +79,7 @@ class Store extends MY_Controller{
 
     }
 
+    //Displays items of the specified categoryID
     function category($categoryID){
 
         $this->load->library('pagination');
@@ -99,7 +103,7 @@ class Store extends MY_Controller{
     }
 
 
-    //testing
+    //testing multiple filters
 
     function filter($categoryID=False, $brandID=False, $price=False){
 
@@ -125,6 +129,7 @@ class Store extends MY_Controller{
         $this->load->view('includes/template', $data, $this->globals);
     }
 
+    //Displays items of the specified price range
     function price($price){
 
         $this->load->library('pagination');
@@ -148,6 +153,8 @@ class Store extends MY_Controller{
         $this->load->view('includes/template', $data, $this->globals);
     }
 
+
+    //Displays items of the specified brandID
     function brand($brand){
 
         $this->load->library('pagination');

@@ -34,14 +34,12 @@ function urlify(text) {
     return text.replace(urlRegex, function(url) {
         return '<a href="' + url + '">' + url + '</a>';
     })
-    // or alternatively
-    // return text.replace(urlRegex, '<a href="$1">$1</a>')
 }
 
 
-//gets the tweets for diaply on the homepage
+//gets the tweets from tweets_json.php and displays on the homepage
 $(document).ready(function(){       
-        $.getJSON('http://localhost/clothes_igniter/twitter/tweets_json.php?count=3&screen_name=asos&callback=?',{
+        $.getJSON('http://localhost/igniter/clothing_store_igniter/twitter/tweets_json.php?count=3&screen_name=asos&callback=?',{
           format: "json"
         }).done(function(data){
 			$.each(data, function(index){

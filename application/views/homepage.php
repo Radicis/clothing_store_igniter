@@ -8,7 +8,7 @@
                     <li>
                         <img src="<?php echo base_url();?>images/slider-image1.jpg" alt="image06"/>
                         <div class="ei-title">
-                             <h2>Stinky Pants <br>	2015 collection</h2>
+                             <h2>Sample Pants <br>	2015 collection</h2>
                             <h3 class="active">It is a long established fact that a reader<br>
                                 Lorem Ipsum is that it has a more-or-less
                             </h3>
@@ -73,7 +73,7 @@
                     <li class="ei-slider-element">Current</li>
                     <li>
                         <a href="#">
-                            <span class="active">Stinky pants</span>
+                            <span class="active">Sample pants</span>
                             <p>limited edition</p>
                         </a>
                         <img src="<?php echo base_url();?>images/thumbs/1.jpg" alt="thumb01" />

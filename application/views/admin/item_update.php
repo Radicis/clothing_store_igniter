@@ -43,6 +43,10 @@ echo form_open('item/update_item/'. $item['id'], $attributes); ?>
     </select>
 </div>
 <div class="form-group">
+    <label for="image_large">Image Filename</label>
+    <input type="text" name="image_large" class="form-control" value="<?php echo $item['image_large']; ?>">
+</div>
+<div class="form-group">
     <label for="item_description">Description</label>
     <textarea name="item_description" class="form-control"><?php echo $item['item_description'];  ?></textarea>
 </div>

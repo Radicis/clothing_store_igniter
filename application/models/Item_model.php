@@ -197,6 +197,7 @@ class Item_model extends CI_Model
         $data = array(
             'item_name' => $this->input->post('item_name'),
             'item_price' => $this->input->post('item_price'),
+            'image_large' => $this->input->post('image_large'),
             'item_description' => $this->input->post('item_description'),
             'categoryID' => $this->input->post('categoryID'),
             'brandID' => $this->input->post('brandID')
@@ -232,17 +233,9 @@ class Item_model extends CI_Model
 
     }
 
-    function update($id)
+    function update($id, $data)
     {
         $this->load->helper('url');
-
-        $data = array(
-            'item_name' => $this->input->post('item_name'),
-            'item_price' => $this->input->post('item_price'),
-            'item_description' => $this->input->post('item_description'),
-            'categoryID' => $this->input->post('categoryID'),
-            'brandID' => $this->input->post('brandID')
-        );
 
         $this->db->where('id', $id);
         $this->db->update('store_items', $data);

@@ -175,6 +175,10 @@ color: #222;
     color:#d43f3a;
 }
 
+.main a:hover{
+    text-decoration: none;
+}
+
 .green_button a{
     padding:10px;
     background:#57C5A0;

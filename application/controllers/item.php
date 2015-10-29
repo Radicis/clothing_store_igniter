@@ -57,7 +57,15 @@ class Item extends MY_Controller
             $data['main_content'] = 'admin/item_create';
             $this->load->view('includes/admin/template', $data, $this->globals);
         } else {
-            $insert_id = $this->item_model->set_item();
+            $data = array(
+                'item_name' => $this->input->post('item_name'),
+                'item_price' => $this->input->post('item_price'),
+                'image_large' => $this->input->post('image_large'),
+                'item_description' => $this->input->post('item_description'),
+                'categoryID' => $this->input->post('categoryID'),
+                'brandID' => $this->input->post('brandID')
+            );
+            $insert_id = $this->item_model->set_item($data);
             $this->session->set_flashdata('success', 'Item Added');
             $this->view($insert_id);
 
@@ -84,6 +92,7 @@ class Item extends MY_Controller
             $data = array(
                 'item_name' => $this->input->post('item_name'),
                 'item_price' => $this->input->post('item_price'),
+                'image_large' => $this->input->post('image_large'),
                 'item_description' => $this->input->post('item_description'),
                 'categoryID' => $this->input->post('categoryID'),
                 'brandID' => $this->input->post('brandID'),

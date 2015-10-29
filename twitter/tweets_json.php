@@ -1,8 +1,11 @@
 <?php
-require 'tmhOAuth.php'; // Get it from: https://github.com/themattharris/tmhOAuth
 
-// Use the data from http://dev.twitter.com/apps to fill out this info
-// notice the slight name difference in the last two items)
+/*
+ * Source: https://gist.github.com/planetoftheweb/5914179
+ */
+
+
+require 'tmhOAuth.php'; // Get it from: https://github.com/themattharris/tmhOAuth
 
 $connection = new tmhOAuth(array(
   'consumer_key' => 'lSHOt4VJNNKCy6oTbEba6IkvX',

@@ -36,6 +36,10 @@ echo form_open('item/create_item', $attributes); ?>
     </select>
 </div>
 <div class="form-group">
+    <label for="image_large">Image Filename</label>
+    <input type="text" name="image_large" class="form-control">
+</div>
+<div class="form-group">
     <label for="item_description">Description</label>
     <textarea name="item_description" class="form-control"></textarea>
 </div>
