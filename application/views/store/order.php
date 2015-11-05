@@ -1,6 +1,6 @@
 <div class=registration_form">
 
-<h1>Shopping Cart</h1>
+<h1>Order Form</h1>
 
 <table class="table table-striped item-list" cellpadding="6" cellspacing="1" style="width:100%" border="0">
 
@@ -50,8 +50,46 @@
     </tr>
 
 </table>
-<div class="green_button pull-right">
-    <?php echo anchor('store/empty_cart', 'Empty Cart'); ?> <?php echo anchor('store/order', 'Checkout'); ?>
-</div>
+    <?php echo form_open('store/confirm_order'); ?>
+    <fieldset>
+        <legend>Personal Information</legend>
+
+        <?php
+
+
+        echo form_input('first_name', set_value('first_name', 'First Name'));
+        echo "<br>";
+        echo form_input('last_name', set_value('last_name', 'Last Name'));
+        echo "<br>";
+        echo form_input('email', set_value('email', 'Email'));
+
+        echo "<div class='pull-right'>";
+
+        //Display all of the users delivery addresses with radio buttons
+        foreach($delivery_addresses as $address) {
+            if ($address['isDefault']) {
+                echo "<div class='order_address'><input type='radio' name='address' value='" . $address['id'] . "' checked><strong>";
+                echo "Default Address</strong>";
+            }
+            else{
+                echo "<div class='order_address'><input type='radio' name='address' value='" . $address['id'] . "' >";
+            }
+            echo  "<br>" . $address['address1'];
+            echo "<br>" . $address['address2'];
+            echo "<br>" . $address['city'];
+            echo "<br>" . $address['county'];
+            echo "<br>" . $address['country'] . "</div>";
+        }
+
+        echo "</div>";
+
+        ?>
+
+        <div class="green_button">
+            <input type="submit" name="submit" value="Buy Now" />
+        </div>
+
+    </fieldset>
+        </form>
 
     </div>

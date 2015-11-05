@@ -179,7 +179,7 @@ color: #222;
     text-decoration: none;
 }
 
-.green_button a{
+.green_button a, .green_button input[type="submit"]{
     padding:10px;
     background:#57C5A0;
     color:#fefefe;

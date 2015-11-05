@@ -52,8 +52,6 @@ class Login extends MY_Controller
                 redirect('admin');
             }
 
-
-
             redirect('site');
         }
 

@@ -7,6 +7,7 @@ class Store extends MY_Controller{
     {
         parent::__construct();
         $this->load->model('item_model');
+        $this->load->model('address_model');
         $this->load->helper('url_helper');
         $this->load->library('user_agent');
 		
@@ -65,6 +66,70 @@ class Store extends MY_Controller{
         $this->cart->destroy();
         $this->session->set_flashdata('success', 'Cart Cleared');
         redirect('site');
+    }
+
+
+    function order(){
+        //User needs to be logged in first
+        if(!$this->session->userdata('is_logged_in')){
+            //Save user agent data for page they are currently on
+            redirect('login');
+        }
+        else{
+
+            //Delivery information form
+            //Get user delivery addresses
+
+            $address1 = array(
+                'id' => 0,
+                'address1' => "Apt 2 patricks street",
+                'address2' => "Cork City",
+                'city' => 'Cork',
+                'county' => 'Cork',
+                'country' => 'Ireland',
+                'isDefault' => 0
+            );
+
+            $address2 = array(
+                'id' => 1,
+                'address1' => "Apt 2 patricks street",
+                'address2' => "Cork City",
+                'city' => 'Cork',
+                'county' => 'Cork',
+                'country' => 'Ireland',
+                'isDefault' => 1
+            );
+
+            $data['delivery_addresses'] = array(
+                $address1,
+                $address2
+            );
+
+            //get user from db to populate fields with user information in form
+
+            $data['main_content'] = 'store/order';
+            $this->load->view('includes/template', $data, $this->globals);
+        }
+        //Redirect to login if not logged in and save user agent location for redirect
+        //Once logged in, display cart contents followed by form to input delivery data.
+        //Button to "Pay Now" which goes to success page if all validates.
+    }
+
+    function confirm_order(){
+        $addressID = $this->input->post('address');
+        //Ger the address from the model
+
+        //Get user input details from --> input
+        $data = array(
+            'first_name' => $this->input->post('first_name'),
+            'last_name' => $this->input->post('last_name'),
+            'email' => $this->input->post('email'),
+            'address' => $this->address_model->get($addressID)
+        );
+
+        $data['main_content'] = 'store/confirm';
+        $this->load->view('includes/template', $data, $this->globals);
+
     }
 
     //Testing Ajax
