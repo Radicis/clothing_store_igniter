@@ -117,36 +117,7 @@
 
             <div class="clear"></div>
 
-<<<<<<< HEAD
-            foreach($items as $item) {
-                echo "<div class='col-sm-4 col-lg-4 col-md-4' >";
-                echo "<div class='thumbnail' >";
-                echo "<img src = 'http://placehold.it/320x150' alt = '' >";
-                echo  "<div class='caption' >";
-                echo "<h4 class='pull-right' >";
-                echo "$" . $item->item_price . "</h4>";
-                echo anchor('item/view/'.$item->id, $item->item_name);
-                echo "</h4 >";
-                echo "<p>". $item->item_description . "</p></div>";
-                echo "<div class='ratings'><p>";
-                for($counter = 0; $counter< $item->rating; $counter++){
-                    echo "<span class='fa fa-thumbs-up' ></span >";
-                }
-                if($this->session->is_logged_in) {
-                    echo "<span class='rating-icons'>";
-                    echo anchor('item/add_rating/' . $item->id, "<i class='rate fa fa-thumbs-up'></i>");
-                    echo anchor('item/remove_rating/' . $item->id, "<i class='rate fa fa-thumbs-down'></i>");
-                    echo "</span>";
-                }
-                echo "</p ></div ></div ></div>";
-            }
-            ?>
         </div>
-
-
-=======
-        </div>
->>>>>>> 1e1377192bd0ef1c7ea78a9e9ba38b388417d22b
     </div>
 </div>
 </div>

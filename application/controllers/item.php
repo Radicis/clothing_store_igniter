@@ -8,6 +8,7 @@ class Item extends MY_Controller
     {
         parent::__construct();
         $this->load->model('item_model');
+        $this->load->model('stock_model');
         $this->load->helper('url_helper');
         $this->load->library('user_agent');
     }
@@ -25,6 +26,8 @@ class Item extends MY_Controller
 			$recent_items[1],
 			$recent_items[2]
 		);
+
+        $data['stock'] = $this->stock_model->get_by_item_id($id);
 
         $categoryID = $data['item']['categoryID'];
         $brandID = $data['item']['brandID'];
@@ -115,21 +118,8 @@ class Item extends MY_Controller
 
     function delete_item($id = null)
     {
-<<<<<<< HEAD
-        $status = $this->item_model->delete($id);
-
-
-//header('Content-type: application/json');
-//echo json_encode(array("success" => $status));
-
-
-
-=======
         $this->item_model->delete($id);
->>>>>>> 1e1377192bd0ef1c7ea78a9e9ba38b388417d22b
         $this->session->set_flashdata('success', 'Item Deleted');
-
-
         redirect($this->agent->referrer());
 
     }

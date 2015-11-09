@@ -37,7 +37,6 @@ class User_model extends CI_Model
                 return FALSE;
             }
         }
-
     }
 
     function create_user()

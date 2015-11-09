@@ -7,29 +7,19 @@ class Store extends MY_Controller{
     {
         parent::__construct();
         $this->load->model('item_model');
+        $this->load->model('stock_model');
         $this->load->model('address_model');
+        $this->load->model('order_model');
         $this->load->helper('url_helper');
         $this->load->library('user_agent');
 		
     }
 
-
     function index(){
-
-        //Build query string from js selects
-        // uri split to extracct category/brand/price and other filters
-
-        //Detects Ajax call and returns Json encoded response
-        if ($this->input->is_ajax_request()) {
-            header('Content-Type: application/x-json; charset=utf-8');
-            echo json_encode($this->item_model->
-            get_item());
-            die(); //stops execution nso it only echos json to request
-        }
 
         $this->load->library('pagination');
 
-        $config['base_url']=base_url().'index.php/store/index';
+        $config['base_url']= base_url().'index.php/store/index';
 
             $config["total_rows"] = $this->item_model->record_count();
             $config['per_page'] = 6;
@@ -43,12 +33,6 @@ class Store extends MY_Controller{
             get_items($config["per_page"], $page);
             $data["links"] = $this->pagination->create_links();
 
-<<<<<<< HEAD
-            $data["categories"] = $this->category_model->get_item();
-			$data["brands"] = $this->brand_model->get_item();
-
-=======
->>>>>>> 1e1377192bd0ef1c7ea78a9e9ba38b388417d22b
             $data['main_content'] = 'store/index';
             $this->load->view('includes/template', $data, $this->globals);
     }
@@ -63,19 +47,25 @@ class Store extends MY_Controller{
     }
 
     // Add specified item ID to the cart
-    function add_to_cart($id)
+    function add_to_cart()
     {
-        $item = $this->item_model->get_item($id);
+        $id = $this->input->post('stock');
+        //echo $id;
+        $stock_item = $this->stock_model->get($id);
+        //echo var_dump($stock_item);
+        $item = $this->item_model->get_item($stock_item['itemID']);
 
         $data = array(
-            'id'      => $item['id'],
+            'id'      => $stock_item['id'],
             'qty'     => 1,
             'price'   => $item['item_price'],
             'name'    => $item['item_name'],
+            'options' => array('Size' => $stock_item['size'], 'Color' => $stock_item['colour'])
         );
 
         $this->cart->insert($data);
-        redirect('item/view/' . $id);
+        //echo ($item['id']);
+        redirect('item/view/' . $item['id']);
     }
 
     // Removes all items in cart
@@ -138,6 +128,7 @@ class Store extends MY_Controller{
         //Ger the address from the model
 
         //Get user input details from --> input
+
         $data = array(
             'first_name' => $this->input->post('first_name'),
             'last_name' => $this->input->post('last_name'),
@@ -150,6 +141,24 @@ class Store extends MY_Controller{
 
     }
 
+    function create_order(){
+        $addressID = $this->input->post('address');
+
+        //Get user input details from --> input
+        //Get user ID  from hidden field after autocompleting with logged in user details
+
+
+        $data = array(
+            'userID' => 1,
+            'deliveryAddress' => 0,
+        );
+
+        $this->order_model->create($data);
+
+        $data['main_content'] = 'store/order_success';
+        $this->load->view('includes/template', $data, $this->globals);
+    }
+
     //Testing Ajax
     function foo(){
 
@@ -158,8 +167,6 @@ class Store extends MY_Controller{
             echo(json_encode($this->item_model->foo()));
 
         }
-
-
     }
 
     //Displays items of the specified categoryID

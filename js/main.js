@@ -1,23 +1,8 @@
-<<<<<<< HEAD
+
 /**
  * Created by alloy on 13/10/2015.
  */
 
-
-$('#foo').click( function(){
-    console.log("foo");
-    $.ajax({
-        type: "GET",
-        url: "http://localhost/clothing_store_igniter/index.php/store",
-        success: function(data)
-        {
-            console.log(data);
-        }
-
-    });
-
-});
-=======
 //Converts twitter datestamp into ..ago or into system time if longer than a week
 function parseTwitterDate(tdate) {
     var system_date = new Date(Date.parse(tdate));
@@ -70,8 +55,3 @@ $(document).ready(function(){
         });     
       });
 
-
-
-
-
->>>>>>> 1e1377192bd0ef1c7ea78a9e9ba38b388417d22b

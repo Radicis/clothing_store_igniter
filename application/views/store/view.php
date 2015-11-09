@@ -53,9 +53,28 @@
                 <h3><?php echo $item['item_name']; ?></h3>
                 <h5>&euro;<?php echo $item['item_price']; ?></h5>
                 <div class="available">
+                    <?php if($stock){
+                        echo form_open('store/add_to_cart'); ?>
+                        <select name="stock">
+                            <?php foreach($stock as $variation){
+                                echo "<option value='"  . $variation['id'] . "'>" . $variation['colour'] . " - " . $variation['size'] .   "</option>";
+                            }
+                            ?>
+                        </select>
+
                     <div class="green_button">
-                            <?php echo anchor('store/add_to_cart/' . $item['id'], 'Add To Cart'); ?>
+
+                            <?php
+                            echo form_submit('submit', 'Add To Cart');
+                            echo anchor('store/add_to_cart/' . $item['id'], 'Add To Cart');
+                            echo form_close();?>
                     </div>
+                    <?php }
+                    else{
+                        echo '<h3>Currently Unavailable</h3>';
+                    }
+
+                    ?>
                     <p><?php echo $item['item_description_short']; ?></p>
                 </div>
 

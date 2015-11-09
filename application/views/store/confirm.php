@@ -2,6 +2,8 @@
 
 <h1>Confirm</h1>
 
+    <?php echo form_open('store/create_order'); ?>
+
 
     <?php $i = 1; ?>
 

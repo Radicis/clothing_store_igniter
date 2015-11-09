@@ -50,20 +50,26 @@
     </tr>
 
 </table>
-    <?php echo form_open('store/confirm_order'); ?>
-    <fieldset>
-        <legend>Personal Information</legend>
-
+    <div class="container">
+<div class="row">
+    <div class="col-md-9">
+        <?php
+        $attributes = array('class' => 'form');
+        echo form_open('store/confirm_order', $attributes); ?>
         <?php
 
+            //echo "<input type='hidden' name='username' value='" . $this->session->userdata('username') . "'";
+            $opts = 'placeholder="Username"';
+            echo form_input('first_name',  '', 'placeholder="First Name" class="form-control"');
+            echo "<br>";
+            echo form_input('last_name', '','placeholder="Last Name" class="form-control"' );
+            echo "<br>";
+            echo form_input('email', '', 'placeholder="Email Address" class="form-control"');
+?>
 
-        echo form_input('first_name', set_value('first_name', 'First Name'));
-        echo "<br>";
-        echo form_input('last_name', set_value('last_name', 'Last Name'));
-        echo "<br>";
-        echo form_input('email', set_value('email', 'Email'));
-
-        echo "<div class='pull-right'>";
+    </div>
+    <div class="col-md-3">
+        <?php
 
         //Display all of the users delivery addresses with radio buttons
         foreach($delivery_addresses as $address) {
@@ -81,15 +87,14 @@
             echo "<br>" . $address['country'] . "</div>";
         }
 
-        echo "</div>";
-
         ?>
+
+
+    </div>
+</div>
+</div>
 
         <div class="green_button">
             <input type="submit" name="submit" value="Buy Now" />
         </div>
-
-    </fieldset>
-        </form>
-
     </div>

@@ -3,14 +3,6 @@
 <html>
 <head>
     <meta charset="UTF-8" />
-<<<<<<< HEAD
-    <title>Clothing 9000</title>
-
-    <link rel="stylesheet" href="<?php echo base_url();?>css/bootstrap.min.css">
-    <link rel="stylesheet" href="<?php echo base_url();?>css/shop-homepage.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-=======
     <title>ClothesIgniter</title>
 
     <link href="<?php echo base_url();?>images/favicon.png" rel="icon" type="image/png">
@@ -18,7 +10,6 @@
 
     <link rel="stylesheet" href="<?php echo base_url();?>css/bootstrap.css">
 
->>>>>>> 1e1377192bd0ef1c7ea78a9e9ba38b388417d22b
     <link rel="stylesheet" href="<?php echo base_url();?>css/style.css">
     <link rel="stylesheet" href="<?php echo base_url();?>css/custom.css">
     <script src="<?php echo base_url();?>js/vendor/jquery.min.js" type="text/javascript"></script>
@@ -105,8 +96,8 @@
             <ul>
                 <li><?php echo anchor('site', 'Home'); ?></li>
                 <li><?php echo anchor('store', 'Shop'); ?></li>
-                <li><?php echo anchor('site', 'About'); ?></li>
-                <li><?php echo anchor('site', 'Contact'); ?></li>
+                <li><?php echo anchor('site/about', 'About'); ?></li>
+                <li><?php echo anchor('site/contact', 'Contact'); ?></li>
 
                 <?php
                 if($this->session->isAdmin==1) {
@@ -123,8 +114,8 @@
             <ul>
                 <li><?php echo anchor('site', 'Home'); ?></li>
                 <li><?php echo anchor('store', 'Shop'); ?></li>
-                <li><?php echo anchor('site', 'About'); ?></li>
-                <li><?php echo anchor('site', 'Contact'); ?></li>
+                <li><?php echo anchor('site/about', 'About'); ?></li>
+                <li><?php echo anchor('site/contact', 'Contact'); ?></li>
 
                 <?php
                 if($this->session->isAdmin==1) {

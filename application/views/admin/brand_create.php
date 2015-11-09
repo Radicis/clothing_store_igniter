@@ -9,7 +9,7 @@ echo form_open('brand/create', $attributes); ?>
 
 <div class="form-group">
     <label for="name">Name</label>
-    <input type="input" name="name" class="form-control" required />
+    <input type="input" name="name" class="form-control" required placeholder="Name" />
 </div>
 
 
