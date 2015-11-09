@@ -1,4 +1,4 @@
-<?php $this->load->view('includes/admin/header');?>
+<?php $this->load->view('includes/admin/header', $this->globals);?>
 
 <?php $this->load->view($main_content);?>
 

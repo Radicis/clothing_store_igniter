@@ -8,11 +8,11 @@ echo form_open('item/update_item/'. $item['id'], $attributes); ?>
 
 <div class="form-group">
     <label for="item_name">Name</label>
-    <input type="input" name="item_name" class="form-control" value="<?php echo $item['item_name'];  ?>" />
+    <input type="input" name="item_name" class="form-control" value="<?php echo $item['item_name'];  ?>" required />
 </div>
 <div class="form-group">
     <label for="item_price">Price</label>
-    <input type="input" name="item_price" class="form-control" value="<?php echo $item['item_price'];  ?>" />
+    <input type="input" name="item_price" class="form-control" value="<?php echo $item['item_price'];  ?>" required />
 </div>
 <div class="form-group">
     <label for="categoryID">Category</label>
@@ -43,13 +43,19 @@ echo form_open('item/update_item/'. $item['id'], $attributes); ?>
     </select>
 </div>
 <div class="form-group">
+    <label for="image_large">Image Filename</label>
+    <input type="text" name="image_large" class="form-control" value="<?php echo $item['image_large']; ?>">
+</div>
+<div class="form-group">
     <label for="item_description">Description</label>
     <textarea name="item_description" class="form-control"><?php echo $item['item_description'];  ?></textarea>
 </div>
+<div class="registration_form">
 <div class="form-group">
     <input type="submit" name="submit" value="Update item" />
 
 </div>
 
+</div>
 
 </form>

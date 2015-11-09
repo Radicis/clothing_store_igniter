@@ -24,7 +24,7 @@ class Item_model extends CI_Model
         }
         else{
 
-            //may need to modify query
+            //may need to modify query 
             $query =  $this->db->get_where('store_items', array('item_price'>=$price));
             return $query->num_rows();
         }
@@ -59,7 +59,50 @@ class Item_model extends CI_Model
         return $query->row_array();
     }
 
-    //used for pagination
+    //Testing filter functions
+    public function foo(){
+        $this->db->select('item_price');
+        $this->db->from('store_items');
+        $query = $this->db->get();
+        if ($query->num_rows() > 0) {
+            foreach ($query->result() as $row) {
+                $data[] = $row;
+            }
+            return $data;
+        }
+        return false;
+    }
+
+    //testing multiple filters
+    public function get_filter_items($categoryID='%', $brandID='%', $price=0)
+    {
+
+        $this->db->select('*');
+        $this->db->from('store_items');
+
+                if($categoryID!=False) {
+                    $this->db->where('categoryID like '.  $categoryID);
+                }
+                if($brandID!=False) {
+                    $this->db->where('brandID like '.  $brandID);
+                }
+                if($price!=False) {
+                   $this->db->where('item_price > ', (float)$price);
+                }
+
+        //$this->db->limit($limit, $start);
+        $query = $this->db->get();
+        if ($query->num_rows() > 0) {
+            foreach ($query->result() as $row) {
+                $data[] = $row;
+            }
+            return $data;
+        }
+        return false;
+
+    }
+
+    //limit and start ued for pagination
     public function get_items($limit, $start)
     {
         $this->db->limit($limit, $start);
@@ -73,7 +116,6 @@ class Item_model extends CI_Model
         return false;
     }
 
-    //used for pagination
     public function get_category_items($limit, $start, $category= FALSE)
     {
         $this->db->limit($limit, $start);
@@ -155,6 +197,7 @@ class Item_model extends CI_Model
         $data = array(
             'item_name' => $this->input->post('item_name'),
             'item_price' => $this->input->post('item_price'),
+            'image_large' => $this->input->post('image_large'),
             'item_description' => $this->input->post('item_description'),
             'categoryID' => $this->input->post('categoryID'),
             'brandID' => $this->input->post('brandID')
@@ -190,17 +233,9 @@ class Item_model extends CI_Model
 
     }
 
-    function update($id)
+    function update($id, $data)
     {
         $this->load->helper('url');
-
-        $data = array(
-            'item_name' => $this->input->post('item_name'),
-            'item_price' => $this->input->post('item_price'),
-            'item_description' => $this->input->post('item_description'),
-            'categoryID' => $this->input->post('categoryID'),
-            'brandID' => $this->input->post('brandID')
-        );
 
         $this->db->where('id', $id);
         $this->db->update('store_items', $data);

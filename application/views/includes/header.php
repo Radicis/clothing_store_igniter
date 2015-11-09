@@ -3,71 +3,151 @@
 <html>
 <head>
     <meta charset="UTF-8" />
+<<<<<<< HEAD
     <title>Clothing 9000</title>
 
     <link rel="stylesheet" href="<?php echo base_url();?>css/bootstrap.min.css">
     <link rel="stylesheet" href="<?php echo base_url();?>css/shop-homepage.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+=======
+    <title>ClothesIgniter</title>
+
+    <link href="<?php echo base_url();?>images/favicon.png" rel="icon" type="image/png">
+    <link href='http://fonts.googleapis.com/css?family=Maven+Pro:400,900,700,500' rel='stylesheet' type='text/css'>
+
+    <link rel="stylesheet" href="<?php echo base_url();?>css/bootstrap.css">
+
+>>>>>>> 1e1377192bd0ef1c7ea78a9e9ba38b388417d22b
     <link rel="stylesheet" href="<?php echo base_url();?>css/style.css">
+    <link rel="stylesheet" href="<?php echo base_url();?>css/custom.css">
+    <script src="<?php echo base_url();?>js/vendor/jquery.min.js" type="text/javascript"></script>
+    <script src="<?php echo base_url();?>js/vendor/bootstrap.min.js" type="text/javascript"></script>
+
+    <link type="text/css" rel="stylesheet" href="<?php echo base_url();?>css/jquery.mmenu.all.css" />
+    <script type="text/javascript" src="<?php echo base_url();?>js/vendor/jquery.mmenu.js"></script>
+    <script type="text/javascript">
+        //	The menu on the left
+        $(function() {
+            $('nav#menu-left').mmenu();
+        });
+    </script>
+    <!-- start slider -->
+    <link href="<?php echo base_url();?>css/slider.css" rel="stylesheet" type="text/css" media="all" />
+    <script type="text/javascript" src="<?php echo base_url();?>js/vendor/jquery.eislideshow.js"></script>
+    <script type="text/javascript" src="<?php echo base_url();?>js/vendor/easing.js"></script>
+    <script type="text/javascript">
+        $(function() {
+            $('#ei-slider').eislideshow({
+                animation			: 'center',
+                autoplay			: true,
+                slideshow_interval	: 3000,
+                titlesFactor		: 0
+            });
+        });
+    </script>
+    <!-- start top_js_button -->
+    <script type="text/javascript" src="<?php echo base_url();?>js/vendor/move-top.js"></script>
+    <script type="text/javascript">
+        jQuery(document).ready(function($) {
+            $(".scroll").click(function(event){
+                event.preventDefault();
+                $('html,body').animate({scrollTop:$(this.hash).offset().top},1200);
+            });
+        });
+    </script>
+
+    <script src="<?php echo base_url();?>js/main.js" type="text/javascript"></script>
 
 </head>
-<body class="hold-transition skin-blue sidebar-mini">
-<!-- Navigation -->
-<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-    <div class="container">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <?php
-                echo anchor('site', 'Clothing 9000!', array('class' => 'navbar-brand'));
+<body>
 
-            ?>
-        </div>
-        <div class="pull-right user-info">
-            <?php
+<!-- start header -->
+<div class="top_bg">
+    <div class="wrap">
+        <div class="header">
+            <div class="logo">
+                <a href="<?php echo base_url();?>"><img src="<?php echo base_url();?>images/logo.png" alt=""/></a>
+            </div>
+            <div class="log_reg">
+                <ul>
+                    <li>
+                    <?php
 
-            if($this->session->is_logged_in){
-                echo "Welcome back ";
-                echo  $this->session->username;
-                echo anchor('login/logout', 'Logout');
-            }
-            else{
-                echo anchor('login', 'Login');
-                echo " or " .  anchor('login/signup', 'Register');
-            }
-            ?>
+                    if($this->session->is_logged_in){
+                        echo "<span class='username'>" . $this->session->username . "</span>" . anchor('login/logout', 'Logout');
 
-        </div>
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav">
-                <li>
-                    <a href="#">About</a>
-                </li>
-                <li>
-                    <?php echo anchor('store', 'Shop'); ?>
-                </li>
-                <li>
-                    <a href="#">Contact</a>
-                </li>
-                <?php
-                    if($this->session->isAdmin==1) {
-                    echo "<li>". anchor('admin', 'Admin', array('class'=>'admin-link')) . "</li>";
+                    }
+                    else{
+                        echo "<li>" . anchor('login', 'Login') . "</li><span class='log'> or </span>
+                    <li>". anchor('login/signup', 'Register'). "</li>
+                    <div class='clear'></div>";
+
                     }
                     ?>
+                    </li>
+                </ul>
+            </div>
+            <div class="web_search">
+                <form>
+                    <input type="text" value="" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '';}">
+                    <input type="submit" value=" " />
+                </form>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+</div>
+<!-- start header_btm -->
+<div class="wrap">
+    <div class="header_btm">
+        <div class="menu">
+            <ul>
+                <li><?php echo anchor('site', 'Home'); ?></li>
+                <li><?php echo anchor('store', 'Shop'); ?></li>
+                <li><?php echo anchor('site', 'About'); ?></li>
+                <li><?php echo anchor('site', 'Contact'); ?></li>
+
+                <?php
+                if($this->session->isAdmin==1) {
+                    echo "<li>". anchor('admin', 'Admin', array('class'=>'admin-link')) . "</li>";
+                }
+                ?>
+                <div class="clear"></div>
             </ul>
         </div>
-        <!-- /.navbar-collapse -->
-    </div>
-    <!-- /.container -->
-</nav>
+        <div id="smart_nav">
+            <a class="navicon" href="#menu-left"> </a>
+        </div>
+        <nav id="menu-left">
+            <ul>
+                <li><?php echo anchor('site', 'Home'); ?></li>
+                <li><?php echo anchor('store', 'Shop'); ?></li>
+                <li><?php echo anchor('site', 'About'); ?></li>
+                <li><?php echo anchor('site', 'Contact'); ?></li>
 
-<div class="container">
+                <?php
+                if($this->session->isAdmin==1) {
+                    echo "<li>". anchor('admin', 'Admin', array('class'=>'admin-link')) . "</li>";
+                }
+                ?>
+                <div class="clear"></div>
+            </ul>
+        </nav>
+
+        <div class="header_right">
+            <ul>
+                <!--<li><a href="#"><i  class="art"></i><span class="color1">30</span></a></li>-->
+                <li><a href="<?php echo base_url(); ?>index.php/store/view_cart"><i  class="cart"></i><span><?php echo $this->cart->total_items(); ?></span></a></li>
+            </ul>
+        </div>
+        <div class="clear"></div>
+    </div>
+</div>
+
+<div class="main_bg">
+    <div class="wrap">
+        <div class="main">
+
 
 

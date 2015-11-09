@@ -12,7 +12,7 @@ class Brand_model extends CI_Model
         return $this->db->count_all("brand");
     }
 
-    public function get_item($id = FALSE)
+    public function get($id = FALSE)
     {
         if (!$id)
         {
@@ -23,6 +23,8 @@ class Brand_model extends CI_Model
         $query = $this->db->get_where('brand', array('id' => $id));
         return $query->row_array();
     }
+
+
 
     //used for pagination
     public function get_items($limit, $start)
@@ -39,27 +41,29 @@ class Brand_model extends CI_Model
     }
 
 
-    function set_item()
+    function create()
     {
-        $this->load->helper('url');
-
         $data = array(
             'name' => $this->input->post('name'),
         );
-
         return $this->db->insert('brand', $data);
     }
 
 
 
-    function update_item()
+    function update($id, $data)
     {
+        $data = array(
+            'name' => $this->input->post('name')
+        );
 
+        $this->db->where('id', $id);
+        $this->db->update('brand', $data);
     }
 
-    function delete_item()
+    function delete($id)
     {
-
+        return $this->db->delete('brand', array('id' => $id));
     }
 
 }

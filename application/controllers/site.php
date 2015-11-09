@@ -1,14 +1,13 @@
 <?php
 
 
-class Site extends CI_Controller{
+class Site extends MY_Controller{
 
     function __construct()
     {
         parent::__construct();
         $this->load->model('item_model');
-        $this->load->model('category_model');
-        $this->load->model('brand_model');
+
     }
 
 
@@ -16,10 +15,11 @@ class Site extends CI_Controller{
 
         $data['items'] = $this->item_model->get_item();
 
+        //Gets first 3 items to display on homepage, change to 3 latest items in future
         $data['items'] = array($data['items'][0], $data['items'][1], $data['items'][2]);
 
         $data['main_content'] = 'homepage';
-        $this->load->view('includes/template', $data);
+        $this->load->view('includes/homepage/template', $data, $this->globals);
     }
 
 }

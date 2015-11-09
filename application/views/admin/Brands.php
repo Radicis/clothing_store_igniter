@@ -1,15 +1,11 @@
 
-<div class="col-md-9">
-    <section class="content-header">
         <h1>
             Brand View
             <small><?php echo anchor('brand/create', 'Create New'); ?></small>
         </h1>
-    </section>
 
-    <!-- Main content -->
-    <section class="content">
-        <div class="item-view">
+
+
             <table class="table table-striped item-list">
                 <tr>
                     <th>ID</th>
@@ -21,9 +17,9 @@
 
                 foreach($items as $item) {
                     echo "<tr><td>" . $item->id . "</td><td>" . $item->name .  "</td>";
-                    echo "<td>" . anchor('brand/update', "Edit");
+                    echo "<td>" . anchor('brand/update/'. $item->id, "Edit");
                     echo " | ";
-                    echo anchor('brand/update', "Delete");
+                    echo anchor('brand/delete/'. $item->id, "Delete");
                     echo "</td></tr>";
                 }
 
@@ -33,4 +29,3 @@
             </table>
 
             <?php echo "<div class='pagination'>" . $links . "</div>"; ?>
-        </div>

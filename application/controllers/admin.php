@@ -1,13 +1,11 @@
 <?php
 
 
-class Admin extends CI_Controller{
+class Admin extends MY_Controller{
     function __construct()
     {
         parent::__construct();
         $this->load->model('item_model');
-        $this->load->model('category_model');
-        $this->load->model('brand_model');
         $this->load->model('user_model');
         $this->load->helper('url_helper');
     }
@@ -16,12 +14,9 @@ class Admin extends CI_Controller{
     {
         $this->is_logged_in();
 
-        //Show overview panels
-        //links to each type of model to viewedit
-
         $data['main_content'] = 'admin/index';
 
-        $this->load->view('includes/admin/template', $data);
+        $this->load->view('includes/admin/template', $data, $this->globals);
     }
 
     function is_logged_in()
@@ -30,12 +25,15 @@ class Admin extends CI_Controller{
 
         if(!isset($is_logged_in) || $is_logged_in != true)
         {
-            echo "No permission to access the page";
-            die();
+            redirect('site');
         }
     }
 
     function show($type=FALSE){
+
+
+        $this->is_logged_in();
+
         $this->load->library('pagination');
         $this->load->library('table');
 
@@ -61,7 +59,7 @@ class Admin extends CI_Controller{
 
 
         $data['main_content'] = 'admin/' . $type;
-        $this->load->view('includes/admin/template', $data);
+        $this->load->view('includes/admin/template', $data, $this->globals);
     }
 
 
