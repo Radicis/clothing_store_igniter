@@ -95,4 +95,8 @@ class Stock extends MY_Controller
 
     }
 
+    function set_stock($id=NULL){
+        //same as update, just sets stock level
+    }
+
 }
