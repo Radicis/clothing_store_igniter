@@ -9,9 +9,6 @@
     <link rel="stylesheet" href="<?php echo base_url();?>css/shop-homepage.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-    <link rel="stylesheet" href="<?php echo base_url();?>css/vendor/AdminLTE.min.css">
-    <link rel="stylesheet" href="<?php echo base_url();?>css/vendor_all-skins.min.css">
-    <link rel="stylesheet" href="<?php echo base_url();?>css/vendor/skin-blue.css">
     <link rel="stylesheet" href="<?php echo base_url();?>css/style.css">
 
 </head>

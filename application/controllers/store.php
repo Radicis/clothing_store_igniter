@@ -13,7 +13,19 @@ class Store extends CI_Controller{
         $this->load->library('user_agent');
     }
 
+
     function index(){
+
+        //Build query string from js selects
+        // uri split to extracct category/brand/price and other filters
+
+        //Detects Ajax call and returns Json encoded response
+        if ($this->input->is_ajax_request()) {
+            header('Content-Type: application/x-json; charset=utf-8');
+            echo json_encode($this->item_model->
+            get_item());
+            die(); //stops execution nso it only echos json to request
+        }
 
         $this->load->library('pagination');
 
@@ -32,7 +44,7 @@ class Store extends CI_Controller{
             $data["links"] = $this->pagination->create_links();
 
             $data["categories"] = $this->category_model->get_item();
-        $data["brands"] = $this->brand_model->get_item();
+			$data["brands"] = $this->brand_model->get_item();
 
             $data['main_content'] = 'store/index';
             $this->load->view('includes/template', $data);

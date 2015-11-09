@@ -50,7 +50,7 @@
                 echo "<p>". $item->item_description . "</p></div>";
                 echo "<div class='ratings'><p>";
                 for($counter = 0; $counter< $item->rating; $counter++){
-                    echo "<span class='glyphicon glyphicon-star' ></span >";
+                    echo "<span class='fa fa-thumbs-up' ></span >";
                 }
                 if($this->session->is_logged_in) {
                     echo "<span class='rating-icons'>";
@@ -62,6 +62,7 @@
             }
             ?>
         </div>
+
 
     </div>
 

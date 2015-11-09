@@ -106,9 +106,16 @@ class Item extends CI_Controller
     function delete_item($id = null)
     {
         $status = $this->item_model->delete($id);
+
+
 //header('Content-type: application/json');
 //echo json_encode(array("success" => $status));
+
+
+
         $this->session->set_flashdata('success', 'Item Deleted');
+
+
         redirect($this->agent->referrer());
 //redirect('admin/show/items');
     }
