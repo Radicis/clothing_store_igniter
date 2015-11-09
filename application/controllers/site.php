@@ -83,4 +83,9 @@ class Site extends MY_Controller{
         $this->load->view('includes/template', $data, $this->globals);
     }
 
+    function about(){
+        $data['main_content'] = 'about';
+        $this->load->view('includes/template', $data, $this->globals);
+    }
+
 }

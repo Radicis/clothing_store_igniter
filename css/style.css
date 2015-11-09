@@ -109,7 +109,7 @@ h4.style{
 	color: #555555;
 	margin: 4% 0;
 }
-.btn form input[type="button"],.registration_form input[type="submit"]{
+.btn form input[type="button"],.registration_form input[type="submit"], .green_button{
 	font-family: 'Maven Pro', sans-serif;
 	cursor:pointer;
 	background: #242424;
@@ -129,7 +129,7 @@ h4.style{
 	-moz-border-radius: 2px;
 	-o-border-radius: 2px;
 }
-.btn form input[type="button"]:hover,.registration_form input[type="submit"]:hover{
+.btn form input[type="button"]:hover,.registration_form input[type="submit"]:hover, .green_button:hover{
 	background: #57C5A0;
 	border: 1px solid #57c5a0;
 }

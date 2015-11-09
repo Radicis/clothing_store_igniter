@@ -62,11 +62,11 @@
                             ?>
                         </select>
 
-                    <div class="green_button">
+                    <div class="registration_form">
 
                             <?php
                             echo form_submit('submit', 'Add To Cart');
-                            echo anchor('store/add_to_cart/' . $item['id'], 'Add To Cart');
+
                             echo form_close();?>
                     </div>
                     <?php }
