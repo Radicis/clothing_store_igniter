@@ -52,6 +52,9 @@ $(document).ready(function(){
 				$('#tweets').append('<p>' + urlify(data[index].text) + '<span style="color:#ccc"> - ' + parseTwitterDate(data[index].created_at) + '</span></p>');
 		});
           
-        });     
-      });
+        });
+
+});
+
+
 
