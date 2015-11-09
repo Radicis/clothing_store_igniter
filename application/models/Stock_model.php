@@ -11,6 +11,7 @@ class Stock_model extends CI_Model
         return $this->db->count_all("stock");
     }
 
+    //Returns stock items with stock >0 for given item id
     public function get_by_item_id($id = FALSE)
     {
         if (!$id)
@@ -20,7 +21,26 @@ class Stock_model extends CI_Model
         }
 
         //$this->db->where('stock > 0');
-        $query = $this->db->get_where('stock', array('itemID' => $id));
+        $this->db->where('itemID', $id);
+        $this->db->where('stock >0');
+        $query = $this->db->get('stock');
+
+        return $query->result_array();
+    }
+
+    //Returns ALL stock items for given item id
+    public function get_by_item_id_all($id = FALSE)
+    {
+        if (!$id)
+        {
+            $query = $this->db->get('stock');
+            return $query->result_array();
+        }
+
+        //$this->db->where('stock > 0');
+        $this->db->where('itemID', $id);
+        $this->db->where('stock >0');
+        $query = $this->db->get('stock');
 
         return $query->result_array();
     }

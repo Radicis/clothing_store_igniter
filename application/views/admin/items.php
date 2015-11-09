@@ -24,6 +24,8 @@
                     echo "<td>" . anchor('item/update_item/' . $item->id, "Edit");
                     echo " | ";
                     echo anchor('item/delete_item/' . $item->id, "Delete");
+                    echo " | ";
+                    echo anchor('item/stock/' . $item->id, "View Stock");
                     echo "</td></tr>";
                 }
 

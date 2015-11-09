@@ -55,9 +55,12 @@
                 <div class="available">
                     <?php if($stock){
                         echo form_open('store/add_to_cart'); ?>
+                        <strong>Select Options:</strong>
                         <select name="stock">
                             <?php foreach($stock as $variation){
-                                echo "<option value='"  . $variation['id'] . "'>" . $variation['colour'] . " - " . $variation['size'] .   "</option>";
+                                if($variation['stock']>0) {
+                                    echo "<option value='" . $variation['id'] . "'>" . $variation['colour'] . " - " . $variation['size'] . "</option>";
+                                }
                             }
                             ?>
                         </select>
