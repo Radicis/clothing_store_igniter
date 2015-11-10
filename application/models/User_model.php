@@ -37,7 +37,7 @@ class User_model extends CI_Model
                 return FALSE;
             }
         }
-<<<<<<< HEAD
+
     }
 
     function getUserID($username){
@@ -48,8 +48,7 @@ class User_model extends CI_Model
         {
             return $row->id;
         }
-=======
->>>>>>> eab659311138e1290ba91f736a8c458433af9419
+
     }
 
     function create_user()
