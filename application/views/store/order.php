@@ -79,7 +79,6 @@
 
 
 
-<<<<<<< HEAD
                             <strong>Price:</strong> &euro;<?php echo $this->cart->format_number($items['price']); ?><br>
                             <strong>Subtotal: </strong> &euro;<?php echo $this->cart->format_number($items['subtotal']); ?><br>
 
@@ -89,31 +88,10 @@
 
                     <?php endforeach; ?>
 
-=======
-</table>
-    <div class="container">
-<div class="row">
-    <div class="col-md-9">
-        <?php
-        $attributes = array('class' => 'form');
-        echo form_open('store/confirm_order', $attributes); ?>
-        <?php
 
-            //echo "<input type='hidden' name='username' value='" . $this->session->userdata('username') . "'";
-            $opts = 'placeholder="Username"';
-            echo form_input('first_name',  '', 'placeholder="First Name" class="form-control"');
-            echo "<br>";
-            echo form_input('last_name', '','placeholder="Last Name" class="form-control"' );
-            echo "<br>";
-            echo form_input('email', '', 'placeholder="Email Address" class="form-control"');
-?>
 
-    </div>
-    <div class="col-md-3">
-
-        <div class="pull-right">
-        <strong>Total</strong>
-        &euro;<?php echo $this->cart->format_number($this->cart->total()); ?></div>
+                       <div class="pull-right"><strong>Total</strong>
+                &euro;<?php echo $this->cart->format_number($this->cart->total()); ?></div>
 
 
                 <!-- /Form -->
@@ -126,16 +104,3 @@
 
 
 
-=======
-        ?>
-
-
-    </div>
-</div>
-</div>
-
-        <div class="green_button">
-            <input type="submit" name="submit" value="Buy Now" />
-        </div>
-    </div>
->>>>>>> eab659311138e1290ba91f736a8c458433af9419
