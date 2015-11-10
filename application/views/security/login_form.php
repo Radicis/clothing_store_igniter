@@ -3,6 +3,7 @@
         <p>By creating an account with our store, you will be able to move through the checkout process faster, store multiple shipping address, view and track your orders in your accoung and more.</p>
         <div class="btn">
             <?php echo anchor('login/signup', 'Create Account',  array('class' => 'green_button')); ?>
+
         </div>
     </div>
     <div class="login_left">

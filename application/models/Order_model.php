@@ -43,6 +43,7 @@ class Order_model extends CI_Model
 
     function create($data)
     {
+
         $this->db->insert('orders', $data);
         return $this->db->insert_id();
     }

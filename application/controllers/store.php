@@ -10,7 +10,6 @@ class Store extends MY_Controller{
         $this->load->model('stock_model');
         $this->load->model('address_model');
         $this->load->model('orderItem_model');
-
         $this->load->model('order_model');
         $this->load->helper('url_helper');
         $this->load->library('user_agent');
@@ -136,10 +135,6 @@ class Store extends MY_Controller{
     function create_order(){
         $addressID = $this->input->post('address');
 
-        //Get user input details from --> input
-        //Get user ID  from hidden field after autocompleting with logged in user details
-
-
         $data = array(
             'userID' =>  $this->session->userdata('userID'),
             'address' => $addressID,
@@ -166,6 +161,9 @@ class Store extends MY_Controller{
         $data['main_content'] = 'store/order_success';
         $this->load->view('includes/template', $data, $this->globals);
     }
+
+
+
 
     //Testing Ajax
     function foo(){

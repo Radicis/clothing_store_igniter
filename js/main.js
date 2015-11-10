@@ -1,3 +1,8 @@
+
+/**
+ * Created by alloy on 13/10/2015.
+ */
+
 //Converts twitter datestamp into ..ago or into system time if longer than a week
 function parseTwitterDate(tdate) {
     var system_date = new Date(Date.parse(tdate));
@@ -47,10 +52,9 @@ $(document).ready(function(){
 				$('#tweets').append('<p>' + urlify(data[index].text) + '<span style="color:#ccc"> - ' + parseTwitterDate(data[index].created_at) + '</span></p>');
 		});
           
-        });     
-      });
+        });
 
-
+});
 
 
 

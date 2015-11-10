@@ -2,10 +2,12 @@
 
 <h1>Confirm</h1>
 
+
     <?php echo form_open('store/create_order');
-    //echo var_dump($this->cart->contents());
 
     ?>
+
+
 
 
     <?php $i = 1; ?>

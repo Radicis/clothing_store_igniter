@@ -23,6 +23,7 @@ class Delivery_model extends CI_Model
         return $query->row_array();
     }
 
+
     public function get_by_userID($id = FALSE)
     {
         if (!$id)
@@ -35,7 +36,6 @@ class Delivery_model extends CI_Model
         $query = $this->db->get('delivery');
         return $query->row_array();
     }
-
 
 
     //used for pagination
