@@ -9,11 +9,11 @@ echo form_open('item/create_item', $attributes); ?>
 
 <div class="form-group">
     <label for="item_name">Name</label>
-    <input type="input" name="item_name" class="form-control"  required />
+    <input type="input" name="item_name" class="form-control" placeholder="Name"  required />
 </div>
 <div class="form-group">
     <label for="item_price">Price</label>
-    <input type="input" name="item_price" class="form-control"  required/>
+    <input type="input" name="item_price" class="form-control" placeholder="Price"   required/>
 </div>
 <div class="form-group">
     <label for="categoryID">Category</label>
@@ -37,11 +37,11 @@ echo form_open('item/create_item', $attributes); ?>
 </div>
 <div class="form-group">
     <label for="image_large">Image Filename</label>
-    <input type="text" name="image_large" class="form-control">
+    <input type="text" name="image_large" class="form-control" placeholder="Image Filename" >
 </div>
 <div class="form-group">
     <label for="item_description">Description</label>
-    <textarea name="item_description" class="form-control"></textarea>
+    <textarea name="item_description" class="form-control" placeholder="Description" ></textarea>
 </div>
 
 

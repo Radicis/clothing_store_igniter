@@ -37,7 +37,16 @@ class User_model extends CI_Model
                 return FALSE;
             }
         }
+    }
 
+    function getUserID($username){
+        $this->db->where('username', $username);
+        $query = $this->db->get('user');
+
+        foreach ($query->result() as $row)
+        {
+            return $row->id;
+        }
     }
 
     function create_user()

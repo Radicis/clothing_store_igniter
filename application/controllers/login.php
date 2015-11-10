@@ -29,7 +29,8 @@ class Login extends MY_Controller
             $data = array(
                 'username' => $this->input->post('username'),
                 'is_logged_in' => true,
-                'isAdmin' => $this->user_model->isAdmin()
+                'isAdmin' => $this->user_model->isAdmin(),
+                'userID' => $this->user_model->getUserID($this->input->post('username'))
             );
 
             if($this->user_model->isAdmin()){
@@ -70,7 +71,6 @@ class Login extends MY_Controller
     function logout()
     {
         $this->session->sess_destroy();
-
         redirect('site');
     }
 

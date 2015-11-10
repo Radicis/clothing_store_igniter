@@ -46,6 +46,19 @@ class Address_model extends CI_Model
 
     }
 
+    public function get_by_userID($id = FALSE)
+    {
+        if (!$id)
+        {
+            $query = $this->db->get('address');
+            return $query->result_array();
+        }
+
+        $this->db->where('userID', $id);
+        $query = $this->db->get('address');
+        return $query->result_array();
+    }
+
 
 
     function update($id, $data)

@@ -7,7 +7,11 @@ class Store extends MY_Controller{
     {
         parent::__construct();
         $this->load->model('item_model');
+        $this->load->model('stock_model');
         $this->load->model('address_model');
+        $this->load->model('orderItem_model');
+
+        $this->load->model('order_model');
         $this->load->helper('url_helper');
         $this->load->library('user_agent');
 		
@@ -17,7 +21,7 @@ class Store extends MY_Controller{
 
         $this->load->library('pagination');
 
-        $config['base_url']=base_url().'index.php/store/index';
+        $config['base_url']= base_url().'index.php/store/index';
 
             $config["total_rows"] = $this->item_model->record_count();
             $config['per_page'] = 6;
@@ -45,19 +49,25 @@ class Store extends MY_Controller{
     }
 
     // Add specified item ID to the cart
-    function add_to_cart($id)
+    function add_to_cart()
     {
-        $item = $this->item_model->get_item($id);
+        $id = $this->input->post('stock');
+        //echo $id;
+        $stock_item = $this->stock_model->get($id);
+        //echo var_dump($stock_item);
+        $item = $this->item_model->get_item($stock_item['itemID']);
 
         $data = array(
-            'id'      => $item['id'],
+            'id'      => $stock_item['id'],
             'qty'     => 1,
             'price'   => $item['item_price'],
             'name'    => $item['item_name'],
+            'options' => array('Size' => $stock_item['size'], 'Color' => $stock_item['colour'])
         );
 
         $this->cart->insert($data);
-        redirect('item/view/' . $id);
+        //echo ($item['id']);
+        redirect('item/view/' . $item['id']);
     }
 
     // Removes all items in cart
@@ -77,35 +87,13 @@ class Store extends MY_Controller{
         }
         else{
 
-            //Delivery information form
-            //Get user delivery addresses
+            //Validate form
 
-            $address1 = array(
-                'id' => 0,
-                'address1' => "Apt 2 patricks street",
-                'address2' => "Cork City",
-                'city' => 'Cork',
-                'county' => 'Cork',
-                'country' => 'Ireland',
-                'isDefault' => 0
-            );
 
-            $address2 = array(
-                'id' => 1,
-                'address1' => "Apt 2 patricks street",
-                'address2' => "Cork City",
-                'city' => 'Cork',
-                'county' => 'Cork',
-                'country' => 'Ireland',
-                'isDefault' => 1
-            );
 
-            $data['delivery_addresses'] = array(
-                $address1,
-                $address2
-            );
+            $userID =  $this->session->userdata('userID');
 
-            //get user from db to populate fields with user information in form
+            $data['delivery_addresses'] = $this->address_model->get_by_userID($userID);
 
             $data['main_content'] = 'store/order';
             $this->load->view('includes/template', $data, $this->globals);
@@ -116,20 +104,67 @@ class Store extends MY_Controller{
     }
 
     function confirm_order(){
+        $this->load->library('form_validation');
+        // field name, error message, validation rules
+
+        $this->form_validation->set_rules('first_name', 'Name', 'trim|required');
+        $this->form_validation->set_rules('last_name', 'Last Name', 'trim|required');
+        $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email');
+
+        if($this->form_validation->run() == FALSE)
+        {
+            $this->order();
+        }
+        else
+        {
+            $addressID = $this->input->post('address');
+
+
+            $data = array(
+                'first_name' => $this->input->post('first_name'),
+                'last_name' => $this->input->post('last_name'),
+                'email' => $this->input->post('email'),
+                'address' => $this->address_model->get($addressID)
+            );
+
+            $data['main_content'] = 'store/confirm';
+            $this->load->view('includes/template', $data, $this->globals);
+
+        }
+    }
+
+    function create_order(){
         $addressID = $this->input->post('address');
-        //Ger the address from the model
 
         //Get user input details from --> input
+        //Get user ID  from hidden field after autocompleting with logged in user details
+
+
         $data = array(
-            'first_name' => $this->input->post('first_name'),
-            'last_name' => $this->input->post('last_name'),
-            'email' => $this->input->post('email'),
-            'address' => $this->address_model->get($addressID)
+            'userID' =>  $this->session->userdata('userID'),
+            'address' => $addressID,
         );
 
-        $data['main_content'] = 'store/confirm';
-        $this->load->view('includes/template', $data, $this->globals);
+        //Return last insert
+        $orderID = $this->order_model->create($data);
+        $stockID = 1;
 
+        foreach($this->cart->contents() as $item){
+            $item_data = array(
+              'qty' => $item['qty'],
+                'name' => $item['name'],
+                'subtotal' => $item['subtotal'],
+                'price' => $item['price'],
+                'orderID' => $orderID,
+                'stockID' => $item['id']
+                );
+            $this->orderItem_model->create($item_data);
+        }
+
+
+
+        $data['main_content'] = 'store/order_success';
+        $this->load->view('includes/template', $data, $this->globals);
     }
 
     //Testing Ajax
@@ -140,8 +175,6 @@ class Store extends MY_Controller{
             echo(json_encode($this->item_model->foo()));
 
         }
-
-
     }
 
     //Displays items of the specified categoryID

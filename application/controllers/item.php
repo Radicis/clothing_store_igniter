@@ -8,6 +8,7 @@ class Item extends MY_Controller
     {
         parent::__construct();
         $this->load->model('item_model');
+        $this->load->model('stock_model');
         $this->load->helper('url_helper');
         $this->load->library('user_agent');
     }
@@ -16,8 +17,6 @@ class Item extends MY_Controller
     {
         $data['item'] = $this->item_model->get_item($id);
 		
-		//change to updated "recent" method when completed
-		
 		$recent_items = $this->item_model->get_item();
 		
 		$data['recent_items'] = array(
@@ -25,6 +24,8 @@ class Item extends MY_Controller
 			$recent_items[1],
 			$recent_items[2]
 		);
+
+        $data['stock'] = $this->stock_model->get_by_item_id($id);
 
         $categoryID = $data['item']['categoryID'];
         $brandID = $data['item']['brandID'];
@@ -38,6 +39,17 @@ class Item extends MY_Controller
         }
         $data['main_content'] = 'store/view';
         $this->load->view('includes/template', $data, $this->globals);
+    }
+
+    function stock($id = NULL){
+        if($id){
+            $data['stock'] = $this->stock_model->get_by_item_id_all($id);
+            $data['main_content'] = 'admin/stock';
+            $this->load->view('includes/admin/template', $data, $this->globals);
+        }
+        else{
+            show_404();
+        }
     }
 
     function create_item()

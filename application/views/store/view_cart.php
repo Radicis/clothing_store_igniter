@@ -50,8 +50,8 @@
     </tr>
 
 </table>
-<div class="green_button pull-right">
-    <?php echo anchor('store/empty_cart', 'Empty Cart'); ?> <?php echo anchor('store/order', 'Checkout'); ?>
+<div class="pull-right">
+    <?php echo anchor('store/empty_cart', 'Empty Cart', array('class' => 'green_button')); ?> <?php echo anchor('store/order', 'Checkout', array('class' => 'green_button')); ?>
 </div>
 
     </div>

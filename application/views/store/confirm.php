@@ -2,6 +2,11 @@
 
 <h1>Confirm</h1>
 
+    <?php echo form_open('store/create_order');
+    //echo var_dump($this->cart->contents());
+
+    ?>
+
 
     <?php $i = 1; ?>
 
@@ -42,8 +47,10 @@
 
         <?php
 
+        echo "<input type='hidden' name='userID' value='" . $this->session->userdata('userID') . "'/>'";
+        echo "<input type='hidden' name='address' value='" . $this->input->post('address') . "'/>'";
         echo $first_name . " " . $last_name . "<br>";
-        echo $email . "<br><hr>";
+        echo $email . "<hr>";
         echo $address['address1'] . "<br>";
         echo $address['address2'] . "<br>";
         echo $address['city'] . "<br>";
@@ -54,7 +61,7 @@
 
 
 
-    <div class="green_button">
+    <div class="registration_form">
         <input type="submit" name="submit" value="Confirm" />
     </div>
 
