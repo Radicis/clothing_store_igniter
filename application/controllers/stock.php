@@ -48,38 +48,29 @@ class Stock extends MY_Controller
         $this->load->helper('form');
         $this->load->library('form_validation');
 
-        $this->form_validation->set_rules('item_name', 'Name', 'required');
-        $this->form_validation->set_rules('item_description', 'Description');
-        $this->form_validation->set_rules('item_price', 'Price', 'trim|required|numeric');
-        $this->form_validation->set_rules('categoryID', 'Category', 'required');
-        $this->form_validation->set_rules('brandID', 'Brand', 'required');
+        $data['item'] = $this->stock_model->get($id);
+        $itemID = $data['item']['itemID'];
+
+        $this->form_validation->set_rules('size', 'Size', 'required');
+        $this->form_validation->set_rules('colour', 'Colour');
+        $this->form_validation->set_rules('stock', 'Stock', 'trim|required|numeric');
 
         if ($this->form_validation->run() === FALSE) {
-            $data['item'] = $this->stock_model->get_item($id);
-            $data['main_content'] = 'admin/item_update';
+            $data['itemID'] = $data['item']['itemID'];
+            $data['main_content'] = 'admin/stock_update';
             $this->load->view('includes/admin/template', $data, $this->globals);
         } else {
+
+
             $data = array(
-                'item_name' => $this->input->post('item_name'),
-                'item_price' => $this->input->post('item_price'),
-                'image_large' => $this->input->post('image_large'),
-                'item_description' => $this->input->post('item_description'),
-                'categoryID' => $this->input->post('categoryID'),
-                'brandID' => $this->input->post('brandID'),
+                'colour' => $this->input->post('colour'),
+                'size' => $this->input->post('size'),
+                'stock' => $this->input->post('stock'),
             );
 
-
             $this->stock_model->update($id, $data);
-            $this->session->set_flashdata('success', 'Item Updated');
-
-            if ($this->session->userdata('redirect_back')) {
-                $redirect_url = $this->session->userdata('redirect_back');  // grab value and put into a temp variable so we unset the session value
-                $this->session->unset_userdata('redirect_back');
-                redirect($redirect_url);
-            }
-
-            $this->view($id);
-
+            $this->session->set_flashdata('success', 'Stock Updated');
+            redirect('item/stock/' . $itemID);
         }
     }
 
