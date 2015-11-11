@@ -49,9 +49,7 @@ class Store extends MY_Controller{
     function add_to_cart()
     {
         $id = $this->input->post('stock');
-        //echo $id;
         $stock_item = $this->stock_model->get($id);
-        echo var_dump($stock_item);
         $item = $this->item_model->get_item($stock_item['itemID']);
 
         $data = array(

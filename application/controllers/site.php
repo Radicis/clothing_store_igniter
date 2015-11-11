@@ -74,9 +74,7 @@ class Site extends MY_Controller{
                 redirect('site/thanks');
             }
         }
-        $data['main_content'] = 'contact';
-        $this->load->view('includes/template', $data, $this->globals);
-    }
+     }
 
     function thanks(){
         $data['main_content'] = 'thanks';
@@ -86,6 +84,29 @@ class Site extends MY_Controller{
     function about(){
         $data['main_content'] = 'about';
         $this->load->view('includes/template', $data, $this->globals);
+    }
+
+    function feed(){
+        $this->load->helper('xml');
+        $this->load->helper('text');
+        $this->data['query'] = $this->item_model->get_item();
+
+        // set feed Name will display at title area and page top
+        $this->data['feed_name'] = 'Clothes Igniter';
+        // set page encoding
+        $this->data['encoding'] = 'utf-8';
+        // set feed url
+        $this->data['feed_url'] = 'ClothesIgniter.com/rss/fashion.xml';
+        // set page language
+        $this->data['page_language'] = 'en';
+        // set page Description
+        $this->data['page_description'] = 'Fashion Updates';
+        // set author email
+        $this->data['creator_email'] = 'clothesigniter@gmail.com';
+        // this line is very important, this will let browser to display XML format output
+        header("Content-Type: application/rss+xml");
+        $this->load->view('feed',$this->data);
+
     }
 
 }

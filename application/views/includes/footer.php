@@ -38,7 +38,7 @@
                     <li><a class="icon1" href="#"></a></li>
                     <li><a class="icon2" href="#"></a></li>
                     <li><a class="icon3" href="#"></a></li>
-                    <li><a class="icon4" href="#"></a></li>
+                    <li><?php echo anchor('site/feed', ' ', array('class'=>'icon4')) ?></li>
                     <li><a class="icon5" href="#"></a></li>
                 </ul>
             </div>
@@ -70,11 +70,11 @@
             <!--end scroll_top_btn -->
             <div class="f_nav1">
                 <ul>
-                    <li><a href="#">home /</a></li>
+                    <li><?php echo anchor('site', 'Home /'); ?></li>
                     <li><a href="#">support /</a></li>
                     <li><a href="#">Terms and conditions /</a></li>
                     <li><a href="#">Faqs /</a></li>
-                    <li><a href="#">Contact us</a></li>
+                    <li><?php echo anchor('site/contact', 'Contact Us'); ?></li>
                 </ul>
             </div>
             <div class="copy">

@@ -28,12 +28,12 @@
                 echo form_open("site/contact", $attributes);?>
 
                 <div class="form-group">
-                    <input class="form-control" name="name" placeholder="Your Full Name" type="text" value="<?php echo set_value('name'); ?>" />
+                    <input class="form-control" name="name" placeholder="Your Full Name" type="text" required value="<?php echo set_value('name'); ?>" />
                     <span class="text-danger"><?php echo form_error('name'); ?></span>
                 </div>
 
                 <div class="form-group">
-                    <input class="form-control" name="email" placeholder="Your Email" type="email" value="<?php echo set_value('email'); ?>" />
+                    <input class="form-control" name="email" placeholder="Your Email" type="email" required value="<?php echo set_value('email'); ?>" />
                     <span class="text-danger"><?php echo form_error('email'); ?></span>
                 </div>
 
@@ -43,7 +43,7 @@
                 </div>
 
                 <div class="form-group">
-                    <textarea class="form-control" name="message" placeholder="Your Message"><?php echo set_value('message'); ?></textarea>
+                    <textarea class="form-control" name="message" placeholder="Your Message" required><?php echo set_value('message'); ?></textarea>
                     <span class="text-danger"><?php echo form_error('message'); ?></span>
                 </div>
 

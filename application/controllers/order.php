@@ -109,6 +109,9 @@ class Order extends MY_Controller{
             );
             $this->orderItem_model->create($item_data);
 
+            //Reduce stock on stock item
+            $this->stock_model->reduce_stock($item['id'], $item['qty']);
+
             $data['total'] += $item['subtotal'];
         }
 
@@ -116,7 +119,8 @@ class Order extends MY_Controller{
 
         $this->order_model->update_total($orderID, $data);
 
-
+        //Clear cart
+        $this->cart->destroy();
 
         $data['main_content'] = 'store/order_success';
         $this->load->view('includes/template', $data, $this->globals);

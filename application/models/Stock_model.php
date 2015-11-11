@@ -104,6 +104,12 @@ class Stock_model extends CI_Model
         $this->db->update('stock', $data);
     }
 
+    function reduce_stock($id, $qty){
+        $this->db->set('stock', 'stock-' . $qty, FALSE);
+        $this->db->where('id', $id);
+        $this->db->update('stock');
+    }
+
     function delete($id)
     {
         return $this->db->delete('stock', array('id' => $id));
