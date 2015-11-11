@@ -73,7 +73,9 @@ class Order extends MY_Controller{
                 'first_name' => $this->input->post('first_name'),
                 'last_name' => $this->input->post('last_name'),
                 'email' => $this->input->post('email'),
-                'address' => $this->address_model->get($addressID)
+                'address' => $this->address_model->get($addressID),
+                'total_cost' => $this->input->post('total_cost'),
+                'delivery_cost' => $this->input->post('delivery_cost')
             );
 
             $data['main_content'] = 'store/confirm';
@@ -90,7 +92,8 @@ class Order extends MY_Controller{
             'address' => $addressID,
             'first_name' => $this->input->post('first_name'),
             'last_name' =>$this->input->post('last_name'),
-            'email' =>$this->input->post('email')
+            'email' =>$this->input->post('email'),
+            'total' =>$this->input->post('total_cost')
         );
 
         //Return last insert
@@ -112,12 +115,7 @@ class Order extends MY_Controller{
             //Reduce stock on stock item
             $this->stock_model->reduce_stock($item['id'], $item['qty']);
 
-            $data['total'] += $item['subtotal'];
         }
-
-        //update order with the total price;
-
-        $this->order_model->update_total($orderID, $data);
 
         //Clear cart
         $this->cart->destroy();

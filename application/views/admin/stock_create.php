@@ -11,7 +11,13 @@ echo form_open('stock/create', $attributes); ?>
 
 <div class="form-group">
     <label for="size">Size</label>
-    <input type="input" name="size" class="form-control" required placeholder="Size" />
+    <select name="size" class="form-control">
+        <option value="X-Large">X-Large</option>
+        <option value="Large">Large</option>
+        <option value="Medium">Medium</option>
+        <option value="Small">Small</option>
+        <option value="X-Small">X-Small</option>
+    </select>
 </div>
 <div class="form-group">
     <label for="colour">Colour</label>

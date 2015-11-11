@@ -5,7 +5,10 @@
             <div class="registration_form">
                 <?php
                     $attributes = array('class' => 'form');
-                    echo form_open('order/confirm_order', $attributes); ?>
+                    echo form_open('order/confirm_order', $attributes);
+
+                $deliveryCost = 4.99;
+                ?>
                     <input type="input" name="first_name" class="form-control" placeholder="First Name"   required/>
                     <input type="input" name="last_name" class="form-control" placeholder="Last Name"   required/>
                     <input type="email" name="email" class="form-control" placeholder="Email Address"   required/>
@@ -13,10 +16,19 @@
             </div>
         </div>
     </div>
+    <h3>Payment Details</h3>
+    <div class="registration">
+        <div class="registration_left">
+            <div class="registration_form">
+                Free!
+            </div>
+        </div>
+    </div>
     <h3>Delivery Details</h3>
     <div class="registration">
         <div class="registration_left">
             <div class="registration_form">
+
                 <?php
 
                 if($delivery_addresses==NULL){
@@ -36,10 +48,15 @@
                         echo "<br>" . $address['city'];
                         echo "<br>" . $address['county'];
                         echo "<br>" . $address['country'] . "</div>";
+
                     }
                 }
 
                 ?>
+
+                <input type="hidden" name="total_cost" value="<?php echo $this->cart->format_number($this->cart->total() + $deliveryCost); ?>" />
+                <input type="hidden" name="delivery_cost" value="<?php echo $deliveryCost; ?>" />
+
             </div>
         </div>
     </div>
@@ -86,13 +103,18 @@
 
                         <hr>
 
-                    <?php endforeach; ?>
+                    <?php endforeach;
+
+
+                    ?>
 
 
 
-                       <div class="pull-right"><strong>Total</strong>
-                &euro;<?php echo $this->cart->format_number($this->cart->total()); ?></div>
-
+                       <div class="pull-right right">
+                           <strong>Sub-Total</strong>&euro;<?php echo $this->cart->format_number($this->cart->total()); ?>
+                           <br><strong>Delivery</strong>&euro;<?php echo $deliveryCost; ?>
+                           <br><strong>Total</strong>&euro;<?php echo $this->cart->format_number($this->cart->total() + $deliveryCost); ?>
+                       </div>
 
                 <!-- /Form -->
             </div>

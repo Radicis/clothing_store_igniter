@@ -40,8 +40,9 @@
 
 
 
-    &euro;<?php echo $this->cart->format_number($this->cart->total()); ?>
-
+    <strong>Sub-Total: </strong>&euro;<?php echo $this->cart->format_number($this->cart->total()); ?>
+    <br><strong>Delivery: </strong>&euro;<?php echo $delivery_cost; ?>
+    <br><strong>Total: </strong>&euro;<?php echo $total_cost; ?>
 
 
 
@@ -54,6 +55,7 @@
         echo "<input type='hidden' name='last_name' value='" . $this->input->post('last_name') . "'/>'";
         echo "<input type='hidden' name='address' value='" . $this->input->post('address') . "'/>'";
         echo "<input type='hidden' name='email' value='" . $this->input->post('email') . "'/>'";
+        echo "<input type='hidden' name='total_cost' value='" . $total_cost . "'/>'";
 
         echo $first_name . " " . $last_name . "<br>";
         echo $email . "<hr>";
