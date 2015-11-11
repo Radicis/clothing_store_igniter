@@ -13,7 +13,6 @@ class Store extends MY_Controller{
         $this->load->model('order_model');
         $this->load->helper('url_helper');
         $this->load->library('user_agent');
-		
     }
 
     function index(){
@@ -42,7 +41,6 @@ class Store extends MY_Controller{
     //Displays cart contents
     function view_cart()
     {
-
         $data['main_content'] = 'store/view_cart';
         $this->load->view('includes/template', $data, $this->globals);
     }
@@ -53,7 +51,7 @@ class Store extends MY_Controller{
         $id = $this->input->post('stock');
         //echo $id;
         $stock_item = $this->stock_model->get($id);
-        //echo var_dump($stock_item);
+        echo var_dump($stock_item);
         $item = $this->item_model->get_item($stock_item['itemID']);
 
         $data = array(
@@ -65,8 +63,7 @@ class Store extends MY_Controller{
         );
 
         $this->cart->insert($data);
-        //echo ($item['id']);
-        redirect('item/view/' . $item['id']);
+         redirect('item/view/' . $item['id']);
     }
 
     // Removes all items in cart
@@ -76,94 +73,6 @@ class Store extends MY_Controller{
         $this->session->set_flashdata('success', 'Cart Cleared');
         redirect('site');
     }
-
-
-    function order(){
-        //User needs to be logged in first
-        if(!$this->session->userdata('is_logged_in')){
-            //Save user agent data for page they are currently on
-            redirect('login');
-        }
-        else{
-
-            //Validate form
-
-
-
-            $userID =  $this->session->userdata('userID');
-
-            $data['delivery_addresses'] = $this->address_model->get_by_userID($userID);
-
-            $data['main_content'] = 'store/order';
-            $this->load->view('includes/template', $data, $this->globals);
-        }
-        //Redirect to login if not logged in and save user agent location for redirect
-        //Once logged in, display cart contents followed by form to input delivery data.
-        //Button to "Pay Now" which goes to success page if all validates.
-    }
-
-    function confirm_order(){
-        $this->load->library('form_validation');
-        // field name, error message, validation rules
-
-        $this->form_validation->set_rules('first_name', 'Name', 'trim|required');
-        $this->form_validation->set_rules('last_name', 'Last Name', 'trim|required');
-        $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email');
-
-        if($this->form_validation->run() == FALSE)
-        {
-            $this->order();
-        }
-        else
-        {
-            $addressID = $this->input->post('address');
-
-
-            $data = array(
-                'first_name' => $this->input->post('first_name'),
-                'last_name' => $this->input->post('last_name'),
-                'email' => $this->input->post('email'),
-                'address' => $this->address_model->get($addressID)
-            );
-
-            $data['main_content'] = 'store/confirm';
-            $this->load->view('includes/template', $data, $this->globals);
-
-        }
-    }
-
-    function create_order(){
-        $addressID = $this->input->post('address');
-
-        $data = array(
-            'userID' =>  $this->session->userdata('userID'),
-            'address' => $addressID,
-        );
-
-        //Return last insert
-        $orderID = $this->order_model->create($data);
-        $stockID = 1;
-
-        foreach($this->cart->contents() as $item){
-            $item_data = array(
-              'qty' => $item['qty'],
-                'name' => $item['name'],
-                'subtotal' => $item['subtotal'],
-                'price' => $item['price'],
-                'orderID' => $orderID,
-                'stockID' => $item['id']
-                );
-            $this->orderItem_model->create($item_data);
-        }
-
-
-
-        $data['main_content'] = 'store/order_success';
-        $this->load->view('includes/template', $data, $this->globals);
-    }
-
-
-
 
     //Testing Ajax
     function foo(){

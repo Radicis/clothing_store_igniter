@@ -3,7 +3,7 @@
 <h1>Confirm</h1>
 
 
-    <?php echo form_open('store/create_order');
+    <?php echo form_open('order/create_order');
 
     ?>
 
@@ -50,7 +50,11 @@
         <?php
 
         echo "<input type='hidden' name='userID' value='" . $this->session->userdata('userID') . "'/>'";
+        echo "<input type='hidden' name='first_name' value='" . $this->input->post('first_name') . "'/>'";
+        echo "<input type='hidden' name='last_name' value='" . $this->input->post('last_name') . "'/>'";
         echo "<input type='hidden' name='address' value='" . $this->input->post('address') . "'/>'";
+        echo "<input type='hidden' name='email' value='" . $this->input->post('email') . "'/>'";
+
         echo $first_name . " " . $last_name . "<br>";
         echo $email . "<hr>";
         echo $address['address1'] . "<br>";

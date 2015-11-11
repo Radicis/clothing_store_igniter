@@ -14,34 +14,30 @@ class Stock extends MY_Controller
     }
 
 
-    function create()
+    function create($id = NULL)
     {
-
         $this->load->helper('form');
         $this->load->library('form_validation');
 
-        $this->form_validation->set_rules('item_name', 'Name', 'required');
-        $this->form_validation->set_rules('item_description', 'Description');
-        $this->form_validation->set_rules('item_price', 'Price', 'trim|required|numeric');
-        $this->form_validation->set_rules('categoryID', 'Category', 'required');
-        $this->form_validation->set_rules('brandID', 'Brand', 'required');
+        $this->form_validation->set_rules('size', 'size', 'required');
+        $this->form_validation->set_rules('colour', 'Colour', 'required');
+        $this->form_validation->set_rules('stock', 'Stock', 'trim|required|numeric');
+
 
         if ($this->form_validation->run() === FALSE) {
-
+            $data['itemID'] = $id;
             $data['main_content'] = 'admin/stock_create';
             $this->load->view('includes/admin/template', $data, $this->globals);
         } else {
             $data = array(
-                'item_name' => $this->input->post('item_name'),
-                'item_price' => $this->input->post('item_price'),
-                'image_large' => $this->input->post('image_large'),
-                'item_description' => $this->input->post('item_description'),
-                'categoryID' => $this->input->post('categoryID'),
-                'brandID' => $this->input->post('brandID')
+                'size' => $this->input->post('size'),
+                'colour' => $this->input->post('colour'),
+                'stock' => $this->input->post('stock'),
+                'itemID' => $this->input->post('itemID'),
             );
             $insert_id = $this->stock_model->create($data);
-            $this->session->set_flashdata('success', 'Item Added');
-            $this->view($insert_id);
+            $this->session->set_flashdata('success', 'Stock Added');
+            redirect('item/stock/' . $this->input->post('itemID'));
 
         }
     }

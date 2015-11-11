@@ -89,9 +89,10 @@ class Stock_model extends CI_Model
     }
 
 
-    function create()
+    function create($data)
     {
-
+        $this->db->insert('stock', $data);
+        return $this->db->insert_id();
     }
 
 
@@ -106,6 +107,11 @@ class Stock_model extends CI_Model
     function delete($id)
     {
         return $this->db->delete('stock', array('id' => $id));
+    }
+
+
+    function delete_by_id($id){
+        return $this->db->delete('stock', array('itemID' => $id));
     }
 
 }

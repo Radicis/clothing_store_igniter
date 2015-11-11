@@ -246,4 +246,6 @@ class Item_model extends CI_Model
         return $this->db->delete('store_items', array('id' => $id));
     }
 
+
+
 }

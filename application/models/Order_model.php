@@ -5,6 +5,7 @@ class Order_model extends CI_Model
     public function __construct()
     {
         $this->load->database();
+        $this->load->model('orderItem_model');
 
     }
 
@@ -27,7 +28,7 @@ class Order_model extends CI_Model
 
 
     //used for pagination
-    public function get_items($limit, $start)
+    function get_items($limit, $start)
     {
         $this->db->limit($limit, $start);
         $query = $this->db->get("orders");
@@ -54,6 +55,11 @@ class Order_model extends CI_Model
 
         $this->db->where('id', $id);
         $this->db->update('orders', $data);
+    }
+
+    function update_total($id, $total){
+        $this->db->where('id', $id);
+        $this->db->update('orders', $total);
     }
 
     function delete($id)

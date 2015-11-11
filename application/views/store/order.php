@@ -5,7 +5,7 @@
             <div class="registration_form">
                 <?php
                     $attributes = array('class' => 'form');
-                    echo form_open('store/confirm_order', $attributes); ?>
+                    echo form_open('order/confirm_order', $attributes); ?>
                     <input type="input" name="first_name" class="form-control" placeholder="First Name"   required/>
                     <input type="input" name="last_name" class="form-control" placeholder="Last Name"   required/>
                     <input type="email" name="email" class="form-control" placeholder="Email Address"   required/>
@@ -26,10 +26,10 @@
                     //Display all of the users delivery addresses with radio buttons
                     foreach ($delivery_addresses as $address) {
                         if ($address['isDefault']) {
-                            echo "<div class='order_address'><input type='radio' name='address' value='" . $address['id'] . "' checked><em>";
+                            echo "<div class='order_address'><input type='radio' required  name='address' value='" . $address['id'] . "' checked><em>";
                             echo " Default Address</em>";
                         } else {
-                            echo "<div class='order_address'><input type='radio' name='address' value='" . $address['id'] . "' >";
+                            echo "<div class='order_address'><input type='radio' required  name='address' value='" . $address['id'] . "' >";
                         }
                         echo "<br>" . $address['address1'];
                         echo "<br>" . $address['address2'];

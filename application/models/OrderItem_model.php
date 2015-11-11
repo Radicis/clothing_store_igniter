@@ -24,6 +24,18 @@ class OrderItem_model extends CI_Model
         return $query->row_array();
     }
 
+    function get_by_orderID($id){
+        $this->db->where('orderID', $id);
+        $query = $this->db->get('order_item');
+        if ($query->num_rows() > 0) {
+            foreach ($query->result() as $row) {
+                $data[] = $row;
+            }
+            return $data;
+        }
+        return false;
+    }
+
 
 
     //used for pagination
@@ -57,6 +69,10 @@ class OrderItem_model extends CI_Model
     function delete($id)
     {
         return $this->db->delete('order_item', array('id' => $id));
+    }
+
+    function delete_by_order($id){
+        return $this->db->delete('order_item', array('orderID' => $id));
     }
 
 }

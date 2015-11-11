@@ -7,7 +7,10 @@ class Admin extends MY_Controller{
         parent::__construct();
         $this->load->model('item_model');
         $this->load->model('user_model');
+        $this->load->model('order_model');
+        $this->load->model('address_model');
         $this->load->helper('url_helper');
+        $this->load->model('orderItem_model');
     }
 
     function index()
@@ -44,6 +47,7 @@ class Admin extends MY_Controller{
             case "categories": $model = $this->category_model;break;
             case "brands": $model = $this->brand_model;break;
             case "users": $model = $this->user_model;break;
+            case "orders": $model = $this->order_model;break;
         }
 
         $config["total_rows"] = $model->record_count();

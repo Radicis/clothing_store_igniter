@@ -43,6 +43,7 @@ class Item extends MY_Controller
 
     function stock($id = NULL){
         if($id){
+            $data['itemID'] = $id;
             $data['stock'] = $this->stock_model->get_by_item_id_all($id);
             $data['main_content'] = 'admin/stock';
             $this->load->view('includes/admin/template', $data, $this->globals);
@@ -127,7 +128,9 @@ class Item extends MY_Controller
 
     function delete_item($id = null)
     {
-        $this->item_model->delete($id);
+        if($this->item_model->delete($id)){
+            $this->stock_model->delete_by_id($id);
+        }
         $this->session->set_flashdata('success', 'Item Deleted');
         redirect($this->agent->referrer());
 

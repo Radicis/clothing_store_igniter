@@ -14,15 +14,15 @@
                 </tr>
 
                 <?php
-
-                foreach($items as $item) {
-                    echo "<tr><td>" . $item->id . "</td><td>" . $item->name .  "</td>";
-                    echo "<td>" . anchor('brand/update/'. $item->id, "Edit");
-                    echo " | ";
-                    echo anchor('brand/delete/'. $item->id, "Delete");
-                    echo "</td></tr>";
+                if($items) {
+                    foreach ($items as $item) {
+                        echo "<tr><td>" . $item->id . "</td><td>" . $item->name . "</td>";
+                        echo "<td>" . anchor('brand/update/' . $item->id, "Edit");
+                        echo " | ";
+                        echo anchor('brand/delete/' . $item->id, "Delete");
+                        echo "</td></tr>";
+                    }
                 }
-
 
                 ?>
 

@@ -51,7 +51,7 @@
 
 </table>
 <div class="pull-right">
-    <?php echo anchor('store/empty_cart', 'Empty Cart', array('class' => 'green_button')); ?> <?php echo anchor('store/order', 'Checkout', array('class' => 'green_button')); ?>
+    <?php echo anchor('store/empty_cart', 'Empty Cart', array('class' => 'green_button')); ?> <?php echo anchor('order/order', 'Checkout', array('class' => 'green_button')); ?>
 </div>
 
     </div>

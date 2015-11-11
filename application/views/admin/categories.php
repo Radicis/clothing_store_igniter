@@ -12,28 +12,28 @@
                         </tr>
 
                         <?php
-
-                        foreach($items as $item) {
-                            $parent = false;
-                            echo "<tr><td>" . $item->id . "</td><td>" . $item->name .  "</td>";
-                            foreach($categories as $category){
-                                if($category['id'] == $item->parentID){
-                                    echo "<td>" . $category['name'] . "</td>";
-                                    $parent = true;
+                        if($items) {
+                            foreach ($items as $item) {
+                                $parent = false;
+                                echo "<tr><td>" . $item->id . "</td><td>" . $item->name . "</td>";
+                                foreach ($categories as $category) {
+                                    if ($category['id'] == $item->parentID) {
+                                        echo "<td>" . $category['name'] . "</td>";
+                                        $parent = true;
+                                    }
                                 }
-                            }
-                            if(!$parent){
-                                echo "<td>" . "None" . "</td>";
-                            }
+                                if (!$parent) {
+                                    echo "<td>" . "None" . "</td>";
+                                }
 
 
-                            echo "<td>" . anchor('category/update/' . $item->id, "Edit");
-                            echo " | ";
-                            echo anchor('category/delete/' . $item->id, "Delete");
-                            echo "</td></tr>";
+                                echo "<td>" . anchor('category/update/' . $item->id, "Edit");
+                                echo " | ";
+                                echo anchor('category/delete/' . $item->id, "Delete");
+                                echo "</td></tr>";
+                            }
+
                         }
-
-
                         ?>
 
                     </table>
