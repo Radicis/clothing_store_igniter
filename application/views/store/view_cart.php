@@ -6,6 +6,7 @@
 
     <tr>
         <th>QTY</th>
+        <th>Image</th>
         <th>Item Name</th>
         <th style="text-align:right">Item Price</th>
         <th style="text-align:right">Sub-Total</th>
@@ -19,6 +20,7 @@
 
         <tr>
             <td><?php echo form_input(array('name' => $i.'[qty]', 'value' => $items['qty'], 'maxlength' => '3', 'size' => '5')); ?></td>
+            <td><img class="thumbnail" src="<?php echo base_url() . "images/clothes/" . $items['image']; ?>" /></td>
             <td>
                 <?php echo $items['name']; ?>
 
@@ -44,7 +46,7 @@
     <?php endforeach; ?>
 
     <tr>
-        <td colspan="2"> </td>
+        <td colspan="3"> </td>
         <td style="text-align:right"><strong>Total</strong></td>
         <td style="text-align:right">&euro;<?php echo $this->cart->format_number($this->cart->total()); ?></td>
     </tr>

@@ -57,6 +57,7 @@ class Store extends MY_Controller{
             'qty'     => 1,
             'price'   => $item['item_price'],
             'name'    => $item['item_name'],
+            'image' => $item['image_large'],
             'options' => array('Size' => $stock_item['size'], 'Color' => $stock_item['colour'])
         );
 

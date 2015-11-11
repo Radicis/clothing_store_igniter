@@ -92,6 +92,8 @@
 
                                 <?php echo $items['name']; ?>
 
+                        <img class="thumbnail pull-right" src="<?php echo base_url() . "images/clothes/" . $items['image']; ?>" />
+
                                 <?php if ($this->cart->has_options($items['rowid']) == TRUE): ?>
 
                                     <p>
