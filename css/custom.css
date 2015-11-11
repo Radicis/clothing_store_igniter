@@ -203,4 +203,45 @@ color: #222;
     height: 200px;
 }
 
+.right{
+    text-align: right;
+}
+
+.gallery img{
+    margin:10px;
+    border:1px solid #999;
+    transition: all 0.4s ease-out;
+}
+
+.gallery img:hover{
+    filter: alpha(opacity=50);
+    opacity: 0.7;
+    border:1px solid #57C5A0;
+}
+
+.thumbnail{
+    max-height:80px;
+    max-width:80px;
+}
+
+.remove{
+    border-radius: 30px;
+    text-align:center;
+    padding-top:5px;
+    display:block;
+    width:35px;
+    color:#fefefe;
+    background-color:#222;
+    height:30px;
+    border:1px solid #ccc;
+    transition: all 0.4s ease-out;
+}
+.remove:hover{
+    color:#fefefe;
+    background-color: #57C5A0;
+}
+
+
+
+
 
