@@ -19,11 +19,7 @@ class Item extends MY_Controller
 		
 		$recent_items = $this->item_model->get_item();
 		
-		$data['recent_items'] = array(
-			$recent_items[0],
-			$recent_items[1],
-			$recent_items[2]
-		);
+		$data['recent_items'] = array_slice($recent_items, -3, 3);
 
         $data['stock'] = $this->stock_model->get_by_item_id($id);
 

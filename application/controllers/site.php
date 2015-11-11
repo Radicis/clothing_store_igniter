@@ -17,8 +17,8 @@ class Site extends MY_Controller{
 
         $data['items'] = $this->item_model->get_item();
 
-        //Gets first 3 items to display on homepage, change to 3 latest items in future
-        $data['items'] = array($data['items'][0], $data['items'][1], $data['items'][2]);
+        //Gets last 3 items to display on homepage
+        $data['items'] = array_slice($data['items'], -3, 3);
 
         $data['main_content'] = 'homepage';
         $this->load->view('includes/homepage/template', $data, $this->globals);
@@ -90,7 +90,9 @@ class Site extends MY_Controller{
     function feed(){
         $this->load->helper('xml');
         $this->load->helper('text');
-        $this->data['query'] = $this->item_model->get_item();
+  
+        $this->data['query'] = array_slice($this->item_model->get_item(), -5, 5);
+
 
         // set feed Name will display at title area and page top
         $this->data['feed_name'] = 'Clothes Igniter';
