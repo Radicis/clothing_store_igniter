@@ -60,14 +60,11 @@ class Stock extends MY_Controller
             $data['main_content'] = 'admin/stock_update';
             $this->load->view('includes/admin/template', $data, $this->globals);
         } else {
-
-
             $data = array(
                 'colour' => $this->input->post('colour'),
                 'size' => $this->input->post('size'),
                 'stock' => $this->input->post('stock'),
             );
-
             $this->stock_model->update($id, $data);
             $this->session->set_flashdata('success', 'Stock Updated');
             redirect('item/stock/' . $itemID);
