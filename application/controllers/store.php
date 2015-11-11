@@ -65,6 +65,16 @@ class Store extends MY_Controller{
          redirect('item/view/' . $item['id']);
     }
 
+    function remove_from_cart($rowid){
+        $data = array(
+            'rowid'   => $rowid,
+            'qty'     => 0
+        );
+
+        $this->cart->update($data);
+        redirect($this->agent->referrer());
+    }
+
     // Removes all items in cart
     function empty_cart()
     {

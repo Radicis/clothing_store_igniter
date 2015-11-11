@@ -5,7 +5,8 @@
 <table class="table table-striped item-list" cellpadding="6" cellspacing="1" style="width:100%" border="0">
 
     <tr>
-        <th>QTY</th>
+        <th></th>
+        <th>Qty</th>
         <th>Image</th>
         <th>Item Name</th>
         <th style="text-align:right">Item Price</th>
@@ -19,7 +20,11 @@
         <?php echo form_hidden($i.'[rowid]', $items['rowid']); ?>
 
         <tr>
-            <td><?php echo form_input(array('name' => $i.'[qty]', 'value' => $items['qty'], 'maxlength' => '3', 'size' => '5')); ?></td>
+            <td><?php
+                //echo form_input(array('name' => $i.'[qty]', 'value' => $items['qty'], 'maxlength' => '3', 'size' => '5'));
+                echo anchor('store/remove_from_cart/'. $items['rowid'], 'X', array('class' =>'remove'));
+                ?></td>
+            <td><?php echo $items['qty']; ?></td>
             <td><img class="thumbnail" src="<?php echo base_url() . "images/clothes/" . $items['image']; ?>" /></td>
             <td>
                 <?php echo $items['name']; ?>
@@ -46,7 +51,7 @@
     <?php endforeach; ?>
 
     <tr>
-        <td colspan="3"> </td>
+        <td colspan="4"> </td>
         <td style="text-align:right"><strong>Total</strong></td>
         <td style="text-align:right">&euro;<?php echo $this->cart->format_number($this->cart->total()); ?></td>
     </tr>
