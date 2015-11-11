@@ -5,8 +5,14 @@
 <?php
 
 echo "<strong>Date: </strong>" . $order['date'];
-echo "<br><strong>Delivery Type: </strong>" . $order['deliveryType'];
-echo "<br><strong>Is Paid: </strong>" . $order['isPaid'];
+echo "<br><strong>Delivery Type: </strong>" . $delivery['type'];
+echo "<br><strong>Delivery Cost: </strong>&euro;" . $delivery['cost'];
+if($order['isPaid']){
+    echo "<br><strong>Payment: </strong> Paid";
+}
+else{
+    echo "<br><strong>Payment: </strong> Awaiting Payment";
+}
 echo "<hr><strong>First Name: </strong>" . $order['first_name'];
 echo "<br><strong>Last Name: </strong>" . $order['last_name'];
 echo "<br><strong>Email: </strong>" . $order['email'];

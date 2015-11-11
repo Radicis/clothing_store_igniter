@@ -33,6 +33,8 @@
                         echo "<td>" . anchor('order/delete/' . $item->id, "Delete");
                         echo " | ";
                         echo anchor('order/view/' . $item->id, "View Details");
+                        echo " | ";
+                        echo anchor('order/pay/' . $item->id, "Pay");
                         echo "</td></tr>";
                     }
                 }

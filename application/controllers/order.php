@@ -9,6 +9,7 @@ class Order extends MY_Controller{
         $this->load->model('item_model');
         $this->load->model('stock_model');
         $this->load->model('address_model');
+        $this->load->model('delivery_model');
         $this->load->model('orderItem_model');
         $this->load->model('order_model');
         $this->load->helper('url_helper');
@@ -22,6 +23,7 @@ class Order extends MY_Controller{
     function view($id = NULL)
     {
         $data['order'] = $this->order_model->get($id);
+        $data['delivery'] = $this->delivery_model->get($data['order']['deliveryType']);
 
         $data['address'] = $this->address_model->get($data['order']['address']);
 
@@ -37,6 +39,12 @@ class Order extends MY_Controller{
 
 
     function order(){
+        //Displays error if not items in cart
+        if($this->cart->total_items()<1){
+            $this->session->set_flashdata('error', 'No Items in Cart');
+            redirect('store/view_cart');
+        }
+
         //User needs to be logged in first
         if(!$this->session->userdata('is_logged_in')){
             //Save user agent data for page they are currently on
@@ -54,6 +62,10 @@ class Order extends MY_Controller{
     }
 
     function confirm_order(){
+
+        echo var_dump($_POST);
+
+
         $this->load->library('form_validation');
 
         $this->form_validation->set_rules('first_name', 'Name', 'trim|required');
@@ -68,6 +80,8 @@ class Order extends MY_Controller{
         {
             $addressID = $this->input->post('address');
 
+            $delivery = $this->delivery_model->get($this->input->post('deliveryID'));
+
 
             $data = array(
                 'first_name' => $this->input->post('first_name'),
@@ -75,7 +89,7 @@ class Order extends MY_Controller{
                 'email' => $this->input->post('email'),
                 'address' => $this->address_model->get($addressID),
                 'total_cost' => $this->input->post('total_cost'),
-                'delivery_cost' => $this->input->post('delivery_cost')
+                'delivery_cost' => $delivery['cost']
             );
 
             $data['main_content'] = 'store/confirm';
@@ -93,7 +107,8 @@ class Order extends MY_Controller{
             'first_name' => $this->input->post('first_name'),
             'last_name' =>$this->input->post('last_name'),
             'email' =>$this->input->post('email'),
-            'total' =>$this->input->post('total_cost')
+            'total' =>$this->input->post('total_cost'),
+            'deliveryType' =>$this->input->post('deliveryID')
         );
 
         //Return last insert
@@ -132,9 +147,10 @@ class Order extends MY_Controller{
         };
         $this->session->set_flashdata('success', 'Order Deleted');
         redirect($this->agent->referrer());
-
     }
 
-
-
+    function pay($id = NULL){
+        $this->order_model->set_paid($id);
+        redirect($this->agent->referrer());
+    }
 }

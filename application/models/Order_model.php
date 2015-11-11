@@ -44,7 +44,6 @@ class Order_model extends CI_Model
 
     function create($data)
     {
-
         $this->db->insert('orders', $data);
         return $this->db->insert_id();
     }
@@ -60,6 +59,12 @@ class Order_model extends CI_Model
     function update_total($id, $total){
         $this->db->where('id', $id);
         $this->db->update('orders', $total);
+    }
+
+    function set_paid($id){
+        $this->db->set('isPaid', true, FALSE);
+        $this->db->where('id', $id);
+        $this->db->update('orders');
     }
 
     function delete($id)

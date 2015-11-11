@@ -24,11 +24,22 @@
             </div>
         </div>
     </div>
+
+    <h3>Delivery Type</h3>
+    <div class="registration">
+        <div class="registration_left">
+            <div class="registration_form">
+                <input type="radio" required name="deliveryID" value="1"  checked />Standard <em> &euro;4.99</em><br>
+                <input type="radio" required name="deliveryID" value="2"  />Store Pickup <em> Free</em><br>
+                <input type="radio" required name="deliveryID" value="3"  />International<em> &euro;10.99</em>
+
+            </div>
+        </div>
+    </div>
     <h3>Delivery Details</h3>
     <div class="registration">
         <div class="registration_left">
             <div class="registration_form">
-
                 <?php
 
                 if($delivery_addresses==NULL){
@@ -54,8 +65,7 @@
 
                 ?>
 
-                <input type="hidden" name="total_cost" value="<?php echo $this->cart->format_number($this->cart->total() + $deliveryCost); ?>" />
-                <input type="hidden" name="delivery_cost" value="<?php echo $deliveryCost; ?>" />
+                <input type="hidden" name="total_cost" value="<?php echo $this->cart->format_number($this->cart->total()); ?>" />
 
             </div>
         </div>
@@ -111,9 +121,7 @@
 
 
                        <div class="pull-right right">
-                           <strong>Sub-Total</strong>&euro;<?php echo $this->cart->format_number($this->cart->total()); ?>
-                           <br><strong>Delivery</strong>&euro;<?php echo $deliveryCost; ?>
-                           <br><strong>Total</strong>&euro;<?php echo $this->cart->format_number($this->cart->total() + $deliveryCost); ?>
+                           <strong>Total</strong>&euro;<?php echo $this->cart->format_number($this->cart->total()); ?>
                        </div>
 
                 <!-- /Form -->

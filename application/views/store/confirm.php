@@ -1,18 +1,20 @@
-<div class=registration_form">
 
-<h1>Confirm</h1>
+<div class="login_left">
+    <h3>Confirm Order</h3>
+    <div class="registration">
+        <div class="registration_left">
+            <div class="registration_form">
+
+                <?php echo form_open('order/create_order');
+
+                ?>
 
 
-    <?php echo form_open('order/create_order');
-
-    ?>
 
 
+                <?php $i = 1; ?>
 
-
-    <?php $i = 1; ?>
-
-    <?php foreach ($this->cart->contents() as $items): ?>
+                <?php foreach ($this->cart->contents() as $items): ?>
 
 <p>
             <?php echo $items['qty']; ?>
@@ -40,37 +42,57 @@
 
 
 
-    <strong>Sub-Total: </strong>&euro;<?php echo $this->cart->format_number($this->cart->total()); ?>
-    <br><strong>Delivery: </strong>&euro;<?php echo $delivery_cost; ?>
-    <br><strong>Total: </strong>&euro;<?php echo $total_cost; ?>
+                <strong>Sub-Total: </strong>&euro;<?php echo $this->cart->format_number($this->cart->total()); ?>
+                <br><strong>Delivery: </strong>&euro;<?php echo $delivery_cost; ?>
+                <?php $total_cost = $total_cost+$delivery_cost; ?>
+                <br><strong>Total: </strong>&euro;<?php echo $total_cost; ?>
+                <?php
+
+                echo "<input type='hidden' name='userID' value='" . $this->session->userdata('userID') . "'/>";
+                echo "<input type='hidden' name='first_name' value='" . $this->input->post('first_name') . "'/>";
+                echo "<input type='hidden' name='last_name' value='" . $this->input->post('last_name') . "'/>";
+                echo "<input type='hidden' name='address' value='" . $this->input->post('address') . "'/>";
+                echo "<input type='hidden' name='email' value='" . $this->input->post('email') . "'/>";
+                echo "<input type='hidden' name='total_cost' value='" . $total_cost . "'/>";
+                echo "<input type='hidden' name='deliveryID' value='" . $this->input->post('deliveryID') . "'/>";
+
+                ?>
+                <div class="registration_form">
+                    <input type="submit" name="submit" value="Confirm" />
+                </div>
 
 
-
-        <h2>Delivery Information</h2>
-
-        <?php
-
-        echo "<input type='hidden' name='userID' value='" . $this->session->userdata('userID') . "'/>'";
-        echo "<input type='hidden' name='first_name' value='" . $this->input->post('first_name') . "'/>'";
-        echo "<input type='hidden' name='last_name' value='" . $this->input->post('last_name') . "'/>'";
-        echo "<input type='hidden' name='address' value='" . $this->input->post('address') . "'/>'";
-        echo "<input type='hidden' name='email' value='" . $this->input->post('email') . "'/>'";
-        echo "<input type='hidden' name='total_cost' value='" . $total_cost . "'/>'";
-
-        echo $first_name . " " . $last_name . "<br>";
-        echo $email . "<hr>";
-        echo $address['address1'] . "<br>";
-        echo $address['address2'] . "<br>";
-        echo $address['city'] . "<br>";
-        echo $address['county'] . "<br>";
-        echo $address['country'] ;
-
-        ?>
-
-
-
-    <div class="registration_form">
-        <input type="submit" name="submit" value="Confirm" />
+            </div>
+        </div>
     </div>
+</div>
+<div class="login_left">
+    <div class="registration">
+        <div class="registration_left">
+            <div class="registration_form">
+                <!-- Form -->
+                <h3>Delivery Details</h3>
+                <?php
 
+                echo $first_name . " " . $last_name . "<br>";
+                echo $email . "<hr>";
+                echo $address['address1'] . "<br>";
+                echo $address['address2'] . "<br>";
+                echo $address['city'] . "<br>";
+                echo $address['county'] . "<br>";
+                echo $address['country'] ;
+?>
+
+
+            </div>
+        </div>
     </div>
+    <!-- end registration -->
+</div>
+<div class="clear"></div>
+
+
+
+
+
+
