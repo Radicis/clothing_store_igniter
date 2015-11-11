@@ -90,7 +90,7 @@ class Site extends MY_Controller{
     function feed(){
         $this->load->helper('xml');
         $this->load->helper('text');
-  
+
         $this->data['query'] = array_slice($this->item_model->get_item(), -5, 5);
 
 
