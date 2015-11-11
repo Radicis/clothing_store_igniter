@@ -48,6 +48,9 @@
         });
     </script>
 
+    <link href="<?php echo base_url();?>css/vendor/featherlight.min.css" type="text/css" rel="stylesheet" />
+    <script src="<?php echo base_url();?>js/vendor/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
+
     <script src="<?php echo base_url();?>js/main.js" type="text/javascript"></script>
 
 </head>
@@ -97,6 +100,7 @@
                 <li><?php echo anchor('site', 'Home'); ?></li>
                 <li><?php echo anchor('store', 'Shop'); ?></li>
                 <li><?php echo anchor('site/about', 'About'); ?></li>
+                <li><?php echo anchor('site/gallery', 'Gallery'); ?></li>
                 <li><?php echo anchor('site/contact', 'Contact'); ?></li>
 
                 <?php
@@ -115,6 +119,7 @@
                 <li><?php echo anchor('site', 'Home'); ?></li>
                 <li><?php echo anchor('store', 'Shop'); ?></li>
                 <li><?php echo anchor('site/about', 'About'); ?></li>
+                <li><?php echo anchor('site/gallery', 'Gallery'); ?></li>
                 <li><?php echo anchor('site/contact', 'Contact'); ?></li>
 
                 <?php

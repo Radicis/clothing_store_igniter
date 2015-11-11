@@ -96,6 +96,7 @@
                 <li><?php echo anchor('site', 'Home'); ?></li>
                 <li><?php echo anchor('store', 'Shop'); ?></li>
                 <li><?php echo anchor('site/about', 'About'); ?></li>
+                <li><?php echo anchor('site/gallery', 'Gallery'); ?></li>
                 <li><?php echo anchor('site/contact', 'Contact'); ?></li>
 
                 <?php
@@ -114,6 +115,7 @@
                 <li><?php echo anchor('site', 'Home'); ?></li>
                 <li><?php echo anchor('store', 'Shop'); ?></li>
                 <li><?php echo anchor('site/about', 'About'); ?></li>
+                <li><?php echo anchor('site/gallery', 'Gallery'); ?></li>
                 <li><?php echo anchor('site/contact', 'Contact'); ?></li>
 
                 <?php

@@ -109,4 +109,43 @@ class Site extends MY_Controller{
 
     }
 
+    function gallery(){
+        $tag = 'primark';
+        $client_id = "2e397553354a4401a860373659f794ce";
+
+        $url = 'https://api.instagram.com/v1/tags/'.$tag.'/media/recent?client_id='.$client_id;
+
+        $inst_stream = $this->get_instagram($url);
+        $results = json_decode($inst_stream, true);
+
+
+        $data['images'] = array();
+
+
+        foreach($results['data'] as $item){
+
+            array_push($data['images'], array(
+                'low' => $item['images']['thumbnail']['url'],
+                'high' => $item['images']['standard_resolution']['url']
+            ));
+        }
+
+        $data['main_content'] = 'gallery';
+        $this->load->view('includes/template', $data, $this->globals);
+    }
+
+    function get_instagram($url){
+        $ch = curl_init();
+        curl_setopt_array($ch, array(
+            CURLOPT_URL => $url,
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_SSL_VERIFYPEER => false,
+            CURLOPT_SSL_VERIFYHOST => 2
+        ));
+
+        $result = curl_exec($ch);
+        curl_close($ch);
+        return $result;
+    }
+
 }
