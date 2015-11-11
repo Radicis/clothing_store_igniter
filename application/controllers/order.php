@@ -20,6 +20,7 @@ class Order extends MY_Controller{
 
     }
 
+    //Views all of the orders on the admin page
     function view($id = NULL)
     {
         $data['order'] = $this->order_model->get($id);
@@ -63,9 +64,6 @@ class Order extends MY_Controller{
 
     function confirm_order(){
 
-        echo var_dump($_POST);
-
-
         $this->load->library('form_validation');
 
         $this->form_validation->set_rules('first_name', 'Name', 'trim|required');
@@ -98,6 +96,7 @@ class Order extends MY_Controller{
         }
     }
 
+    //Writes the order to the DB
     function create_order(){
         $addressID = $this->input->post('address');
 
@@ -149,6 +148,7 @@ class Order extends MY_Controller{
         redirect($this->agent->referrer());
     }
 
+    //Sets the payment status of the order to true
     function pay($id = NULL){
         $this->order_model->set_paid($id);
         redirect($this->agent->referrer());

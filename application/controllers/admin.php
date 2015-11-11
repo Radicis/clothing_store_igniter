@@ -22,6 +22,7 @@ class Admin extends MY_Controller{
         $this->load->view('includes/admin/template', $data, $this->globals);
     }
 
+    //Checks if the user is currently logged in
     function is_logged_in()
     {
         $is_logged_in = $this->session->userdata('isAdmin');
@@ -32,8 +33,8 @@ class Admin extends MY_Controller{
         }
     }
 
+    //Displays all of the users to the admin panel
     function show($type=FALSE){
-
 
         $this->is_logged_in();
 
@@ -65,8 +66,5 @@ class Admin extends MY_Controller{
         $data['main_content'] = 'admin/' . $type;
         $this->load->view('includes/admin/template', $data, $this->globals);
     }
-
-
-
 
 }

@@ -86,6 +86,7 @@ class Site extends MY_Controller{
         $this->load->view('includes/template', $data, $this->globals);
     }
 
+    //Generates the XMl RSS feed
     function feed(){
         $this->load->helper('xml');
         $this->load->helper('text');
@@ -134,6 +135,7 @@ class Site extends MY_Controller{
         $this->load->view('includes/template', $data, $this->globals);
     }
 
+    //Curls the instagram API
     function get_instagram($url){
         $ch = curl_init();
         curl_setopt_array($ch, array(

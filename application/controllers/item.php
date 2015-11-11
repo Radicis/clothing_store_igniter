@@ -41,6 +41,7 @@ class Item extends MY_Controller
         $this->load->view('includes/template', $data, $this->globals);
     }
 
+    //Views all of the related stock items to the given item ID - Admin
     function stock($id = NULL){
         if($id){
             $data['itemID'] = $id;
