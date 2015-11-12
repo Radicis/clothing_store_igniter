@@ -73,6 +73,59 @@ var testChart = function() {
     });
 }
 
+var testChart2 = function() {
+
+    var data = [{
+        name: 'Orders',
+        colorByPoint: true,
+        data :[
+        ]
+    }];
+
+    var drillData = {series: []};
+
+    $.ajax({
+        url: "http://localhost/igniter/clothing_store_igniter/index.php/order/get_dates",
+        type: 'GET',
+        success: function (result) {
+            console.log(result);
+            $(result).each(function (index) {
+
+                thisDate = result[index].date;
+                //console.log(time);
+                data[0].data.push([Date.UTC(2015,11,11),1]);
+
+            });
+
+
+            $(function () {
+                $('#chart').highcharts({
+                    title: {
+                        text: 'Order Analysis',
+
+                    },
+                    xAxis: {
+                        type: 'datetime',
+                        dateTimeLabelFormats: { // don't display the dummy year
+                            month: '%e. %b',
+                            year: '%b'
+                        },
+                        title: {
+                            text: 'Date'
+                        }
+                    },
+                    yAxis: {
+                        title: {
+                            text: 'Stock Quantity'
+                        },
+                    },
+                    series: data,
+                });
+            });
+        }
+    });
+}
+
 $( document ).ready(function() {
     testChart();
 });

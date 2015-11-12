@@ -96,7 +96,7 @@ class Login extends MY_Controller
             $this->load->model('user_model');
             if($query = $this->user_model->create_user())
             {
-                $data['main_content'] = 'security/signup_successful';
+                $data['main_content'] = 'security/login_form';
                 $this->load->view('includes/template', $data, $this->globals);
             }
             else

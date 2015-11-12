@@ -1,4 +1,6 @@
 
+<?php echo validation_errors(); ?>
+
     <div class="pull_left">
         <div class="registration_form">
 <h1>Create an Account</h1>
