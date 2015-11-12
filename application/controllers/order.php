@@ -38,6 +38,13 @@ class Order extends MY_Controller{
         $this->load->view('includes/admin/template', $data, $this->globals);
     }
 
+    function get_dates(){
+        if ($this->input->is_ajax_request()) {
+            header('Content-Type: application/x-json; charset=utf-8');
+            echo(json_encode($this->order_model->get_dates()));
+        }
+    }
+
 
     function order(){
         //Displays error if not items in cart

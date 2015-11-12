@@ -50,6 +50,23 @@ class Item extends MY_Controller
         }
     }
 
+    function get_stock_level(){
+
+            header('Content-Type: application/x-json; charset=utf-8');
+            $items = $this->item_model->get_item();
+            $stock_levels = array();
+            foreach($items as $item){
+                $total_stock = 0;
+                $stocks = $this->stock_model->get_by_item_id_all($item->id);
+                foreach($stocks as $stock){
+                    $total_stock += $stock['stock'];
+                }
+                array_push($stock_levels, array('name'=>$item->item_name, 'stock'=>$total_stock));
+            }
+            echo(json_encode($stock_levels));
+
+    }
+
     function create_item()
     {
 

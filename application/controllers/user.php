@@ -1,7 +1,7 @@
 <?php
 
 
-class Admin extends MY_Controller{
+class User extends MY_Controller{
     function __construct()
     {
         parent::__construct();
@@ -17,9 +17,13 @@ class Admin extends MY_Controller{
     {
         $this->is_logged_in();
 
-        $data['main_content'] = 'admin/index';
+        $data['user'] = $this->user_model->get($this->session->userdata('userID'));
+        $data['addresses'] = $this->address_model->get_by_userID($this->session->userdata('userID'));
+        $data['orders'] = $this->order_model->get_by_userID($this->session->userdata('userID'));
 
-        $this->load->view('includes/admin/template', $data, $this->globals);
+        $data['main_content'] = 'user/index';
+
+        $this->load->view('includes/template', $data, $this->globals);
     }
 
     //Checks if the user is currently logged in

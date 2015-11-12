@@ -25,6 +25,33 @@ class Order_model extends CI_Model
         return $query->row_array();
     }
 
+    //Testing filter functions
+    public function get_dates(){
+        $this->db->select('date');
+        $this->db->from('orders');
+        $query = $this->db->get();
+        if ($query->num_rows() > 0) {
+            foreach ($query->result() as $row) {
+                $data[] = $row;
+            }
+            return $data;
+        }
+        return false;
+    }
+
+    public function get_by_userID($id = FALSE)
+    {
+        if (!$id)
+        {
+            $query = $this->db->get('orders');
+            return $query->result_array();
+        }
+
+        $this->db->where('userID', $id);
+        $query = $this->db->get('orders');
+        return $query->result_array();
+    }
+
 
 
     //used for pagination

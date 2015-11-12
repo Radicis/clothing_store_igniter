@@ -65,6 +65,18 @@ class User_model extends CI_Model
         return $insert;
     }
 
+    public function get($id = NULL)
+    {
+        if (!$id)
+        {
+            $query = $this->db->get('user');
+            return $query->result_array();
+        }
+
+        $query = $this->db->get_where('user', array('id' => $id));
+        return $query->row_array();
+    }
+
 
     //used for pagination
     public function get_items($limit, $start)

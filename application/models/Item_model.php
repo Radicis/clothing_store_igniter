@@ -60,7 +60,7 @@ class Item_model extends CI_Model
     }
 
     //Testing filter functions
-    public function foo(){
+    public function prices(){
         $this->db->select('item_price');
         $this->db->from('store_items');
         $query = $this->db->get();

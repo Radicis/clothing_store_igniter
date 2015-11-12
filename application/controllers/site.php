@@ -44,7 +44,7 @@ class Site extends MY_Controller{
             $message = $this->input->post('message');
 
             //the email that you want to receive the emails
-            $to_email = 'user@gmail.com';
+            $to_email = 'adam.lloyd@mycit.ie';
 
             //email configuration settings
             $config['protocol'] = 'smtp';
@@ -52,11 +52,12 @@ class Site extends MY_Controller{
             $config['smtp_port'] = '465';
             $config['smtp_user'] = 'clothesigniter';
             $config['smtp_pass'] = 'HelloKitty123#';
-            //$config['mailtype'] = 'html';
-            //$config['charset'] = 'iso-8859-1';
+            $config['mailtype'] = 'html';
+            $config['charset'] = 'iso-8859-1';
             //$config['wordwrap'] = TRUE;
             //$config['newline'] = "\r\n";
             $this->load->library('email',$config);
+            $this->email->set_newline("\r\n");
             $this->email->initialize($config);
 
             //send an email

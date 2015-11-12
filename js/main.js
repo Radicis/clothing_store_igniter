@@ -44,7 +44,7 @@ function urlify(text) {
 
 //gets the tweets from tweets_json.php and displays on the homepage
 $(document).ready(function(){       
-        $.getJSON('http://localhost/igniter/clothing_store_igniter/twitter/tweets_json.php?count=2&screen_name=asos&callback=?',{
+        $.getJSON('http://localhost/igniter/clothing_store_igniter/twitter/tweets_json.php?count=3&screen_name=asos&callback=?',{
           format: "json"
         }).done(function(data){
 			$.each(data, function(index){

@@ -65,7 +65,7 @@
                     <?php
 
                     if($this->session->is_logged_in){
-                        echo "<span class='username'>" . $this->session->username . "</span>" . anchor('login/logout', 'Logout');
+                        echo "<span class='username'>" . anchor('user', $this->session->username,  array('class'=>'username')) . "</span>" . anchor('login/logout', 'Logout');
 
                     }
                     else{

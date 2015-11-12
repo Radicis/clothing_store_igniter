@@ -2,7 +2,7 @@
 
 
 data = [{
-    name: 'Prices',
+    name: 'Stock',
     data: []
 }];
 
@@ -10,42 +10,32 @@ data = [{
 var testChart = function() {
 
     $.ajax({
-        url: "http://localhost/igniter/clothing_store_igniter/index.php/store/foo",
+        url: "http://localhost/igniter/clothing_store_igniter/index.php/item/get_stock_level",
         type: 'GET',
         success: function (result) {
 
+            console.log(result);
+
             $(result).each(function (index) {
                 //console.log(result[index]['item_price']);
-                data[0].data.push(parseFloat(result[index]['item_price']));
+                data[0].data.push([result[index]['name'], parseFloat(result[index]['stock'])]);
             });
 
-            console.log(data[0].data)
 
             $(function () {
                 $('#chart').highcharts({
+                    chart:{type:'column'},
                     title: {
-                        text: 'Price Analysis',
-                        x: -20 //center
+                        text: 'Stock Analysis',
+
                     },
                     xAxis: {
-                        categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-                            'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+                        type: 'category'
                     },
                     yAxis: {
                         title: {
                             text: 'Price'
                         },
-                        plotLines: [{
-                            value: 0,
-                            width: 1,
-                            color: '#808080'
-                        }]
-                    },
-                    legend: {
-                        layout: 'vertical',
-                        align: 'right',
-                        verticalAlign: 'middle',
-                        borderWidth: 0
                     },
                     series: data
                 });
