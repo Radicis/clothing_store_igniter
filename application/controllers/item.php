@@ -57,14 +57,15 @@ class Item extends MY_Controller
             $stock_levels = array();
             foreach($items as $item){
                 $total_stock = 0;
+                $stock_items = array();
                 $stocks = $this->stock_model->get_by_item_id_all($item->id);
                 foreach($stocks as $stock){
+                    array_push($stock_items, array('name'=>$stock['size'] . " - " . $stock['colour'], 'stock'=>$stock['stock']));
                     $total_stock += $stock['stock'];
                 }
-                array_push($stock_levels, array('name'=>$item->item_name, 'stock'=>$total_stock));
+                array_push($stock_levels, array('name'=>$item->item_name, 'stock'=>$total_stock, 'drill'=>$stock_items));
             }
             echo(json_encode($stock_levels));
-
     }
 
     function create_item()
