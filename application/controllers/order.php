@@ -14,6 +14,7 @@ class Order extends MY_Controller{
         $this->load->model('order_model');
         $this->load->helper('url_helper');
         $this->load->library('user_agent');
+        $this->load->helper("string"); // used for generating invoice id
     }
 
     function index(){
@@ -59,7 +60,6 @@ class Order extends MY_Controller{
             redirect('login');
         }
         else{
-
             $userID =  $this->session->userdata('userID');
 
             $data['delivery_addresses'] = $this->address_model->get_by_userID($userID);
@@ -87,18 +87,45 @@ class Order extends MY_Controller{
 
             $delivery = $this->delivery_model->get($this->input->post('deliveryID'));
 
-
             $data = array(
                 'first_name' => $this->input->post('first_name'),
                 'last_name' => $this->input->post('last_name'),
                 'email' => $this->input->post('email'),
                 'address' => $this->address_model->get($addressID),
                 'total_cost' => $this->input->post('total_cost'),
-                'delivery_cost' => $delivery['cost']
+                'delivery_cost' => $delivery['cost'],
+                'payment_type' => $this->input->post('payment')
             );
 
-            $data['main_content'] = 'store/confirm';
-            $this->load->view('includes/template', $data, $this->globals);
+            //If payment option is paypal
+            if($this->input->post('payment')==1){
+                $config['business'] = 'clothesigniter@clothesigniter.com';
+                $config['cpp_header_image'] = ''; //Image header url [750 pixels wide by 90 pixels high]
+                $config['return'] = base_url() . 'index.php/order/success';// shows data of order
+
+                $config['cancel_return'] = base_url() ; // returns to main page
+                $config['notify_url'] = base_url() . 'index.php/order/success'; //IPN Post
+                $config['production'] = FALSE; //Its false by default and will use sandbox
+                $config["invoice"] = random_string('numeric',8); //The invoice id ( unique using helper string)
+
+                $this->load->library('Paypal', $config);
+
+                //Iterate through cart contents and add to paypal
+                foreach($this->cart->contents() as $item) {
+                    $item_name = $item['name'] . " : ";
+                    foreach($this->cart->product_options($item['rowid']) as $option_name => $option_value){
+                        $item_name .=  $option_value . " ";
+
+                    }
+                    $this->paypal->add($item_name, $item['price'], $item['qty'], $delivery['cost']); //First item
+                }
+
+                $this->paypal->pay(); //Proccess the payment
+            }
+            else {
+                $data['main_content'] = 'store/confirm';
+                $this->load->view('includes/template', $data, $this->globals);
+            }
 
         }
     }
@@ -138,11 +165,28 @@ class Order extends MY_Controller{
 
         }
 
+        $this->success();
+
+    }
+
+    function success(){
+
+
         //Clear cart
         $this->cart->destroy();
 
-        $data['main_content'] = 'store/order_success';
-        $this->load->view('includes/template', $data, $this->globals);
+        //Get Paypal returned variables if set
+        if(isset($_POST['auth'])){
+
+            $data['auth'] = $_POST['auth'];
+            $data['main_content'] = 'store/order_success';
+            $this->load->view('includes/template', $data, $this->globals);
+        }
+        else {
+
+            $data['main_content'] = 'store/order_success';
+            $this->load->view('includes/template', $data, $this->globals);
+        }
     }
 
     function delete($id = null)

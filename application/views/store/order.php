@@ -20,7 +20,8 @@
     <div class="registration">
         <div class="registration_left">
             <div class="registration_form">
-                Free!
+                <input type="radio" name="payment" value="1" checked><img src="<?php echo base_url() . "images/paypal.png" ?>" width="100px" />
+                <input type="radio" name="payment" value="0" > <img src="<?php echo base_url() . "images/creditcard.gif" ?>" width="100px" />
             </div>
         </div>
     </div>
