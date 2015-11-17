@@ -1,15 +1,60 @@
-<h3>Profile Page</h3>
 
+
+<div class="login_left">
+    <div class="registration">
+        <div class="registration_left">
+            <h3>Personal Details<a class="add_new" href="#">Edit</a></h3>
 <?php
-
 echo "<h4>" . $user['username'] . "</h4>";
 echo "<p>" . $user['email'] . "<br>";
 echo $user['first_name'] . " " . $user['last_name'] . "<br>";
-echo "<p>" . anchor('user/change_password', "Change Password") . "</p>";
+echo "<p>" . anchor('user/change_password', "Change Password") . "</p>"; ?>
+        </div>
+    </div>
+    <div class="registration">
+        <h3>Orders</h3>
+        <div class="registration_left scrolling">
 
+    <?php
+
+    if($orders) {
+
+        foreach ($orders as $order) {
+            echo "<p>" . $order['date'] . "<br>";
+            if($order['isPaid']) {
+                echo "<span class='alert-success'>Paid</span><br>";
+            }
+            else{
+                echo "<span class='alert-danger'>Awaiting Payment</span><br>";
+            }
+            echo $order['first_name'] . "<br>";
+            echo $order['last_name'] . "<br>";
+            echo $order['email'] . "<br>";
+            echo $order['total'] . "<br>";
+            echo "</p>";
+        }
+    }
+    ?></div></div>
+
+
+</div>
+
+<div class="login_left">
+    <div class="registration">
+        <h3>Addresses<?php echo anchor('address/create', 'Add New', array('class'=>'add_new')) ?></h3>
+        <div class="registration_left scrolling">
+
+
+<?php
 if($addresses) {
 
     foreach ($addresses as $address) {
+        if ($address['isDefault']) {
+            echo "<em class='pull-right'>Default Address</em>";
+        }
+        else{
+            echo anchor('address/makeDefault/' . $address['id'], "Make Default", array('class'=>'pull-right'));
+        }
         echo "<p>" . $address['address1'] . "<br>";
         echo $address['address2'] . "<br>";
         echo $address['city'] . "<br>";
@@ -17,19 +62,10 @@ if($addresses) {
         echo $address['country'] . "<br>";
         echo "</p>";
     }
-}
+}?>
 
-if($orders) {
-
-    foreach ($orders as $order) {
-        echo "<p>" . $order['date'] . "<br>";
-        echo $order['first_name'] . "<br>";
-        echo $order['last_name'] . "<br>";
-        echo $order['email'] . "<br>";
-        echo $order['total'] . "<br>";
-        echo "</p>";
-    }
-}
+    </div></div></div>
 
 
-?>
+<div class="clear"></div>
+

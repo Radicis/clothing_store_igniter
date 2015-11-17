@@ -245,6 +245,17 @@ color: #222;
     color:#fefefe !important;
 }
 
+.scrolling{
+    overflow-y: scroll;
+    height:500px;
+
+}
+
+.add_new{
+    font-size:0.7em;
+    padding:5px;
+}
+
 
 
 

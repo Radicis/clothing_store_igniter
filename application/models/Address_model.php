@@ -41,9 +41,9 @@ class Address_model extends CI_Model
     }
 
 
-    function create()
+    function create($data)
     {
-
+        return $this->db->insert('address', $data);
     }
 
     public function get_by_userID($id = FALSE)
@@ -63,7 +63,6 @@ class Address_model extends CI_Model
 
     function update($id, $data)
     {
-
         $this->db->where('id', $id);
         $this->db->update('address', $data);
     }

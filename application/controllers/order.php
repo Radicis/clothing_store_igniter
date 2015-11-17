@@ -126,43 +126,45 @@ class Order extends MY_Controller{
                 $data['main_content'] = 'store/confirm';
                 $this->load->view('includes/template', $data, $this->globals);
             }
-
         }
     }
 
     //Writes the order to the DB
-    function create_order(){
-        $addressID = $this->input->post('address');
+    function create_order($data =NULL){
 
-        $data = array(
-            'userID' =>  $this->session->userdata('userID'),
-            'address' => $addressID,
-            'first_name' => $this->input->post('first_name'),
-            'last_name' =>$this->input->post('last_name'),
-            'email' =>$this->input->post('email'),
-            'total' =>$this->input->post('total_cost'),
-            'deliveryType' =>$this->input->post('deliveryID')
-        );
+        if(!$data) {
+            $addressID = $this->input->post('address');
 
-        //Return last insert
-        $orderID = $this->order_model->create($data);
-
-        $data['total'] = 0;
-
-        foreach($this->cart->contents() as $item){
-            $item_data = array(
-                'qty' => $item['qty'],
-                'name' => $item['name'],
-                'subtotal' => $item['subtotal'],
-                'price' => $item['price'],
-                'orderID' => $orderID,
-                'stockID' => $item['id']
+            $data = array(
+                'userID' => $this->session->userdata('userID'),
+                'address' => $addressID,
+                'first_name' => $this->input->post('first_name'),
+                'last_name' => $this->input->post('last_name'),
+                'email' => $this->input->post('email'),
+                'total' => $this->input->post('total_cost'),
+                'deliveryType' => $this->input->post('deliveryID')
             );
-            $this->orderItem_model->create($item_data);
 
-            //Reduce stock on stock item
-            $this->stock_model->reduce_stock($item['id'], $item['qty']);
+            //Return last insert
+            $orderID = $this->order_model->create($data);
 
+            $data['total'] = 0;
+
+            foreach ($this->cart->contents() as $item) {
+                $item_data = array(
+                    'qty' => $item['qty'],
+                    'name' => $item['name'],
+                    'subtotal' => $item['subtotal'],
+                    'price' => $item['price'],
+                    'orderID' => $orderID,
+                    'stockID' => $item['id']
+                );
+                $this->orderItem_model->create($item_data);
+
+                //Reduce stock on stock item
+                $this->stock_model->reduce_stock($item['id'], $item['qty']);
+
+            }
         }
 
         $this->success();
@@ -170,7 +172,6 @@ class Order extends MY_Controller{
     }
 
     function success(){
-
 
         //Clear cart
         $this->cart->destroy();
