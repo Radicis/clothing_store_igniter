@@ -71,4 +71,38 @@ class User extends MY_Controller{
         $this->load->view('includes/admin/template', $data, $this->globals);
     }
 
+    function update($id=null){
+
+        $this->load->helper('form');
+        $this->load->library('form_validation');
+
+        $this->form_validation->set_rules('first_name', 'First Name', 'required');
+        $this->form_validation->set_rules('last_name', 'Last Name', 'required');
+        $this->form_validation->set_rules('email', 'Email', 'required');
+
+
+        if ($this->form_validation->run() === FALSE) {
+            $data['user'] = $this->user_model->get($id);
+            $data['main_content'] = 'user/update_profile';
+            $this->load->view('includes/template', $data, $this->globals);
+        } else {
+            $data = array(
+                'name' => $this->input->post('name'),
+                'parentID' => $this->input->post('parentID')
+            );
+
+            $this->user_model->update($id, $data);
+            $this->session->set_flashdata('success', 'Profile Updated');
+
+            if ($this->session->userdata('redirect_back')) {
+                $redirect_url = $this->session->userdata('redirect_back');  // grab value and put into a temp variable so we unset the session value
+                $this->session->unset_userdata('redirect_back');
+                redirect($redirect_url);
+            }
+
+            redirect('user');
+
+        }
+    }
+
 }

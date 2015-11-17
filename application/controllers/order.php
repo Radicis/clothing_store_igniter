@@ -39,6 +39,24 @@ class Order extends MY_Controller{
         $this->load->view('includes/admin/template', $data, $this->globals);
     }
 
+    //Views all of the orders on the admin page
+    function user_view($id = NULL)
+    {
+        $data['order'] = $this->order_model->get($id);
+        $data['delivery'] = $this->delivery_model->get($data['order']['deliveryType']);
+
+        $data['address'] = $this->address_model->get($data['order']['address']);
+
+        $data['order_items'] = $this->orderItem_model->get_by_orderID($id);
+
+        if (empty($data['order']))
+        {
+            show_404();
+        }
+        $data['main_content'] = 'user/order_view';
+        $this->load->view('includes/template', $data, $this->globals);
+    }
+
     function get_dates(){
         if ($this->input->is_ajax_request()) {
             header('Content-Type: application/x-json; charset=utf-8');

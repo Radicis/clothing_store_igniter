@@ -1,35 +1,27 @@
-<h3>Profile Page</h3>
+<h3>Update Personal Details</h3>
+
+<?php echo validation_errors(); ?>
 
 <?php
 
-echo "<h4>" . $user['username'] . "</h4>";
-echo "<p>" . $user['email'] . "<br>";
-echo $user['first_name'] . " " . $user['last_name'] . "<br>";
-echo "<p>" . anchor('user/change_password', "Change Password") . "</p>";
+$attributes = array('class' => 'form');
 
-if($addresses) {
+echo form_open('user/update/' . $user['id'], $attributes); ?>
 
-    foreach ($addresses as $address) {
-        echo "<p>" . $address['address1'] . "<br>";
-        echo $address['address2'] . "<br>";
-        echo $address['city'] . "<br>";
-        echo $address['county'] . "<br>";
-        echo $address['country'] . "<br>";
-        echo "</p>";
-    }
-}
-
-if($orders) {
-
-    foreach ($orders as $order) {
-        echo "<p>" . $order['date'] . "<br>";
-        echo $order['first_name'] . "<br>";
-        echo $order['last_name'] . "<br>";
-        echo $order['email'] . "<br>";
-        echo $order['total'] . "<br>";
-        echo "</p>";
-    }
-}
+<div class="form-group">
+    <label for="first_name">First Name</label>
+    <input type="input" name="first_name" class="form-control" required value="<?php echo $user['first_name']; ?>" placeholder="First Name" />
+</div>
+<div class="form-group">
+    <label for="last_name">Last Name</label>
+    <input type="input" name="last_name" class="form-control" value="<?php echo $user['last_name']; ?>" placeholder="Last Name" />
+</div>
+<div class="form-group">
+    <label for="email">Email</label>
+    <input type="input" name="email" class="form-control" required value="<?php echo $user['email']; ?>" placeholder="Email" />
+</div>
 
 
-?>
+<div class="form-group registration_form">
+    <input type="submit" name="submit" value="Update" />
+</div>

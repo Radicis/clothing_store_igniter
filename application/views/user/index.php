@@ -3,7 +3,7 @@
 <div class="login_left">
     <div class="registration">
         <div class="registration_left">
-            <h3>Personal Details<a class="add_new" href="#">Edit</a></h3>
+            <h3>Personal Details<?php echo anchor('user/update/' . $this->session->userdata('userID'), 'Edit', array('class'=>'add_new pull-right')) ?></h3>
 <?php
 echo "<h4>" . $user['username'] . "</h4>";
 echo "<p>" . $user['email'] . "<br>";
@@ -20,6 +20,7 @@ echo "<p>" . anchor('user/change_password', "Change Password") . "</p>"; ?>
     if($orders) {
 
         foreach ($orders as $order) {
+            echo anchor('order/user_view/' . $order['id'], 'View', array('class'=>'pull-right'));
             echo "<p>" . $order['date'] . "<br>";
             if($order['isPaid']) {
                 echo "<span class='alert-success'>Paid</span><br>";
@@ -31,7 +32,8 @@ echo "<p>" . anchor('user/change_password', "Change Password") . "</p>"; ?>
             echo $order['last_name'] . "<br>";
             echo $order['email'] . "<br>";
             echo $order['total'] . "<br>";
-            echo "</p>";
+
+            echo "</p><hr>";
         }
     }
     ?></div></div>
@@ -41,7 +43,7 @@ echo "<p>" . anchor('user/change_password', "Change Password") . "</p>"; ?>
 
 <div class="login_left">
     <div class="registration">
-        <h3>Addresses<?php echo anchor('address/create', 'Add New', array('class'=>'add_new')) ?></h3>
+        <h3>Addresses<?php echo anchor('address/create', 'Add New', array('class'=>'add_new pull-right')) ?></h3>
         <div class="registration_left scrolling">
 
 
