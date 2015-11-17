@@ -50,30 +50,29 @@ class Address extends MY_Controller
         $this->load->helper('form');
         $this->load->library('form_validation');
 
-        $this->form_validation->set_rules('name', 'Name', 'required');
+        $this->form_validation->set_rules('address1', 'Name', 'required');
+        $this->form_validation->set_rules('city', 'City', 'required');
+        $this->form_validation->set_rules('county', 'County', 'required');
+        $this->form_validation->set_rules('country', 'Country', 'required');
 
 
         if ($this->form_validation->run() === FALSE) {
-            $data['brand'] = $this->brand_model->get($id);
+            $data['address'] = $this->address_model->get($id);
 
-            $data['main_content'] = 'admin/brand_update';
-            $this->load->view('includes/admin/template', $data, $this->globals);
+            $data['main_content'] = 'user/update_address';
+            $this->load->view('includes/template', $data, $this->globals);
         } else {
             $data = array(
-                'name' => $this->input->post('name'),
-
+                'userID' => $this->session->userdata('userID'),
+                'address1' => $this->input->post('address1'),
+                'address2' => $this->input->post('address2'),
+                'city' => $this->input->post('city'),
+                'county' => $this->input->post('county'),
+                'country' => $this->input->post('country')
             );
-
             $this->address_model->update($id, $data);
             $this->session->set_flashdata('success', 'Address Updated');
-
-            if ($this->session->userdata('redirect_back')) {
-                $redirect_url = $this->session->userdata('redirect_back');  // grab value and put into a temp variable so we unset the session value
-                $this->session->unset_userdata('redirect_back');
-                redirect($redirect_url);
-            }
-
-            redirect('admin/show/brands');
+            redirect('user');
 
         }
     }

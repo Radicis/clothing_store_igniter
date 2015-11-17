@@ -60,7 +60,8 @@ if($addresses) {
         echo $address['city'] . "<br>";
         echo $address['county'] . "<br>";
         echo $address['country'] . "<br>";
-        echo "</p>";
+        echo anchor('address/update/' . $address['id'], 'Edit', array('class'=>'pull-right'));
+        echo "</p><hr>";
     }
 }?>
 

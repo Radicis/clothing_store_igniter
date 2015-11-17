@@ -1,35 +1,38 @@
-<h3>Profile Page</h3>
+
+<?php echo validation_errors(); ?>
 
 <?php
 
-echo "<h4>" . $user['username'] . "</h4>";
-echo "<p>" . $user['email'] . "<br>";
-echo $user['first_name'] . " " . $user['last_name'] . "<br>";
-echo "<p>" . anchor('user/change_password', "Change Password") . "</p>";
+$attributes = array('class' => 'form');
 
-if($addresses) {
-
-    foreach ($addresses as $address) {
-        echo "<p>" . $address['address1'] . "<br>";
-        echo $address['address2'] . "<br>";
-        echo $address['city'] . "<br>";
-        echo $address['county'] . "<br>";
-        echo $address['country'] . "<br>";
-        echo "</p>";
-    }
-}
-
-if($orders) {
-
-    foreach ($orders as $order) {
-        echo "<p>" . $order['date'] . "<br>";
-        echo $order['first_name'] . "<br>";
-        echo $order['last_name'] . "<br>";
-        echo $order['email'] . "<br>";
-        echo $order['total'] . "<br>";
-        echo "</p>";
-    }
-}
+echo form_open('address/update/' . $address['id'], $attributes); ?>
 
 
-?>
+<div class="form-group">
+    <label for="address1">Address 1</label>
+    <input type="input" name="address1" class="form-control" required value="<?php echo $address['address1']; ?>" placeholder="Address 1" />
+</div>
+<div class="form-group">
+    <label for="address2">Address 2</label>
+    <input type="input" name="address2" class="form-control" value="<?php if(isset($address['address2']))echo $address['address2']; ?>" placeholder="Address 2" />
+</div>
+<div class="form-group">
+    <label for="city">City</label>
+    <input type="input" name="city" class="form-control" required value="<?php echo $address['city']; ?>" placeholder="City" />
+</div>
+<div class="form-group">
+    <label for="county">County</label>
+    <input type="input" name="county" class="form-control" required value="<?php echo $address['county']; ?>" placeholder="County" />
+</div>
+<div class="form-group">
+    <label for="country">Country</label>
+    <input type="input" name="country" class="form-control" value="<?php echo $address['country']; ?>" required placeholder="Country" />
+</div>
+
+
+<div class="form-group registration_form">
+    <input type="submit" name="submit" value="Update Address" />
+</div>
+
+
+</form>
