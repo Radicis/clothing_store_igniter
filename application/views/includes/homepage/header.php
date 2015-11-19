@@ -79,8 +79,8 @@
                 </ul>
             </div>
             <div class="web_search">
-                <form>
-                    <input type="text" value="" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '';}">
+                <?php echo form_open('store/filter'); ?>
+                    <input type="text" name="searchInput" value="" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '';}">
                     <input type="submit" value=" " />
                 </form>
             </div>

@@ -1,45 +1,53 @@
   <div class="row">
       <div class="col-md-3 admin-sidebar">
                 <div class="list-group">
-                    <ul class="category-select">
-                        <h3>Categories</h3>
-                    <?php
 
-                    foreach($categories as $category) {
-                        echo "<li>" . anchor('store/category/'. $category['id'], $category['name']) . "</li>";
-                    }
-                    ?>
-                    </ul>
-                    <hr>
+                        <?php
+                        $attributes = array('class' => 'form-horizontal');
+                        echo form_open('store/filter', $attributes); ?>
+                        <fieldset>
 
-                    <ul class="category-select">
-                        <h3>Brands</h3>
-                        <?php
+                            <!-- Text input-->
+                            <h4>Search</h4>
+                            <div class="form-group">
+                                <input name="searchInput" placeholder="Search.." class="form-control input-md" type="text">
+                            </div>
 
-                        foreach($brands as $brand) {
-                            echo "<li>" . anchor('store/brand/'. $brand['id'], $brand['name']) . "</li>";
-                        }
-                        ?>
-                    </ul>
-                    <hr>
-                    <ul class="category-select">
-                        <h3>Price Range</h3>
-                        <?php
-                            echo "<li>" . anchor('store/price/2', 'Under &euro;2') . "</li>";
-                            echo "<li>" . anchor('store/price/5', 'Under &euro;5') . "</li>";
-                            echo "<li>" . anchor('store/price/10', 'Under &euro;10') . "</li>";
-                            echo "<li>" . anchor('store/price/20', 'Under &euro;20') . "</li>";
-                        ?>
-                    </ul>
-                    <hr>
-                    <ul class="category-select">
-                        <h3>Filter</h3>
-                        <?php
-                        echo "<li>" . anchor('store/filter/1/2', 'Test it') . "</li>";
-                        ?>
-                    </ul>
-                 </div>
-          </div>
+                            <!-- Multiple Checkboxes -->
+                            <h4>Category</h4>
+                            <div class="form-group">
+                                <?php foreach($categories as $category) { ?>
+                                    <div class="checkbox">
+                                        <label for="checkboxes-0">
+                                            <input name="categories[]" value="<?php echo $category['id'] ?>" type="checkbox">
+                                            <?php echo $category['name']?>
+                                        </label>
+                                    </div>
+                                <?php } ?>
+                            </div>
+
+                            <h4>Brand</h4>
+
+                            <!-- Multiple Checkboxes -->
+                            <div class="form-group">
+                                <?php foreach($brands as $brand) { ?>
+                                    <div class="checkbox">
+                                        <label for="checkboxes-0">
+                                            <input  name="brands[]" value="<?php echo $brand['id'] ?>" type="checkbox">
+                                            <?php echo $brand['name']?>
+                                        </label>
+                                    </div>
+                                <?php } ?>
+                            </div>
+                        </fieldset>
+                        <div class="form-group registration_form">
+                            <input type="submit" name="submit" value="Apply" />
+                        </div>
+                    </form>
+</div>
+      </div>
+
+
       <div class="col-md-9">
 
           <!-- start grids_of_3 -->

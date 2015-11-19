@@ -117,14 +117,13 @@ class Store extends MY_Controller{
 
     //testing multiple filters
 
-    function filter($categoryID=False, $brandID=False, $price=False){
-
+    function filter(){
 
         $this->load->library('pagination');
 
-        $config['base_url']=base_url().'index.php/store/filter/'. $price;
+        $config['base_url']=base_url().'index.php/store/filter/';
 
-        $config["total_rows"] = $this->item_model->record_count_price($price);
+        $config["total_rows"] = $this->item_model->record_count();
         $config['per_page'] = 6;
         $config['num_links'] = 20;
         $config["uri_segment"] = 4;
@@ -132,13 +131,18 @@ class Store extends MY_Controller{
         $this->pagination->initialize($config);
 
         $page = ($this->uri->segment($config["uri_segment"])) ? $this->uri->segment($config["uri_segment"]) : 0;
-        $data["items"] = $this->item_model->get_filter_items($categoryID, $brandID, $price);
+        $brands = $this->input->post('brands');
+        $categories = $this->input->post('categories');
+        $search = $this->input->post('searchInput');
+
+        $data['items'] = $this->item_model->filter($brands ,$categories, $search);
         $data["links"] = $this->pagination->create_links();
 
-        $this->session->set_flashdata('success', "Cat: " . $categoryID. " brand: " . $brandID . " price: " . $price);
 
         $data['main_content'] = 'store/index';
         $this->load->view('includes/template', $data, $this->globals);
+
+
     }
 
     //Displays items of the specified price range

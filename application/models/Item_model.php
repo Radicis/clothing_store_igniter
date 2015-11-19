@@ -59,6 +59,35 @@ class Item_model extends CI_Model
         return $query->row_array();
     }
 
+    public function get($id=false){
+            if (!$id)
+            {
+                $query = $this->db->get('store_items');
+                return $query->result_array();
+            }
+
+            $query = $this->db->get_where('store_items', array('id' => $id));
+            return $query->row_array();
+    }
+
+    public function filter($brands, $categories, $search){
+        //$query = $this->db->from('store_items');
+        $this->db->like('item_name', $search);
+        $this->db->or_where_in('categoryID', $categories);
+        $this->db->or_where_in('brandID', $brands);
+        $query = $this->db->get('store_items');
+
+        if ($query->num_rows() > 0) {
+            foreach ($query->result() as $row) {
+                $data[] = $row;
+            }
+            return $data;
+        }
+        return false;
+
+
+    }
+
     //Testing filter functions
     public function prices(){
         $this->db->select('item_price');
