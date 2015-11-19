@@ -114,7 +114,7 @@ class Site extends MY_Controller{
     }
 
     function gallery(){
-        $tag = 'primark';
+        $tag = 'clothing';
         $client_id = "2e397553354a4401a860373659f794ce";
 
         $url = 'https://api.instagram.com/v1/tags/'.$tag.'/media/recent?client_id='.$client_id;
@@ -125,13 +125,16 @@ class Site extends MY_Controller{
 
         $data['images'] = array();
 
+        try {
+            foreach ($results['data'] as $item) {
 
-        foreach($results['data'] as $item){
+                array_push($data['images'], array(
+                    'low' => $item['images']['thumbnail']['url'],
+                    'high' => $item['images']['standard_resolution']['url']
+                ));
+            }
+        }catch(Exception $e){
 
-            array_push($data['images'], array(
-                'low' => $item['images']['thumbnail']['url'],
-                'high' => $item['images']['standard_resolution']['url']
-            ));
         }
 
         $data['main_content'] = 'gallery';
