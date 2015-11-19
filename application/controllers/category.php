@@ -16,6 +16,8 @@ class Category extends MY_Controller
     function create()
     {
 
+        $this->is_admin();
+
         $this->load->helper('form');
         $this->load->library('form_validation');
 
@@ -39,6 +41,8 @@ class Category extends MY_Controller
 
     function update($id = null)
     {
+
+        $this->is_admin();
 
         $this->load->helper('form');
         $this->load->library('form_validation');
@@ -72,6 +76,8 @@ class Category extends MY_Controller
 
     function delete($id = null)
     {
+        $this->is_admin();
+
         $this->category_model->delete($id);
         $this->session->set_flashdata('success', 'Category Deleted');
         redirect($this->agent->referrer());

@@ -20,6 +20,15 @@ echo form_open('user/update/' . $user['id'], $attributes); ?>
     <label for="email">Email</label>
     <input type="input" name="email" class="form-control" required value="<?php echo $user['email']; ?>" placeholder="Email" />
 </div>
+<hr>
+<div class="form-group">
+    <label for="password">Password</label>
+    <input type="password" name="password" class="form-control" required value="<?php echo $user['password']; ?>" placeholder="Password" />
+</div>
+<div class="form-group">
+    <label for="password2">Confirm Password</label>
+    <input type="password" name="password2" class="form-control" required value="<?php echo $user['password']; ?>" placeholder="Password Confirmation" />
+</div>
 
 
 <div class="form-group registration_form">

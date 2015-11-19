@@ -11,6 +11,7 @@ class User extends MY_Controller{
         $this->load->model('address_model');
         $this->load->helper('url_helper');
         $this->load->model('orderItem_model');
+        $this->load->library('user_agent');
     }
 
     function index()
@@ -24,17 +25,6 @@ class User extends MY_Controller{
         $data['main_content'] = 'user/index';
 
         $this->load->view('includes/template', $data, $this->globals);
-    }
-
-    //Checks if the user is currently logged in
-    function is_logged_in()
-    {
-        $is_logged_in = $this->session->userdata('isAdmin');
-
-        if(!isset($is_logged_in) || $is_logged_in != true)
-        {
-            redirect('login');
-        }
     }
 
     //Displays all of the users to the admin panel
@@ -73,12 +63,17 @@ class User extends MY_Controller{
 
     function update($id=null){
 
+        $this->is_logged_in();
+
         $this->load->helper('form');
         $this->load->library('form_validation');
 
         $this->form_validation->set_rules('first_name', 'First Name', 'required');
         $this->form_validation->set_rules('last_name', 'Last Name', 'required');
         $this->form_validation->set_rules('email', 'Email', 'required');
+        $this->form_validation->set_rules('password', 'Password', 'trim|required|min_length[4]');
+        $this->form_validation->set_rules('password2', 'Password Confirm', 'trim|required|matches[password]');
+
 
 
         if ($this->form_validation->run() === FALSE) {
@@ -87,21 +82,37 @@ class User extends MY_Controller{
             $this->load->view('includes/template', $data, $this->globals);
         } else {
             $data = array(
-                'name' => $this->input->post('name'),
-                'parentID' => $this->input->post('parentID')
+                'first_name' => $this->input->post('first_name'),
+                'last_name' => $this->input->post('last_name'),
+                'email' => $this->input->post('email'),
+                'password' => md5($this->input->post('password'))
             );
 
             $this->user_model->update($id, $data);
             $this->session->set_flashdata('success', 'Profile Updated');
 
-            if ($this->session->userdata('redirect_back')) {
-                $redirect_url = $this->session->userdata('redirect_back');  // grab value and put into a temp variable so we unset the session value
-                $this->session->unset_userdata('redirect_back');
-                redirect($redirect_url);
-            }
-
             redirect('user');
 
+        }
+    }
+
+    function delete($id){
+
+        $this->is_logged_in();
+        if($this->session->userdata('userID') == $id) {
+
+            if ($this->user_model->delete($id)) {
+                $addresses = $this->address_model->get_by_userID($id);
+                //Delete all of the users Addresses
+                foreach ($addresses as $address) {
+                    $this->address_model->delete($address['id']);
+                }
+            }
+            $this->session->sess_destroy();
+            redirect('site');
+        }
+        else{
+            redirect('login');
         }
     }
 

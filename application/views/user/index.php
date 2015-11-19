@@ -3,12 +3,11 @@
 <div class="login_left">
     <div class="registration">
         <div class="registration_left">
-            <h3>Personal Details<?php echo anchor('user/update/' . $this->session->userdata('userID'), 'Edit', array('class'=>'add_new pull-right')) ?></h3>
+            <h3>Personal Details<?php echo  anchor('user/delete/' . $user['id'], "Delete", array('class'=>'add_new pull-right delete_account')) . "<span class='pull-right add_new'> | </span>" .  anchor('user/update/' . $this->session->userdata('userID'), 'Edit', array('class'=>'add_new pull-right')) ?></h3>
 <?php
 echo "<h4>" . $user['username'] . "</h4>";
 echo "<p>" . $user['email'] . "<br>";
-echo $user['first_name'] . " " . $user['last_name'] . "<br>";
-echo "<p>" . anchor('user/change_password', "Change Password") . "</p>"; ?>
+echo $user['first_name'] . " " . $user['last_name'] . "<br>" ?>
         </div>
     </div>
     <div class="registration">
@@ -63,6 +62,8 @@ if($addresses) {
         echo $address['county'] . "<br>";
         echo $address['country'] . "<br>";
         echo anchor('address/update/' . $address['id'], 'Edit', array('class'=>'pull-right'));
+        echo "<span class='pull-right'> | </span>";
+        echo anchor('address/delete/' . $address['id'], 'Delete', array('class'=>'pull-right'));
         echo "</p><hr>";
     }
 }?>

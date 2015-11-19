@@ -15,23 +15,14 @@ class Admin extends MY_Controller{
 
     function index()
     {
-        $this->is_logged_in();
+        $this->is_admin();
 
         $data['main_content'] = 'admin/index';
 
         $this->load->view('includes/admin/template', $data, $this->globals);
     }
 
-    //Checks if the user is currently logged in
-    function is_logged_in()
-    {
-        $is_logged_in = $this->session->userdata('isAdmin');
 
-        if(!isset($is_logged_in) || $is_logged_in != true)
-        {
-            redirect('login');
-        }
-    }
 
     //Displays all of the users to the admin panel
     function show($type=FALSE){

@@ -16,14 +16,13 @@
                                 if ($user->isAdmin) echo '<strong>Admin</strong>';
                                 else echo "User";
                                 echo "</td>";
-                                echo "<td>" . anchor('category/', "Edit");
+                                echo "<td>" . anchor('user/edit/' . $user->id, "Edit");
                                 echo " | ";
-                                echo anchor('category/delete', "Delete");
+                                echo anchor('user/delete/' . $user->id, "Delete");
                                 echo "</td></tr>";
                             }
                         }
-                        //Change to flat table display of data
-                        //Add update/delete links maybe a copy link
+
                         echo "</table>";
 
                         echo "<div class='pagination'>" . $links . "</div>";

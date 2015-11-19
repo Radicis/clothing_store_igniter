@@ -246,7 +246,7 @@ color: #222;
 }
 
 .scrolling{
-    overflow-y: scroll;
+    overflow-y: auto;
     height:500px;
 
 }
@@ -254,6 +254,12 @@ color: #222;
 .add_new{
     font-size:0.7em;
     padding:5px;
+}
+
+.delete_account{
+    color:red;
+    font-size:0.5em;
+    padding-top:10px;
 }
 
 

@@ -71,6 +71,8 @@ class Item extends MY_Controller
     function create_item()
     {
 
+        $this->is_admin();
+
         $this->load->helper('form');
         $this->load->library('form_validation');
 
@@ -102,6 +104,8 @@ class Item extends MY_Controller
 
     function update_item($id = null)
     {
+
+        $this->is_admin();
 
         $this->load->helper('form');
         $this->load->library('form_validation');
@@ -143,6 +147,8 @@ class Item extends MY_Controller
 
     function delete_item($id = null)
     {
+        $this->is_admin();
+
         if($this->item_model->delete($id)){
             $this->stock_model->delete_by_id($id);
         }

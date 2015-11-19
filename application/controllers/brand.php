@@ -15,7 +15,7 @@ class Brand extends MY_Controller
 
     function create()
     {
-
+        $this->is_admin();
         $this->load->helper('form');
         $this->load->library('form_validation');
 
@@ -36,6 +36,7 @@ class Brand extends MY_Controller
     function update($id = null)
     {
 
+        $this->is_admin();
         $this->load->helper('form');
         $this->load->library('form_validation');
 
@@ -69,6 +70,7 @@ class Brand extends MY_Controller
 
     function delete($id = null)
     {
+        $this->is_admin();
         $this->brand_model->delete($id);
         $this->session->set_flashdata('success', 'Brand Deleted');
         redirect($this->agent->referrer());

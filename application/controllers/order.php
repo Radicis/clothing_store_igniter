@@ -24,7 +24,11 @@ class Order extends MY_Controller{
     //Views all of the orders on the admin page
     function view($id = NULL)
     {
+
         $data['order'] = $this->order_model->get($id);
+
+        $this->is_owner($data['order']);
+
         $data['delivery'] = $this->delivery_model->get($data['order']['deliveryType']);
 
         $data['address'] = $this->address_model->get($data['order']['address']);
@@ -210,6 +214,8 @@ class Order extends MY_Controller{
 
     function delete($id = null)
     {
+        $this->is_admin();
+
         if($this->order_model->delete($id)){
             echo "foo";
             $this->orderItem_model->delete_by_order($id);
@@ -220,6 +226,7 @@ class Order extends MY_Controller{
 
     //Sets the payment status of the order to true
     function pay($id = NULL){
+        $this->is_admin();
         $this->order_model->set_paid($id);
         redirect($this->agent->referrer());
     }

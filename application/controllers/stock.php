@@ -16,6 +16,8 @@ class Stock extends MY_Controller
 
     function create($id = NULL)
     {
+        $this->is_admin();
+
         $this->load->helper('form');
         $this->load->library('form_validation');
 
@@ -45,6 +47,8 @@ class Stock extends MY_Controller
     function update($id = null)
     {
 
+        $this->is_admin();
+
         $this->load->helper('form');
         $this->load->library('form_validation');
 
@@ -73,6 +77,8 @@ class Stock extends MY_Controller
 
     function delete($id = null)
     {
+        $this->is_admin();
+
         $this->stock_model->delete($id);
         $this->session->set_flashdata('success', 'Item Deleted');
         redirect($this->agent->referrer());

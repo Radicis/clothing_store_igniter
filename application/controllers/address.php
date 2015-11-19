@@ -15,7 +15,6 @@ class Address extends MY_Controller
 
     function create()
     {
-
         $this->load->helper('form');
         $this->load->library('form_validation');
 
@@ -46,7 +45,6 @@ class Address extends MY_Controller
 
     function update($id = null)
     {
-
         $this->load->helper('form');
         $this->load->library('form_validation');
 
@@ -79,7 +77,7 @@ class Address extends MY_Controller
 
     function delete($id = null)
     {
-        $this->brand_model->delete($id);
+        $this->address_model->delete($id);
         $this->session->set_flashdata('success', 'Address Deleted');
         redirect($this->agent->referrer());
 
