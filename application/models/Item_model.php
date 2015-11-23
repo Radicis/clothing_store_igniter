@@ -73,8 +73,8 @@ class Item_model extends CI_Model
     public function filter($brands, $categories, $search){
         //$query = $this->db->from('store_items');
         $this->db->like('item_name', $search);
-        $this->db->or_where_in('categoryID', $categories);
-        $this->db->or_where_in('brandID', $brands);
+        $this->db->where_in('categoryID', $categories);
+        $this->db->where_in('brandID', $brands);
         $query = $this->db->get('store_items');
 
         if ($query->num_rows() > 0) {
