@@ -11,6 +11,7 @@ class Order extends MY_Controller{
         $this->load->model('address_model');
         $this->load->model('delivery_model');
         $this->load->model('orderItem_model');
+        $this->load->model('payment_model');
         $this->load->model('order_model');
         $this->load->helper('url_helper');
         $this->load->library('user_agent');
@@ -119,35 +120,10 @@ class Order extends MY_Controller{
                 'payment_type' => $this->input->post('payment')
             );
 
-            //If payment option is paypal
-            if($this->input->post('payment')==1){
-                $config['business'] = 'clothesigniter@clothesigniter.com';
-                $config['cpp_header_image'] = ''; //Image header url [750 pixels wide by 90 pixels high]
-                $config['return'] = base_url() . 'index.php/order/success';// shows data of order
 
-                $config['cancel_return'] = base_url() ; // returns to main page
-                $config['notify_url'] = base_url() . 'index.php/order/success'; //IPN Post
-                $config['production'] = FALSE; //Its false by default and will use sandbox
-                $config["invoice"] = random_string('numeric',8); //The invoice id ( unique using helper string)
-
-                $this->load->library('Paypal', $config);
-
-                //Iterate through cart contents and add to paypal
-                foreach($this->cart->contents() as $item) {
-                    $item_name = $item['name'] . " : ";
-                    foreach($this->cart->product_options($item['rowid']) as $option_name => $option_value){
-                        $item_name .=  $option_value . " ";
-
-                    }
-                    $this->paypal->add($item_name, $item['price'], $item['qty'], $delivery['cost']); //First item
-                }
-
-                $this->paypal->pay(); //Proccess the payment
-            }
-            else {
                 $data['main_content'] = 'store/confirm';
                 $this->load->view('includes/template', $data, $this->globals);
-            }
+
         }
     }
 
@@ -189,7 +165,32 @@ class Order extends MY_Controller{
             }
         }
 
-        $this->success();
+        $config['business'] = 'clothesigniter@clothesigniter.com';
+        $config['cpp_header_image'] = ''; //Image header url [750 pixels wide by 90 pixels high]
+        $config['return'] = base_url() . 'index.php/order/success';// shows data of order
+
+        $config['cancel_return'] = base_url() ; // returns to main page
+        $config['notify_url'] = base_url() . 'index.php/order/success'; //IPN Post
+        $config['production'] = FALSE; //Its false by default and will use sandbox
+        $config["invoice"] = random_string('numeric',8); //The invoice id ( unique using helper string)
+
+        $this->load->library('Paypal', $config);
+
+        $delivery = $this->delivery_model->get($this->input->post('deliveryID'));
+
+        //Iterate through cart contents and add to paypal
+        foreach($this->cart->contents() as $item) {
+            $item_name = $item['name'] . " : ";
+            foreach($this->cart->product_options($item['rowid']) as $option_name => $option_value){
+                $item_name .=  $option_value . " ";
+
+            }
+            $this->paypal->add($item_name, $item['price'], $item['qty'], $delivery['cost']); //First item
+        }
+
+        $this->paypal->pay(); //Proccess the payment
+
+        //$this->success();
 
     }
 
@@ -200,14 +201,21 @@ class Order extends MY_Controller{
 
         //Get Paypal returned variables if set
         if(isset($_POST['auth'])){
+            $data = array(
+              'auth' => $_POST['auth'],
+                'amount' => $_POST['mc_gross']
+            );
 
-            $data['auth'] = $_POST['auth'];
+            $this->payment_model->create($data);
+
             $data['main_content'] = 'store/order_success';
             $this->load->view('includes/template', $data, $this->globals);
         }
         else {
 
-            $data['main_content'] = 'store/order_success';
+            //Advise of problem with payment and to contact the store.
+
+            $data['main_content'] = 'store/order_fail';
             $this->load->view('includes/template', $data, $this->globals);
         }
     }

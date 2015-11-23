@@ -120,9 +120,6 @@
 
 
                     ?>
-
-
-
                        <div class="pull-right right">
                            <strong>Total</strong>&euro;<?php echo $this->cart->format_number($this->cart->total()); ?>
                        </div>

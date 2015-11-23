@@ -7,17 +7,18 @@
                         echo form_open('store/filter', $attributes); ?>
                         <fieldset>
 
-                            <!-- Text input-->
-                            <h4>Search</h4>
-                            <div class="form-group">
-                                <input name="searchInput" placeholder="Search.." class="form-control input-md" type="text">
-                            </div>
+                            <div class="input-group">
+                                <input type="text" class="form-control" name="searchInput" placeholder="Search for...">
+      <span class="input-group-btn">
+        <button class="btn btn-default" type="button">Go!</button>
+      </span>
+                            </div><!-- /input-group -->
 
                             <!-- Multiple Checkboxes -->
                             <h4>Category</h4>
                             <div class="form-group">
                                 <?php foreach($categories as $category) { ?>
-                                    <div class="checkbox">
+                                    <div class="checkbox checkbox-success">
                                         <label for="checkboxes-0">
                                             <input name="categories[]" value="<?php echo $category['id'] ?>" type="checkbox">
                                             <?php echo $category['name']?>
