@@ -79,6 +79,49 @@
 
                     ?>
                     <p><?php echo $item['item_description_short']; ?></p>
+                    <script>
+                        window.fbAsyncInit = function() {
+                            FB.init({
+                                appId      : '911275082282145',
+                                xfbml      : true,
+                                version    : 'v2.5'
+                            });
+                        };
+
+                        (function(d, s, id){
+                            var js, fjs = d.getElementsByTagName(s)[0];
+                            if (d.getElementById(id)) {return;}
+                            js = d.createElement(s); js.id = id;
+                            js.src = "//connect.facebook.net/en_US/sdk.js";
+                            fjs.parentNode.insertBefore(js, fjs);
+                        }(document, 'script', 'facebook-jssdk'));
+                    </script>
+
+
+                        <script>
+                            window.fbAsyncInit = function() {
+                                FB.init({
+                                    appId  : '917041461705507',
+                                    status : true, // check login status
+                                    cookie : true, // enable cookies to allow the server to access the session
+                                    xfbml  : true  // parse XFBML
+                                });
+                            };
+
+                            (function() {
+                                var e = document.createElement('script');
+                                e.src = document.location.protocol + '//connect.facebook.net/en_US/all.js';
+                                e.async = true;
+                                document.getElementById('fb-root').appendChild(e);
+                            }());
+
+
+                        </script>
+
+                    <a href="http://www.facebook.com/sharer.php?u=<?php echo(('http://').$_SERVER["SERVER_NAME"].$_SERVER["REQUEST_URI"]); ?>">
+                        <img src = "<?php echo base_url();?>/images/share.png" id = "share_button">
+                    </a>
+
                 </div>
 
             </div>

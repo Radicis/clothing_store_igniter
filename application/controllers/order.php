@@ -203,7 +203,7 @@ class Order extends MY_Controller{
         if(isset($_POST['auth'])){
             $data = array(
               'auth' => $_POST['auth'],
-                'amount' => $_POST['mc_gross']
+              'amount' => $_POST['mc_gross']
             );
 
             $this->payment_model->create($data);

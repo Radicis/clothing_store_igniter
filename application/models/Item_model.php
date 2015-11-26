@@ -84,8 +84,6 @@ class Item_model extends CI_Model
             return $data;
         }
         return false;
-
-
     }
 
     //Testing filter functions
