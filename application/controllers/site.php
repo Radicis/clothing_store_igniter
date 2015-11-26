@@ -156,4 +156,32 @@ class Site extends MY_Controller{
         return $result;
     }
 
+
+    function getRSS(){
+        header('Content-Type: application/x-json; charset=utf-8');
+
+        //(file_get_contents('http://www.elle.com/rss/fashion.xml'));
+        $doc = new DOMDocument();
+        $doc->load( 'http://www.elle.com/rss/fashion.xml' );//xml file loading here
+
+        $items = $doc->getElementsByTagName( "item" );
+        $i = 0;
+
+        $rssString = "";
+
+        foreach ($items as $item) {
+            $titles = $item->getElementsByTagName("title");
+            $links = $item->getElementsByTagName("link");
+            $link = $links->item(0)->nodeValue;
+            $dates = $item->getElementsByTagName("pubDate");
+            $date = $dates->item(0)->nodeValue;
+            $title = $titles->item(0)->nodeValue;
+            $rssString .= "<p><a href='" . $link . "'>" . $title ."</a><br><span class='text-muted small'>" . $date .  "</span></p>";
+            $i += 1;
+            if($i>3)break;
+        }
+
+        echo(json_encode($rssString));
+    }
+
 }

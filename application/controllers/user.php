@@ -22,6 +22,7 @@ class User extends MY_Controller{
         $data['addresses'] = $this->address_model->get_by_userID($this->session->userdata('userID'));
         $data['orders'] = $this->order_model->get_by_userID($this->session->userdata('userID'));
 
+
         $data['main_content'] = 'user/index';
 
         $this->load->view('includes/template', $data, $this->globals);

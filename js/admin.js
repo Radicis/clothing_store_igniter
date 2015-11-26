@@ -1,7 +1,5 @@
 
 
-
-
 var testChart = function() {
 
     var data = [{
@@ -128,6 +126,7 @@ var testChart2 = function() {
 
 $( document ).ready(function() {
     testChart();
+
 });
 
 

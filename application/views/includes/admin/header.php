@@ -168,11 +168,6 @@
                     <li ><i class="fa fa-list"></i><?php echo anchor('admin/show/orders', 'Orders'); ?></li>
                     <li><i class="fa fa-users"></i><?php echo anchor('admin/show/users', 'Users'); ?></li>
                 </ul>
-                    <hr>
-                <h4 class="left">Reports/Charts</h4>
-                <ul>
-
-                </ul>
                     </div>
                 <div class="col-md-9">
 

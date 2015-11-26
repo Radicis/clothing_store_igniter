@@ -13,7 +13,7 @@ class MY_Controller extends CI_Controller
 		
         $this->globals = array(
             'categories' => $this->category_model->get(),
-            'brands' => $this->brand_model->get(),			
+            'brands' => $this->brand_model->get()
         );
     }
 

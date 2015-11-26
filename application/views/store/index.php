@@ -9,9 +9,9 @@
 
                             <div class="input-group">
                                 <input type="text" class="form-control" name="searchInput" placeholder="Search for...">
-      <span class="input-group-btn">
-        <button class="btn btn-default" type="button">Go!</button>
-      </span>
+                                      <span class="input-group-btn">
+                                        <button class="btn btn-default" type="button">Go!</button>
+                                      </span>
                             </div><!-- /input-group -->
 
                             <!-- Multiple Checkboxes -->

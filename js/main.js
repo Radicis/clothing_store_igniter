@@ -42,6 +42,21 @@ function urlify(text) {
 }
 
 
+var getRss = function(){
+    $.ajax({
+        url: "http://localhost/igniter/clothing_store_igniter/index.php/site/getRSS",
+        type: 'GET',
+        success: function (result) {
+            $(result).each(function (index) {
+                $('#rss-view').html(result);
+
+            });
+        }
+    });
+}
+
+
+
 //gets the tweets from tweets_json.php and displays on the homepage
 $(document).ready(function(){       
         $.getJSON('http://localhost/igniter/clothing_store_igniter/twitter/tweets_json.php?count=3&screen_name=asos&callback=?',{
@@ -52,6 +67,8 @@ $(document).ready(function(){
 				$('#tweets').append('<p>' + urlify(data[index].text) + '<span style="color:#ccc"> - ' + parseTwitterDate(data[index].created_at) + '</span></p>');
 		});
         });
+    getRss();
+
 });
 
 

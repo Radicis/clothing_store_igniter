@@ -15,8 +15,8 @@
                     <div id="tweets"></div>
                 </div>
                 <div class="span1_of_3">
-                    <h3>Facebook Widget here</h3>
-
+                    <h3>RSS</h3>
+                    <div id="rss-view"></div>
                 </div>
                 <div class="clear"></div>
             </div>

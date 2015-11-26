@@ -51,7 +51,6 @@ class Item extends MY_Controller
     }
 
     function get_stock_level(){
-
             header('Content-Type: application/x-json; charset=utf-8');
             $items = $this->item_model->get_item();
             $stock_levels = array();
