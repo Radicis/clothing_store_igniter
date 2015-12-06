@@ -21,7 +21,6 @@
         <div class="registration_left">
             <div class="registration_form">
                 <input type="radio" name="payment" value="1" checked><img src="<?php echo base_url() . "images/paypal.png" ?>" width="100px" />
-                <input type="radio" name="payment" value="0" > <img src="<?php echo base_url() . "images/creditcard.gif" ?>" width="100px" />
             </div>
         </div>
     </div>
@@ -33,7 +32,6 @@
                 <input type="radio" required name="deliveryID" value="1"  checked />Standard <em> &euro;4.99</em><br>
                 <input type="radio" required name="deliveryID" value="2"  />Store Pickup <em> Free</em><br>
                 <input type="radio" required name="deliveryID" value="3"  />International<em> &euro;10.99</em>
-
             </div>
         </div>
     </div>
@@ -44,7 +42,7 @@
                 <?php
 
                 if($delivery_addresses==NULL){
-                    echo "No addresses";
+                    echo "No addresses - Please add an address";
                 }
                 else {
                     //Display all of the users delivery addresses with radio buttons
@@ -72,7 +70,13 @@
         </div>
     </div>
     <div class="registration_form">
+        <?php
+        if($delivery_addresses==NULL){
+            echo anchor('address/create', 'Add New');
+       }else{ ?>
         <input type="submit" name="submit" value="Buy Now" />
+        <?php } ?>
+
     </div>
     <!-- end registration -->
 </div>
@@ -131,6 +135,3 @@
     <!-- end registration -->
 </div>
 <div class="clear"></div>
-
-
-

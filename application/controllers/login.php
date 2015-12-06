@@ -64,6 +64,13 @@ class Login extends MY_Controller
 
     function signup()
     {
+        $data = array(
+          'first_name' => $this->input->post('first_name'),
+            'last_name' => $this->input->post('last_name'),
+            'email' => $this->input->post('email'),
+            'username' => $this->input->post('username')
+        );
+
         $data['main_content'] = 'security/signup_form';
         $this->load->view('includes/template', $data, $this->globals);
     }
